@@ -1,0 +1,20 @@
+\name{gbif_match}
+\alias{gbif_match}
+\title{Match scientific names against GBIF}
+\usage{
+gbif_match(scientific_name)
+}
+\arguments{
+\item{scientific_name}{Character vector of scientific names.}
+}
+\value{
+A data frame with selected GBIF match fields.
+}
+\description{
+Thin helper around the GBIF species match API.
+}
+\examples{
+\dontrun{
+gbif_match("Quercus serrata")
+}
+}

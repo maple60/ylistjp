@@ -1,0 +1,27 @@
+Package: ylistjp
+Title: Unofficial Access to YList Japanese Plant Name Data
+Version: 0.1.0
+Authors@R:
+    person(
+        given = "ylistjp",
+        family = "contributors",
+        email = "noreply@example.com",
+        role = c("aut", "cre")
+    )
+Author: ylistjp contributors
+Maintainer: ylistjp contributors <noreply@example.com>
+Description: Fetches and caches the public tab-delimited YList data file and
+    provides helpers for looking up scientific plant names from Japanese names.
+    It also includes a small optional helper for checking scientific names
+    against the GBIF species match API. This package is not affiliated with or
+    endorsed by YList.
+License: MIT + file LICENSE
+URL: https://github.com/maple60/ylistjp
+BugReports: https://github.com/maple60/ylistjp/issues
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.2
+Config/testthat/edition: 3
+Suggests:
+    jsonlite,
+    testthat (>= 3.0.0)

@@ -1,0 +1,7 @@
+^\.github$
+^\.gitignore$
+^README\.Rmd$
+^.*\.Rcheck$
+^ylistjp_.*\.tar\.gz$
+^outputs$
+^work$
