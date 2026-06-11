@@ -48,6 +48,8 @@ ylist_load(refresh = TRUE)
 - [English: Usage guide](https://maple60.github.io/ylistjp/articles/get-started.html)
 - [日本語: メンテナンスガイド](https://maple60.github.io/ylistjp/articles/ja-maintenance.html)
 - [English: Maintenance guide](https://maple60.github.io/ylistjp/articles/maintenance.html)
+- [日本語: パッケージ開発チュートリアル](https://maple60.github.io/ylistjp/articles/ja-package-development.html)
+- [English: Package development tutorial](https://maple60.github.io/ylistjp/articles/package-development.html)
 - [関数リファレンス](https://maple60.github.io/ylistjp/reference/index.html)
 
 ## 国際的な学名確認

@@ -51,6 +51,8 @@ ylist_load(refresh = TRUE)
 - [日本語: 使い方ガイド](https://maple60.github.io/ylistjp/articles/ja-get-started.html)
 - [Maintenance guide](https://maple60.github.io/ylistjp/articles/maintenance.html)
 - [日本語: メンテナンスガイド](https://maple60.github.io/ylistjp/articles/ja-maintenance.html)
+- [Package development tutorial](https://maple60.github.io/ylistjp/articles/package-development.html)
+- [日本語: パッケージ開発チュートリアル](https://maple60.github.io/ylistjp/articles/ja-package-development.html)
 - [Function reference](https://maple60.github.io/ylistjp/reference/index.html)
 
 ## International Name Checks

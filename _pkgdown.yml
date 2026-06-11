@@ -28,6 +28,10 @@ navbar:
         href: articles/maintenance.html
       - text: "日本語: メンテナンスガイド"
         href: articles/ja-maintenance.html
+      - text: "English: Package Development Tutorial"
+        href: articles/package-development.html
+      - text: "日本語: パッケージ開発チュートリアル"
+        href: articles/ja-package-development.html
 
 articles:
 - title: User guides
@@ -40,6 +44,11 @@ articles:
   contents:
   - maintenance
   - ja-maintenance
+- title: Learning guides
+  navbar: Learning guides
+  contents:
+  - package-development
+  - ja-package-development
 
 reference:
 - title: Overview
