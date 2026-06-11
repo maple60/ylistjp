@@ -35,14 +35,23 @@ ylist_search("コナラ")
 ```
 
 The first function call that needs YList data downloads the public
-tab-delimited file into the user’s local R cache. To refresh the cached
-file:
+tab-delimited file into the user’s local R cache. After that,
+[`academic_name()`](https://maple60.github.io/ylistjp/reference/academic_name.md),
+[`ylist_search()`](https://maple60.github.io/ylistjp/reference/ylist_search.md),
+and
+[`ylist_load()`](https://maple60.github.io/ylistjp/reference/ylist_load.md)
+read from the cached local file and do not query the YList server for
+every lookup. This keeps repeated use gentle on the YList server. To
+refresh the cached file intentionally:
 
 ``` r
 
 ylist_download(overwrite = TRUE)
 ylist_load(refresh = TRUE)
 ```
+
+[`gbif_match()`](https://maple60.github.io/ylistjp/reference/gbif_match.md)
+is separate: it calls the GBIF API when you run it.
 
 ## Guides
 

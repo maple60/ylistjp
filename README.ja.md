@@ -34,13 +34,22 @@ ylist_search("コナラ")
 
 最初に YList
 データが必要になった時点で、公開タブ区切りファイルをユーザーの R
-キャッシュへダウンロードします。キャッシュを明示的に更新したい場合は次のようにします。
+キャッシュへダウンロードします。その後の
+[`academic_name()`](https://maple60.github.io/ylistjp/reference/academic_name.md)、[`ylist_search()`](https://maple60.github.io/ylistjp/reference/ylist_search.md)、
+[`ylist_load()`](https://maple60.github.io/ylistjp/reference/ylist_load.md)
+はローカルのキャッシュファイルを読むため、検索のたびに YList
+サーバーへ問い合わせることはありません。これにより、YList
+への負荷は最小限に
+抑えられます。キャッシュを明示的に更新したい場合は次のようにします。
 
 ``` r
 
 ylist_download(overwrite = TRUE)
 ylist_load(refresh = TRUE)
 ```
+
+[`gbif_match()`](https://maple60.github.io/ylistjp/reference/gbif_match.md)
+は別扱いで、実行時に GBIF API へ問い合わせます。
 
 ## ガイド
 

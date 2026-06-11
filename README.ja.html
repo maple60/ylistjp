@@ -62,10 +62,11 @@
 <span><span class="co">#&gt; [1] "Quercus serrata Murray"</span></span>
 <span></span>
 <span><span class="fu"><a href="reference/ylist_search.html">ylist_search</a></span><span class="op">(</span><span class="st">"コナラ"</span><span class="op">)</span></span></code></pre></div>
-<p>最初に YList データが必要になった時点で、公開タブ区切りファイルをユーザーの R キャッシュへダウンロードします。キャッシュを明示的に更新したい場合は次のようにします。</p>
+<p>最初に YList データが必要になった時点で、公開タブ区切りファイルをユーザーの R キャッシュへダウンロードします。その後の <code><a href="reference/academic_name.html">academic_name()</a></code>、<code><a href="reference/ylist_search.html">ylist_search()</a></code>、 <code><a href="reference/ylist_load.html">ylist_load()</a></code> はローカルのキャッシュファイルを読むため、検索のたびに YList サーバーへ問い合わせることはありません。これにより、YList への負荷は最小限に 抑えられます。キャッシュを明示的に更新したい場合は次のようにします。</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/ylist_download.html">ylist_download</a></span><span class="op">(</span>overwrite <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="fu"><a href="reference/ylist_load.html">ylist_load</a></span><span class="op">(</span>refresh <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<p><code><a href="reference/gbif_match.html">gbif_match()</a></code> は別扱いで、実行時に GBIF API へ問い合わせます。</p>
 </div>
 <div class="section level2">
 <h2 id="ガイド">ガイド<a class="anchor" aria-label="anchor" href="#%E3%82%AC%E3%82%A4%E3%83%89"></a></h2>
