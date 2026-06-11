@@ -1,21 +1,23 @@
 # ylistjp
 
-`ylistjp` is an unofficial R package for working with Japanese plant names from
+`ylistjp` is an unofficial R package for looking up scientific plant names from
+Japanese plant names using the public tab-delimited data file from
 [YList](http://www.ylist.info/), the "植物和名-学名インデックス".
 
-The package does not redistribute YList data. Instead, it downloads the public
-tab-delimited YList file into the user's local R cache and reads it from there.
-YList data remains subject to its own source, terms, and citation requirements.
+`ylistjp` は、[YList](http://www.ylist.info/)（植物和名-学名インデックス）の
+公開タブ区切りデータを利用して、和名から学名を調べるための非公式 R パッケージです。
+
+Documentation site:
+[https://maple60.github.io/ylistjp/](https://maple60.github.io/ylistjp/)
 
 ## Installation
 
 ```r
-# After the GitHub repository is available:
 # install.packages("pak")
 pak::pak("maple60/ylistjp")
 ```
 
-## Basic use
+## Quick Start
 
 ```r
 library(ylistjp)
@@ -29,18 +31,44 @@ academic_name("コナラ", with_author = TRUE)
 ylist_search("コナラ")
 ```
 
-The first call that needs YList data downloads the public tab-delimited file to
-the user cache. To refresh it explicitly:
+The first function call that needs YList data downloads the public tab-delimited
+file into the user's local R cache. To refresh the cached file:
 
 ```r
 ylist_download(overwrite = TRUE)
 ylist_load(refresh = TRUE)
 ```
 
-## International name checks
+## 日本語での概要
+
+基本的な使い方は次の通りです。
+
+```r
+library(ylistjp)
+
+# 和名から学名を取得
+academic_name("コナラ")
+
+# 命名者付きの学名を取得
+academic_name("コナラ", with_author = TRUE)
+
+# 候補を一覧で確認
+ylist_search("コナラ")
+```
+
+`academic_name()` は YList の `和名` 列を完全一致で検索し、`ステータス` が
+`標準` の行を優先して学名を返します。部分一致や別名を含む候補確認には
+`ylist_search()` を使います。
+
+詳しい使い方はドキュメントサイトの
+[日本語ガイド](https://maple60.github.io/ylistjp/articles/ja-get-started.html)
+を参照してください。
+
+## International Name Checks
 
 `gbif_match()` is a small optional helper around the GBIF species match API.
-It requires the suggested package `jsonlite`.
+It is intended for checking the scientific name returned from YList against an
+international biodiversity data source.
 
 ```r
 gbif_match("Quercus serrata")

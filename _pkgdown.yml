@@ -1,0 +1,52 @@
+url: https://maple60.github.io/ylistjp/
+
+template:
+  bootstrap: 5
+
+home:
+  title: ylistjp
+  description: >
+    Unofficial R helpers for looking up scientific plant names from Japanese
+    names using the public YList tab-delimited data file.
+
+navbar:
+  structure:
+    left: [intro, reference, articles]
+    right: [search, github]
+  components:
+    intro:
+      text: Get Started
+      href: articles/get-started.html
+    articles:
+      text: Guides
+      menu:
+      - text: "English: Usage Guide"
+        href: articles/get-started.html
+      - text: "日本語: 使い方ガイド"
+        href: articles/ja-get-started.html
+
+articles:
+- title: Guides
+  navbar: Guides
+  contents:
+  - get-started
+  - ja-get-started
+
+reference:
+- title: Overview
+  contents:
+  - ylistjp-package
+- title: Data access
+  desc: Download and load the public YList tab-delimited file.
+  contents:
+  - ylist_download
+  - ylist_load
+- title: Name lookup
+  desc: Search YList rows and retrieve scientific names.
+  contents:
+  - academic_name
+  - ylist_search
+- title: International checks
+  desc: Optional helper for checking scientific names against GBIF.
+  contents:
+  - gbif_match

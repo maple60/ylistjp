@@ -16,12 +16,17 @@ Description: Fetches and caches the public tab-delimited YList data file and
     against the GBIF species match API. This package is not affiliated with or
     endorsed by YList.
 License: MIT + file LICENSE
-URL: https://github.com/maple60/ylistjp
+URL: https://github.com/maple60/ylistjp, https://maple60.github.io/ylistjp/
 BugReports: https://github.com/maple60/ylistjp/issues
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.2
 Config/testthat/edition: 3
+Config/Needs/website: pkgdown
 Suggests:
+    knitr,
     jsonlite,
+    pkgdown,
+    rmarkdown,
     testthat (>= 3.0.0)
+VignetteBuilder: knitr
