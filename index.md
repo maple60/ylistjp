@@ -63,6 +63,10 @@ is separate: it calls the GBIF API when you run it.
   guide](https://maple60.github.io/ylistjp/articles/maintenance.html)
 - [日本語:
   メンテナンスガイド](https://maple60.github.io/ylistjp/articles/ja-maintenance.html)
+- [Package development
+  tutorial](https://maple60.github.io/ylistjp/articles/package-development.html)
+- [日本語:
+  パッケージ開発チュートリアル](https://maple60.github.io/ylistjp/articles/ja-package-development.html)
 - [Function
   reference](https://maple60.github.io/ylistjp/reference/index.html)
 

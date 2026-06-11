@@ -1,0 +1,201 @@
+# ylistjp パッケージ開発チュートリアル
+
+この記事では、`ylistjp` が小さな R
+パッケージとしてどのように構成されているかを
+説明します。公開データを、再現可能な解析用の道具に変える例として読むことを
+想定しています。
+
+English version: [Building ylistjp as an R
+package](https://maple60.github.io/ylistjp/articles/package-development.md)
+
+## 小さな課題から始める
+
+最初の目標は単純です。
+
+``` r
+
+academic_name("コナラ")
+#> [1] "Quercus serrata"
+```
+
+この短い API の裏側には、いくつかの設計判断があります。
+
+- YList の非公式 wrapper として作る。
+- YList データはパッケージに同梱しない。
+- 公開タブ区切りファイルは、必要になったときだけ取得する。
+- 2 回目以降の検索ではローカルキャッシュを使う。
+- 完全一致を基本にし、曖昧な候補を自動で選ばない。
+- 国際的な学名確認は任意機能として YList 検索から分ける。
+
+小さな関数群ですが、データ取得、文字コード、キャッシュ、テスト、
+ドキュメント、GitHub Actions まで含むため、R パッケージ作成の教材として
+扱いやすい題材です。
+
+## パッケージの骨格
+
+`ylistjp` は、多くの R パッケージで使われる標準的な構成を使っています。
+
+| パス | このパッケージでの役割 |
+|----|----|
+| `DESCRIPTION` | パッケージ情報、依存関係、URL、vignette 設定。 |
+| `NAMESPACE` | ユーザーに公開する関数。 |
+| `R/` | キャッシュ、読み込み、検索、GBIF 補助関数の実装。 |
+| `man/` | roxygen コメントから作られる関数リファレンス。 |
+| `tests/testthat/` | 単体テストと小さな合成 YList fixture。 |
+| `vignettes/` | 使い方ガイドやメンテナンスガイドなどの記事。 |
+| `_pkgdown.yml` | ドキュメントサイトのナビゲーションと reference 分類。 |
+| `.github/workflows/` | R package check と pkgdown deploy の GitHub Actions。 |
+
+小さなパッケージでは、この構成で十分です。重要なのは、コードは `R/`、
+テストは `tests/`、長めの説明は `vignettes/`、自動化は `.github/`
+というように、 役割を分けておくことです。
+
+## 先に公開 API を決める
+
+中心になる使い方は次の形です。
+
+``` r
+
+library(ylistjp)
+
+academic_name("コナラ")
+academic_name("コナラ", with_author = TRUE)
+ylist_search("コナラ")
+```
+
+その周辺に、役割のはっきりした関数を置いています。
+
+| 関数 | 役割 |
+|----|----|
+| [`ylist_download()`](https://maple60.github.io/ylistjp/reference/ylist_download.md) | YList の公開タブ区切りファイルをユーザーキャッシュへ保存する。 |
+| [`ylist_load()`](https://maple60.github.io/ylistjp/reference/ylist_load.md) | キャッシュ済みファイルを `data.frame` として読み込む。 |
+| [`academic_name()`](https://maple60.github.io/ylistjp/reference/academic_name.md) | 和名の完全一致から標準学名を返す。 |
+| [`ylist_search()`](https://maple60.github.io/ylistjp/reference/ylist_search.md) | 候補行を返し、人間が確認できるようにする。 |
+| [`gbif_match()`](https://maple60.github.io/ylistjp/reference/gbif_match.md) | 学名を GBIF と照合する任意の補助関数。 |
+
+この分け方にすると、簡単な用途は
+[`academic_name()`](https://maple60.github.io/ylistjp/reference/academic_name.md)
+だけで済み、必要な人は 元データや候補行も確認できます。
+
+## YList データをパッケージに同梱しない
+
+`ylistjp` は YList データをパッケージ内に入れていません。データの流れは
+次の通りです。
+
+1.  [`academic_name()`](https://maple60.github.io/ylistjp/reference/academic_name.md)、[`ylist_search()`](https://maple60.github.io/ylistjp/reference/ylist_search.md)、[`ylist_load()`](https://maple60.github.io/ylistjp/reference/ylist_load.md)
+    が YList データを必要とする。
+2.  キャッシュがなければ
+    [`ylist_download()`](https://maple60.github.io/ylistjp/reference/ylist_download.md)
+    が公開タブ区切りファイルを取得する。
+3.  ファイルをユーザーの R キャッシュディレクトリに保存する。
+4.  以後の検索では YList サーバーではなくローカルファイルを読む。
+
+この設計には 2 つの意味があります。まず、パッケージコードを MIT
+ライセンスで 公開しても、YList
+データそのものを再配布しません。次に、解析で何度検索しても、
+検索のたびに YList サーバーへ問い合わせることがありません。
+
+明示的に更新したい場合だけ、次のようにします。
+
+``` r
+
+ylist_download(overwrite = TRUE)
+ylist_load(refresh = TRUE)
+```
+
+## 日本語データの文字コードを明示する
+
+YList の公開タブ区切りファイルは CP932 として読み込んでいます。
+
+``` r
+
+utils::read.delim(
+  file = path,
+  sep = "\t",
+  fileEncoding = "CP932",
+  encoding = "UTF-8",
+  stringsAsFactors = FALSE,
+  check.names = FALSE
+)
+```
+
+これは重要な実装ポイントです。日本語の公開データでは Shift-JIS や CP932
+が 使われていることがあります。R
+に文字コードの推測を任せると、環境によって `和名`、`学名`、`ステータス`
+などの列名が読めなくなる可能性があります。
+
+ソースコード中の列名は、環境をまたいで編集しやすくするため、必要に応じて
+Unicode escape で保持しています。
+
+## 検索は保守的にする
+
+[`academic_name()`](https://maple60.github.io/ylistjp/reference/academic_name.md)
+は fuzzy search ではなく、解析で安定して使うための関数です。
+現在の仕様は意図的に狭くしています。
+
+- YList の `和名` 列を完全一致で検索する。
+- `ステータス == "標準"` の行だけを使う。
+- 標準の完全一致がない場合は `NA_character_` を返す。
+- 標準の完全一致が複数ある場合はエラーにする。
+
+これにより、疑わしい候補をスクリプトが静かに採用することを避けます。
+曖昧な場合は
+[`ylist_search()`](https://maple60.github.io/ylistjp/reference/ylist_search.md)
+で候補を確認します。
+
+## テストでは小さな fixture を使う
+
+単体テストでは、YList 本体の大きなファイルを毎回ダウンロードしません。
+代わりに、挙動確認に必要な最小限の行だけを含む合成 fixture を使います。
+
+この fixture で確認している主な点は次の通りです。
+
+- CP932 のタブ区切りファイルを読めること。
+- `標準` 行と synonym 行を区別できること。
+- 見つからない場合に `NA_character_` を返すこと。
+- 複数候補がある場合にエラーになること。
+- キャッシュの再利用と更新が動くこと。
+
+GBIF や YList への live test は任意にします。外部 API の確認は smoke
+test としては 有用ですが、通常のローカルテストや pull request
+のたびに必須にすると不安定に なりやすいためです。
+
+## pkgdown でドキュメントサイトを作る
+
+ドキュメントサイトは pkgdown で作ります。
+
+- `README.md` は英語トップページになる。
+- `README.ja.md` は日本語の入口になる。
+- `vignettes/*.Rmd` は article ページになる。
+- `_pkgdown.yml` でナビゲーションと reference 分類を決める。
+
+GitHub Actions で pkgdown を実行し、生成されたサイトを GitHub Pages
+に公開します。
+これにより、コードとドキュメントを同じリポジトリで管理でき、push ごとに
+再現可能な形で公開できます。
+
+## 今後の拡張案
+
+次の機能を足す場合も、保守的な既定動作を保つのが安全です。
+
+- ひらがな・カタカナ変換や全角・半角の正規化を明示的に追加する。
+- [`ylist_search()`](https://maple60.github.io/ylistjp/reference/ylist_search.md)
+  に候補ランキングを追加する。
+- WFO や Catalogue of Life などの任意チェック関数を追加する。
+- 監査用に YList の追加メタデータを返せるようにする。
+- [`academic_name()`](https://maple60.github.io/ylistjp/reference/academic_name.md)
+  の結果をデータフレームに結合する実例記事を追加する。
+
+探索的な機能は
+[`ylist_search()`](https://maple60.github.io/ylistjp/reference/ylist_search.md)
+や補助関数に寄せ、[`academic_name()`](https://maple60.github.io/ylistjp/reference/academic_name.md)
+はスクリプトで 予測しやすい挙動のままにしておくのが基本方針です。
+
+## 次に読むもの
+
+- [使い方ガイド](https://maple60.github.io/ylistjp/articles/ja-get-started.md):
+  パッケージの使い方。
+- [メンテナンスガイド](https://maple60.github.io/ylistjp/articles/ja-maintenance.md):
+  何を変えたいときにどのファイルを見るか。
+- [関数リファレンス](https://maple60.github.io/ylistjp/reference/index.md):
+  公開関数ごとの説明。

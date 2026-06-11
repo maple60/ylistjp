@@ -23,6 +23,7 @@ guide](https://maple60.github.io/ylistjp/articles/maintenance.md)
 | pkgdown のナビゲーションや reference 分類 | `_pkgdown.yml` |
 | 使い方ガイド | `vignettes/get-started.Rmd`, `vignettes/ja-get-started.Rmd` |
 | メンテナンスガイド | `vignettes/maintenance.Rmd`, `vignettes/ja-maintenance.Rmd` |
+| パッケージ開発チュートリアル | `vignettes/package-development.Rmd`, `vignettes/ja-package-development.Rmd` |
 | R パッケージチェックの GitHub Actions | `.github/workflows/R-CMD-check.yaml` |
 | GitHub Pages / pkgdown deploy | `.github/workflows/pkgdown.yaml` |
 
@@ -123,6 +124,10 @@ pkgdown のトップページは `README.md`
 - `vignettes/ja-get-started.Rmd`: 日本語の使い方ガイド。
 - `vignettes/maintenance.Rmd`: 英語のメンテナンスガイド。
 - `vignettes/ja-maintenance.Rmd`: 日本語のメンテナンスガイド。
+- `vignettes/package-development.Rmd`:
+  英語のパッケージ開発チュートリアル。
+- `vignettes/ja-package-development.Rmd`:
+  日本語のパッケージ開発チュートリアル。
 - `_pkgdown.yml`: サイトのナビゲーション、記事分類、reference 分類。
 
 ドキュメントを変えた後は、可能なら pkgdown

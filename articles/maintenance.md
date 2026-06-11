@@ -23,6 +23,7 @@ For Japanese, see [日本語:
 | pkgdown navigation and reference sections | `_pkgdown.yml` |
 | User guides | `vignettes/get-started.Rmd`, `vignettes/ja-get-started.Rmd` |
 | Maintenance guides | `vignettes/maintenance.Rmd`, `vignettes/ja-maintenance.Rmd` |
+| Package development tutorial | `vignettes/package-development.Rmd`, `vignettes/ja-package-development.Rmd` |
 | GitHub Actions R package check | `.github/workflows/R-CMD-check.yaml` |
 | GitHub Pages / pkgdown deployment | `.github/workflows/pkgdown.yaml` |
 
@@ -121,6 +122,9 @@ Use this split:
 - `vignettes/ja-get-started.Rmd`: Japanese user guide.
 - `vignettes/maintenance.Rmd`: English maintainer guide.
 - `vignettes/ja-maintenance.Rmd`: Japanese maintainer guide.
+- `vignettes/package-development.Rmd`: English package-build tutorial.
+- `vignettes/ja-package-development.Rmd`: Japanese package-build
+  tutorial.
 - `_pkgdown.yml`: site navigation, article groups, and reference
   sections.
 
