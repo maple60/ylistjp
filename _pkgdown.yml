@@ -24,13 +24,22 @@ navbar:
         href: articles/get-started.html
       - text: "日本語: 使い方ガイド"
         href: articles/ja-get-started.html
+      - text: "English: Maintenance Guide"
+        href: articles/maintenance.html
+      - text: "日本語: メンテナンスガイド"
+        href: articles/ja-maintenance.html
 
 articles:
-- title: Guides
+- title: User guides
   navbar: Guides
   contents:
   - get-started
   - ja-get-started
+- title: Developer guides
+  navbar: Developer guides
+  contents:
+  - maintenance
+  - ja-maintenance
 
 reference:
 - title: Overview

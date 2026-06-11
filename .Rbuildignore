@@ -1,6 +1,7 @@
 ^\.github$
 ^\.gitignore$
 ^README\.Rmd$
+^README\.ja\.md$
 ^docs$
 ^.*\.Rcheck$
 ^ylistjp_.*\.tar\.gz$
