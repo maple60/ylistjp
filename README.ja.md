@@ -20,6 +20,8 @@ pak::pak("maple60/ylistjp")
 ```r
 library(ylistjp)
 
+ylist_info("コナラ")
+
 academic_name("コナラ")
 #> [1] "Quercus serrata"
 
@@ -41,6 +43,15 @@ ylist_load(refresh = TRUE)
 ```
 
 `gbif_match()` は別扱いで、実行時に GBIF API へ問い合わせます。
+
+和名から情報をまとめて確認したい場合は、便利な入口として `ylist_info()` が使えます。
+既定ではキャッシュ済みの YList データだけを使います。WFO や GBIF の確認は任意で、
+外部データベースの内容や API の利用可否に依存します。
+
+```r
+ylist_info("コナラ", wfo = TRUE)
+ylist_info("コナラ", wfo = TRUE, gbif = TRUE)
+```
 
 ## ガイド
 
