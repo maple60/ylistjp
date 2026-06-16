@@ -88,16 +88,17 @@
 </tr></thead>
 <tbody>
 <tr class="odd">
-<td>YList のダウンロード URL、キャッシュファイル名、キャッシュ場所</td>
+<td>チェックリストのダウンロード
+URL、キャッシュファイル名、キャッシュ場所</td>
 <td><code>R/cache.R</code></td>
 </tr>
 <tr class="even">
-<td>タブ区切り YList ファイルの読み込み方法</td>
+<td>チェックリスト Excel ファイルの読み込み方法</td>
 <td><code>R/load.R</code></td>
 </tr>
 <tr class="odd">
 <td>
-<code><a href="../reference/academic_name.html">academic_name()</a></code> の挙動</td>
+<code><a href="../reference/scientific_name.html">scientific_name()</a></code> の挙動</td>
 <td>
 <code>R/lookup.R</code>,
 <code>tests/testthat/test-lookup.R</code>
@@ -105,7 +106,7 @@
 </tr>
 <tr class="even">
 <td>
-<code><a href="../reference/ylist_search.html">ylist_search()</a></code> の検索対象やマッチ規則</td>
+<code><a href="../reference/japanese_name_search.html">japanese_name_search()</a></code> の検索対象やマッチ規則</td>
 <td>
 <code>R/lookup.R</code>,
 <code>tests/testthat/test-lookup.R</code>
@@ -176,13 +177,13 @@
 <h2 id="関数ごとの保守ポイント">関数ごとの保守ポイント<a class="anchor" aria-label="anchor" href="#%E9%96%A2%E6%95%B0%E3%81%94%E3%81%A8%E3%81%AE%E4%BF%9D%E5%AE%88%E3%83%9D%E3%82%A4%E3%83%B3%E3%83%88"></a>
 </h2>
 <div class="section level3">
-<h3 id="ylist_download">
-<code>ylist_download()</code><a class="anchor" aria-label="anchor" href="#ylist_download"></a>
+<h3 id="japanese_name_download">
+<code>japanese_name_download()</code><a class="anchor" aria-label="anchor" href="#japanese_name_download"></a>
 </h3>
 <p>実装は <code>R/cache.R</code> です。</p>
 <p>ここを直す典型例:</p>
 <ul>
-<li>YList の公開タブ区切りファイル URL が変わった。</li>
+<li>チェックリスト Excel ファイルの URL が変わった。</li>
 <li>キャッシュファイル名を変えたい。</li>
 <li>テスト用 fixture のコピー方法を変えたい。</li>
 <li>キャッシュディレクトリの決め方を変えたい。</li>
@@ -192,24 +193,23 @@
 <code>tests/testthat/test-cache-load.R</code> にあります。</p>
 </div>
 <div class="section level3">
-<h3 id="ylist_load">
-<code>ylist_load()</code><a class="anchor" aria-label="anchor" href="#ylist_load"></a>
+<h3 id="japanese_name_load">
+<code>japanese_name_load()</code><a class="anchor" aria-label="anchor" href="#japanese_name_load"></a>
 </h3>
 <p>実装は <code>R/load.R</code> です。</p>
 <p>ここを直す典型例:</p>
 <ul>
-<li>YList ファイルの文字コードが変わった。</li>
-<li>区切り文字やヘッダーの扱いが変わった。</li>
+<li>チェックリストのシート名や必須列が変わった。</li>
 <li>読み込み後の整形処理を追加したい。</li>
 </ul>
-<p>現在は YList の公開タブ区切りファイルを CP932
-として読み込んでいます。
+<p>現在はチェックリスト Excel ファイルの <code>JN_dataset</code>
+シートを読み込んでいます。
 単体テストでは本番の巨大ファイルを直接ダウンロードせず、小さな合成
-fixture で文字コードと列構造を確認します。</p>
+fixture で列構造を確認します。</p>
 </div>
 <div class="section level3">
-<h3 id="academic_name">
-<code>academic_name()</code><a class="anchor" aria-label="anchor" href="#academic_name"></a>
+<h3 id="scientific_name">
+<code>scientific_name()</code><a class="anchor" aria-label="anchor" href="#scientific_name"></a>
 </h3>
 <p>実装は <code>R/lookup.R</code> です。</p>
 <p>ここを直す典型例:</p>
@@ -222,7 +222,8 @@ fixture で文字コードと列構造を確認します。</p>
 </ul>
 <p>現在の仕様は保守的です。</p>
 <ul>
-<li>YList の <code>和名</code> 列を完全一致で検索します。</li>
+<li>チェックリストの <code>和名</code> 列と <code>別名</code>
+列を完全一致で検索します。</li>
 <li>
 <code>ステータス == "標準"</code> の行だけを使います。</li>
 <li>見つからない場合は <code>NA_character_</code> を返します。</li>
@@ -231,8 +232,8 @@ fixture で文字コードと列構造を確認します。</p>
 <p>この仕様を変えた場合は、README、日英の使い方ガイド、テストも一緒に更新します。</p>
 </div>
 <div class="section level3">
-<h3 id="ylist_search">
-<code>ylist_search()</code><a class="anchor" aria-label="anchor" href="#ylist_search"></a>
+<h3 id="japanese_name_search">
+<code>japanese_name_search()</code><a class="anchor" aria-label="anchor" href="#japanese_name_search"></a>
 </h3>
 <p>実装は <code>R/lookup.R</code> です。</p>
 <p>ここを直す典型例:</p>
@@ -244,7 +245,7 @@ fixture で文字コードと列構造を確認します。</p>
 <li>候補のランキングを追加したい。</li>
 </ul>
 <p>検索機能は、候補を人間が確認できるようにするための関数です。
-<code><a href="../reference/academic_name.html">academic_name()</a></code> を暗黙の fuzzy lookup
+<code><a href="../reference/scientific_name.html">scientific_name()</a></code> を暗黙の fuzzy lookup
 に変えるより、検索候補を明示的に返す設計を優先します。</p>
 </div>
 <div class="section level3">

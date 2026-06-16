@@ -11,12 +11,16 @@
 <url><loc>https://maple60.github.io/ylistjp/articles/package-development.html</loc></url>
 <url><loc>https://maple60.github.io/ylistjp/authors.html</loc></url>
 <url><loc>https://maple60.github.io/ylistjp/index.html</loc></url>
-<url><loc>https://maple60.github.io/ylistjp/reference/academic_name.html</loc></url>
 <url><loc>https://maple60.github.io/ylistjp/reference/gbif_match.html</loc></url>
 <url><loc>https://maple60.github.io/ylistjp/reference/index.html</loc></url>
-<url><loc>https://maple60.github.io/ylistjp/reference/ylist_download.html</loc></url>
-<url><loc>https://maple60.github.io/ylistjp/reference/ylist_load.html</loc></url>
-<url><loc>https://maple60.github.io/ylistjp/reference/ylist_search.html</loc></url>
+<url><loc>https://maple60.github.io/ylistjp/reference/japanese_name_download.html</loc></url>
+<url><loc>https://maple60.github.io/ylistjp/reference/japanese_name_info.html</loc></url>
+<url><loc>https://maple60.github.io/ylistjp/reference/japanese_name_load.html</loc></url>
+<url><loc>https://maple60.github.io/ylistjp/reference/japanese_name_search.html</loc></url>
+<url><loc>https://maple60.github.io/ylistjp/reference/japanese_name_suggest.html</loc></url>
+<url><loc>https://maple60.github.io/ylistjp/reference/scientific_name.html</loc></url>
+<url><loc>https://maple60.github.io/ylistjp/reference/wfo_accepted_name.html</loc></url>
+<url><loc>https://maple60.github.io/ylistjp/reference/wfo_suggest.html</loc></url>
 <url><loc>https://maple60.github.io/ylistjp/reference/ylistjp-package.html</loc></url>
 </urlset>
 

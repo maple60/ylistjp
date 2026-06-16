@@ -1,7 +1,7 @@
 # ylistjp の使い方
 
-`ylistjp` は、YList（植物和名-学名インデックス）の公開タブ区切りデータを
-R から扱いやすくするための非公式パッケージです。
+`ylistjp` は、「維管束植物和名チェックリスト ver. 1.10」を R
+から扱いやすくするための非公式パッケージです。
 
 「コナラ」のような和名から、解析や表作成で使う学名を再現可能な形で取得する
 ことを目的にしています。
@@ -26,12 +26,12 @@ library(ylistjp)
 ## まず和名から学名を調べる
 
 和名から標準的な学名を取得するには
-[`academic_name()`](https://maple60.github.io/ylistjp/reference/academic_name.md)
+[`scientific_name()`](https://maple60.github.io/ylistjp/reference/scientific_name.md)
 を使います。
 
 ``` r
 
-academic_name("コナラ")
+scientific_name("コナラ")
 #> [1] "Quercus serrata"
 ```
 
@@ -39,7 +39,7 @@ academic_name("コナラ")
 
 ``` r
 
-academic_name("コナラ", with_author = TRUE)
+scientific_name("コナラ", with_author = TRUE)
 #> [1] "Quercus serrata Murray"
 ```
 
@@ -47,53 +47,53 @@ academic_name("コナラ", with_author = TRUE)
 
 ``` r
 
-academic_name(c("コナラ", "ミズナラ"))
+scientific_name(c("コナラ", "ミズナラ"))
 ```
 
-## YList データの取得とキャッシュ
+## チェックリストデータの取得とキャッシュ
 
-`ylistjp` は YList
-データをパッケージ内に同梱しません。最初にデータが必要に
-なった時点で、YList の公開タブ区切りファイルをユーザーの R キャッシュへ
+`ylistjp`
+はチェックリストデータをパッケージ内に同梱しません。最初にデータが必要に
+なった時点で、チェックリストの Excel ファイルをユーザーの R キャッシュへ
 ダウンロードして読み込みます。
 
 明示的にダウンロードしたい場合は次のようにします。
 
 ``` r
 
-ylist_download()
+japanese_name_download()
 ```
 
 既存のキャッシュを更新したい場合は `overwrite = TRUE` を使います。
 
 ``` r
 
-ylist_download(overwrite = TRUE)
+japanese_name_download(overwrite = TRUE)
 ```
 
 データ全体を `data.frame` として読み込みたい場合は
-[`ylist_load()`](https://maple60.github.io/ylistjp/reference/ylist_load.md)
+[`japanese_name_load()`](https://maple60.github.io/ylistjp/reference/japanese_name_load.md)
 を使います。
 
 ``` r
 
-ylist <- ylist_load()
-head(ylist)
+checklist <- japanese_name_load()
+head(checklist)
 ```
 
 読み込み前に必ず再取得したい場合は `refresh = TRUE` を指定します。
 
 ``` r
 
-ylist <- ylist_load(refresh = TRUE)
+checklist <- japanese_name_load(refresh = TRUE)
 ```
 
-## `academic_name()` の考え方
+## `scientific_name()` の考え方
 
-[`academic_name()`](https://maple60.github.io/ylistjp/reference/academic_name.md)
+[`scientific_name()`](https://maple60.github.io/ylistjp/reference/scientific_name.md)
 は、解析で使いやすいように保守的な動作にしています。
 
-- YList の `和名` 列を完全一致で検索します。
+- チェックリストの `和名` 列と `別名` 列を完全一致で検索します。
 - `ステータス` が `標準` の行だけを使います。
 - 見つからない場合は `NA_character_` を返します。
 - 標準行が複数見つかった場合は、自動で一つに決めずエラーにします。
@@ -104,12 +104,12 @@ ylist <- ylist_load(refresh = TRUE)
 ## 候補を確認する
 
 部分一致や別名も含めて候補を確認したい場合は
-[`ylist_search()`](https://maple60.github.io/ylistjp/reference/ylist_search.md)
+[`japanese_name_search()`](https://maple60.github.io/ylistjp/reference/japanese_name_search.md)
 を使います。
 
 ``` r
 
-ylist_search("コナラ")
+japanese_name_search("コナラ")
 ```
 
 検索対象の列を指定できます。
@@ -117,20 +117,20 @@ ylist_search("コナラ")
 ``` r
 
 # 学名から検索
-ylist_search("Quercus serrata", field = "scientific")
+japanese_name_search("Quercus serrata", field = "scientific")
 
 # 別名から検索
-ylist_search("ナラ", field = "alias")
+japanese_name_search("ナラ", field = "alias")
 
 # 和名・別名・学名をまとめて検索
-ylist_search("コナラ", field = "all")
+japanese_name_search("コナラ", field = "all")
 ```
 
 完全一致で候補を確認したい場合は `exact = TRUE` を指定します。
 
 ``` r
 
-ylist_search("コナラ", exact = TRUE)
+japanese_name_search("コナラ", exact = TRUE)
 ```
 
 ## 実用的なワークフロー
@@ -138,13 +138,13 @@ ylist_search("コナラ", exact = TRUE)
 データ整理では、次のような流れにすると扱いやすくなります。
 
 1.  和名リストに対して
-    [`academic_name()`](https://maple60.github.io/ylistjp/reference/academic_name.md)
+    [`scientific_name()`](https://maple60.github.io/ylistjp/reference/scientific_name.md)
     を使い、標準学名を付与します。
 2.  `NA` になったものや確認が必要なものを
-    [`ylist_search()`](https://maple60.github.io/ylistjp/reference/ylist_search.md)
+    [`japanese_name_search()`](https://maple60.github.io/ylistjp/reference/japanese_name_search.md)
     で調べます。
 3.  元の和名と取得した学名を両方残します。
-4.  論文、報告書、公開データで使う場合は YList を引用します。
+4.  論文、報告書、公開データで使う場合はチェックリストを引用します。
 
 例:
 
@@ -155,13 +155,13 @@ plants <- data.frame(
   stringsAsFactors = FALSE
 )
 
-plants$scientific_name <- academic_name(plants$japanese_name)
+plants$scientific_name <- scientific_name(plants$japanese_name)
 plants
 ```
 
 ## GBIF で国際的な学名情報を確認する
 
-YList から得た学名を国際的なデータベースと照合したい場合は、
+チェックリストから得た学名を国際的なデータベースと照合したい場合は、
 [`gbif_match()`](https://maple60.github.io/ylistjp/reference/gbif_match.md)
 を使えます。
 
@@ -175,14 +175,17 @@ gbif_match("Quercus serrata")
 
 ## データソースと引用
 
-`ylistjp` は YList の公式パッケージではなく、YList から承認・推奨された
-ものでもありません。YList の公開タブ区切りデータを R から扱いやすくする
-ための小さな補助パッケージです。
+`ylistjp` は「維管束植物和名チェックリスト ver. 1.10」を lookup source
+として使います。 このチェックリストには YList
+由来・更新データが含まれますが、`ylistjp` は JBIF、YList、
+またはチェックリスト著者の公式パッケージではなく、承認・推奨されたものでもありません。
 
-YList データを利用する場合は、YList 本体を引用してください。
+チェックリストに基づく結果を利用する場合は、チェックリストを引用してください。
 
-> 米倉浩司・梶田忠 (2003-)「BG Plants
-> 和名－学名インデックス」（YList），<http://ylist.info>
+> 山ノ内崇志・首藤光太郎・大澤剛士・米倉浩司・加藤 将・志賀 隆. 2019.
+> 「維管束植物和名チェックリスト」
+> (<https://gbif.jp/activities/checklist/wamei_checklist_110>)
 
-このパッケージのコードは MIT ライセンスです。ただし、YList データは
+このパッケージのコードは MIT
+ライセンスです。ただし、チェックリストデータは
 パッケージに同梱しておらず、このパッケージのライセンス対象ではありません。

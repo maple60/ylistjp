@@ -89,16 +89,16 @@ goals to the files that usually need to be edited.</p>
 </tr></thead>
 <tbody>
 <tr class="odd">
-<td>YList download URL, cache file name, or cache location</td>
+<td>Checklist download URL, cache file name, or cache location</td>
 <td><code>R/cache.R</code></td>
 </tr>
 <tr class="even">
-<td>How the tab-delimited YList file is parsed</td>
+<td>How the checklist Excel file is parsed</td>
 <td><code>R/load.R</code></td>
 </tr>
 <tr class="odd">
 <td>
-<code><a href="../reference/academic_name.html">academic_name()</a></code> behavior</td>
+<code><a href="../reference/scientific_name.html">scientific_name()</a></code> behavior</td>
 <td>
 <code>R/lookup.R</code>,
 <code>tests/testthat/test-lookup.R</code>
@@ -106,7 +106,7 @@ goals to the files that usually need to be edited.</p>
 </tr>
 <tr class="even">
 <td>
-<code><a href="../reference/ylist_search.html">ylist_search()</a></code> fields or matching rules</td>
+<code><a href="../reference/japanese_name_search.html">japanese_name_search()</a></code> fields or matching rules</td>
 <td>
 <code>R/lookup.R</code>,
 <code>tests/testthat/test-lookup.R</code>
@@ -177,13 +177,13 @@ goals to the files that usually need to be edited.</p>
 <h2 id="function-behavior">Function Behavior<a class="anchor" aria-label="anchor" href="#function-behavior"></a>
 </h2>
 <div class="section level3">
-<h3 id="ylist_download">
-<code>ylist_download()</code><a class="anchor" aria-label="anchor" href="#ylist_download"></a>
+<h3 id="japanese_name_download">
+<code>japanese_name_download()</code><a class="anchor" aria-label="anchor" href="#japanese_name_download"></a>
 </h3>
 <p>Implemented in <code>R/cache.R</code>.</p>
 <p>Change this file when:</p>
 <ul>
-<li>the public YList tab file URL changes;</li>
+<li>the checklist Excel file URL changes;</li>
 <li>the cache file name should change;</li>
 <li>you want to change how local fixture sources are copied in
 tests;</li>
@@ -194,23 +194,22 @@ Tests for cache behavior live in
 <code>tests/testthat/test-cache-load.R</code>.</p>
 </div>
 <div class="section level3">
-<h3 id="ylist_load">
-<code>ylist_load()</code><a class="anchor" aria-label="anchor" href="#ylist_load"></a>
+<h3 id="japanese_name_load">
+<code>japanese_name_load()</code><a class="anchor" aria-label="anchor" href="#japanese_name_load"></a>
 </h3>
 <p>Implemented in <code>R/load.R</code>.</p>
 <p>Change this file when:</p>
 <ul>
-<li>the YList file encoding changes;</li>
-<li>the delimiter or header handling changes;</li>
+<li>the checklist sheet or required columns change;</li>
 <li>required post-processing is added after reading the file.</li>
 </ul>
-<p>YList’s public tab-delimited file is currently read with CP932
-decoding. Keep encoding tests in the synthetic fixture rather than
-downloading the full YList file during unit tests.</p>
+<p>The checklist Excel file is read from the <code>JN_dataset</code>
+sheet. Keep structure tests in the synthetic fixture rather than
+downloading the full checklist file during unit tests.</p>
 </div>
 <div class="section level3">
-<h3 id="academic_name">
-<code>academic_name()</code><a class="anchor" aria-label="anchor" href="#academic_name"></a>
+<h3 id="scientific_name">
+<code>scientific_name()</code><a class="anchor" aria-label="anchor" href="#scientific_name"></a>
 </h3>
 <p>Implemented in <code>R/lookup.R</code>.</p>
 <p>Change this file when:</p>
@@ -223,7 +222,8 @@ downloading the full YList file during unit tests.</p>
 </ul>
 <p>The current contract is intentionally conservative:</p>
 <ul>
-<li>exact-match the <code>和名</code> column;</li>
+<li>exact-match the <code>和名</code> and <code>別名</code>
+columns;</li>
 <li>use only rows where <code>ステータス == "標準"</code>;</li>
 <li>return <code>NA_character_</code> when there is no standard exact
 match;</li>
@@ -233,8 +233,8 @@ match;</li>
 tests.</p>
 </div>
 <div class="section level3">
-<h3 id="ylist_search">
-<code>ylist_search()</code><a class="anchor" aria-label="anchor" href="#ylist_search"></a>
+<h3 id="japanese_name_search">
+<code>japanese_name_search()</code><a class="anchor" aria-label="anchor" href="#japanese_name_search"></a>
 </h3>
 <p>Implemented in <code>R/lookup.R</code>.</p>
 <p>Change this file when:</p>
@@ -245,8 +245,8 @@ tests.</p>
 <li>adding richer candidate ranking.</li>
 </ul>
 <p>Add tests for each new search mode. Search should remain explicit and
-inspectable; avoid silently changing <code><a href="../reference/academic_name.html">academic_name()</a></code> into a
-fuzzy lookup.</p>
+inspectable; avoid silently changing <code><a href="../reference/scientific_name.html">scientific_name()</a></code> into
+a fuzzy lookup.</p>
 </div>
 <div class="section level3">
 <h3 id="gbif_match">

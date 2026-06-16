@@ -55,11 +55,11 @@
           <code><a href="ylistjp-package.html">ylistjp</a></code> <code><a href="ylistjp-package.html">ylistjp-package</a></code>
 
         </dt>
-        <dd>Unofficial Access to YList Japanese Plant Name Data</dd>
+        <dd>Unofficial Japanese Plant Name Lookup Tools</dd>
       </dl></div><div class="section level2">
       <h2 id="data-access">Data access<a class="anchor" aria-label="anchor" href="#data-access"></a></h2>
 
-      <div class="section-desc"><p>Download and load the public YList tab-delimited file.</p></div>
+      <div class="section-desc"><p>Download and load the checklist Excel file.</p></div>
 
       <dl></dl></div><div class="section level2">
 
@@ -68,21 +68,21 @@
 
       <dl><dt>
 
-          <code><a href="ylist_download.html">ylist_download()</a></code>
+          <code><a href="japanese_name_download.html">japanese_name_download()</a></code> <code><a href="japanese_name_download.html">ylist_download()</a></code>
 
         </dt>
-        <dd>Download the public YList tab-delimited data file</dd>
+        <dd>Download the Japanese-name checklist data file</dd>
 
         <dt>
 
-          <code><a href="ylist_load.html">ylist_load()</a></code>
+          <code><a href="japanese_name_load.html">japanese_name_load()</a></code> <code><a href="japanese_name_load.html">ylist_load()</a></code>
 
         </dt>
-        <dd>Load cached YList data</dd>
+        <dd>Load cached Japanese-name checklist data</dd>
       </dl></div><div class="section level2">
       <h2 id="name-lookup">Name lookup<a class="anchor" aria-label="anchor" href="#name-lookup"></a></h2>
 
-      <div class="section-desc"><p>Search YList rows and retrieve scientific names.</p></div>
+      <div class="section-desc"><p>Search cached checklist rows and retrieve scientific names.</p></div>
 
       <dl></dl></div><div class="section level2">
 
@@ -91,21 +91,35 @@
 
       <dl><dt>
 
-          <code><a href="academic_name.html">academic_name()</a></code>
+          <code><a href="scientific_name.html">scientific_name()</a></code> <code><a href="scientific_name.html">academic_name()</a></code>
 
         </dt>
         <dd>Look up scientific names from Japanese plant names</dd>
 
         <dt>
 
-          <code><a href="ylist_search.html">ylist_search()</a></code>
+          <code><a href="japanese_name_search.html">japanese_name_search()</a></code> <code><a href="japanese_name_search.html">ylist_search()</a></code>
 
         </dt>
-        <dd>Search YList rows</dd>
+        <dd>Search cached checklist rows</dd>
+
+        <dt>
+
+          <code><a href="japanese_name_suggest.html">japanese_name_suggest()</a></code> <code><a href="japanese_name_suggest.html">ylist_suggest()</a></code>
+
+        </dt>
+        <dd>Suggest lookup rows for an approximate Japanese plant name</dd>
+
+        <dt>
+
+          <code><a href="japanese_name_info.html">japanese_name_info()</a></code> <code><a href="japanese_name_info.html">print(<i>&lt;japanese_name_info&gt;</i>)</a></code> <code><a href="japanese_name_info.html">ylist_info()</a></code> <code><a href="japanese_name_info.html">print(<i>&lt;ylist_info&gt;</i>)</a></code>
+
+        </dt>
+        <dd>Get a high-level Japanese-name checklist summary</dd>
       </dl></div><div class="section level2">
       <h2 id="international-checks">International checks<a class="anchor" aria-label="anchor" href="#international-checks"></a></h2>
 
-      <div class="section-desc"><p>Optional helper for checking scientific names against GBIF.</p></div>
+      <div class="section-desc"><p>Optional helpers for checking scientific names against WFO and GBIF.</p></div>
 
       <dl></dl></div><div class="section level2">
 
@@ -113,6 +127,20 @@
 
 
       <dl><dt>
+
+          <code><a href="wfo_suggest.html">wfo_suggest()</a></code>
+
+        </dt>
+        <dd>Suggest WFO Plant List names for a scientific name</dd>
+
+        <dt>
+
+          <code><a href="wfo_accepted_name.html">wfo_accepted_name()</a></code>
+
+        </dt>
+        <dd>Return the best accepted WFO Plant List name</dd>
+
+        <dt>
 
           <code><a href="gbif_match.html">gbif_match()</a></code>
 

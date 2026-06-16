@@ -81,19 +81,19 @@ analysis tool.</p>
 </h2>
 <p>The original goal was simple:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/academic_name.html">academic_name</a></span><span class="op">(</span><span class="st">"コナラ"</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/scientific_name.html">scientific_name</a></span><span class="op">(</span><span class="st">"コナラ"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] "Quercus serrata"</span></span></code></pre></div>
 <p>That small API hides several important package-design decisions:</p>
 <ul>
-<li>the package is an unofficial wrapper around YList;</li>
-<li>YList data is not redistributed inside the package;</li>
-<li>the public YList tab-delimited file is downloaded only when
-needed;</li>
+<li>the package is an unofficial wrapper around the Vascular Plant
+Japanese Name Checklist ver. 1.10;</li>
+<li>checklist data is not redistributed inside the package;</li>
+<li>the checklist Excel file is downloaded only when needed;</li>
 <li>repeated lookup uses the user’s local cache;</li>
 <li>exact lookup is conservative, so ambiguous names are not silently
 guessed;</li>
-<li>international checking is optional and kept separate from the YList
-lookup.</li>
+<li>international checking is optional and kept separate from the
+checklist lookup.</li>
 </ul>
 <p>This is a good package-sized problem because the public API is small,
 but it still touches data access, encoding, caching, tests,
@@ -133,7 +133,7 @@ helpers.</td>
 </tr>
 <tr class="odd">
 <td><code>tests/testthat/</code></td>
-<td>Unit tests and synthetic YList fixtures.</td>
+<td>Unit tests and synthetic checklist fixtures.</td>
 </tr>
 <tr class="even">
 <td><code>vignettes/</code></td>
@@ -161,9 +161,9 @@ each directory responsible for one kind of work: code in
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/maple60/ylistjp" class="external-link">ylistjp</a></span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu"><a href="../reference/academic_name.html">academic_name</a></span><span class="op">(</span><span class="st">"コナラ"</span><span class="op">)</span></span>
-<span><span class="fu"><a href="../reference/academic_name.html">academic_name</a></span><span class="op">(</span><span class="st">"コナラ"</span>, with_author <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span><span class="fu"><a href="../reference/ylist_search.html">ylist_search</a></span><span class="op">(</span><span class="st">"コナラ"</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="../reference/scientific_name.html">scientific_name</a></span><span class="op">(</span><span class="st">"コナラ"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/scientific_name.html">scientific_name</a></span><span class="op">(</span><span class="st">"コナラ"</span>, with_author <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/japanese_name_search.html">japanese_name_search</a></span><span class="op">(</span><span class="st">"コナラ"</span><span class="op">)</span></span></code></pre></div>
 <p>The package then exposes a few focused functions around that
 workflow:</p>
 <table class="table">
@@ -177,21 +177,20 @@ workflow:</p>
 </tr></thead>
 <tbody>
 <tr class="odd">
-<td><code><a href="../reference/ylist_download.html">ylist_download()</a></code></td>
-<td>Download the public YList tab-delimited file into the user
-cache.</td>
+<td><code><a href="../reference/japanese_name_download.html">japanese_name_download()</a></code></td>
+<td>Download the checklist Excel file into the user cache.</td>
 </tr>
 <tr class="even">
-<td><code><a href="../reference/ylist_load.html">ylist_load()</a></code></td>
+<td><code><a href="../reference/japanese_name_load.html">japanese_name_load()</a></code></td>
 <td>Read the cached file as a <code>data.frame</code>.</td>
 </tr>
 <tr class="odd">
-<td><code><a href="../reference/academic_name.html">academic_name()</a></code></td>
+<td><code><a href="../reference/scientific_name.html">scientific_name()</a></code></td>
 <td>Return the standard scientific name for an exact Japanese-name
 match.</td>
 </tr>
 <tr class="even">
-<td><code><a href="../reference/ylist_search.html">ylist_search()</a></code></td>
+<td><code><a href="../reference/japanese_name_search.html">japanese_name_search()</a></code></td>
 <td>Return candidate rows for manual inspection.</td>
 </tr>
 <tr class="odd">
@@ -204,56 +203,55 @@ match.</td>
 advanced users to inspect the underlying data.</p>
 </div>
 <div class="section level2">
-<h2 id="keep-ylist-data-outside-the-package">Keep YList Data Outside the Package<a class="anchor" aria-label="anchor" href="#keep-ylist-data-outside-the-package"></a>
+<h2 id="keep-checklist-data-outside-the-package">Keep Checklist Data Outside the Package<a class="anchor" aria-label="anchor" href="#keep-checklist-data-outside-the-package"></a>
 </h2>
-<p><code>ylistjp</code> does not bundle YList data. Instead, the data
-flow is:</p>
+<p><code>ylistjp</code> does not bundle checklist data. Instead, the
+data flow is:</p>
 <ol style="list-style-type: decimal">
 <li>
-<code><a href="../reference/academic_name.html">academic_name()</a></code>, <code><a href="../reference/ylist_search.html">ylist_search()</a></code>, or
-<code><a href="../reference/ylist_load.html">ylist_load()</a></code> needs YList data.</li>
-<li>If no cached file exists, <code><a href="../reference/ylist_download.html">ylist_download()</a></code> downloads
-the public tab file.</li>
+<code><a href="../reference/scientific_name.html">scientific_name()</a></code>, <code><a href="../reference/japanese_name_search.html">japanese_name_search()</a></code>,
+or <code><a href="../reference/japanese_name_load.html">japanese_name_load()</a></code> needs checklist data.</li>
+<li>If no cached file exists, <code><a href="../reference/japanese_name_download.html">japanese_name_download()</a></code>
+downloads the checklist Excel file.</li>
 <li>The file is saved under the user’s R cache directory.</li>
-<li>Later lookups read the cached file instead of contacting the YList
-server.</li>
+<li>Later lookups read the cached file instead of contacting the
+checklist server.</li>
 </ol>
 <p>This design matters for two reasons. First, the package code can be
-MIT licensed without redistributing YList data. Second, repeated
-analysis does not send a request to YList for every lookup.</p>
+MIT licensed without redistributing checklist data. Second, repeated
+analysis does not send a request to the checklist server for every
+lookup.</p>
 <p>Users can refresh the local copy intentionally:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/ylist_download.html">ylist_download</a></span><span class="op">(</span>overwrite <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span><span class="fu"><a href="../reference/ylist_load.html">ylist_load</a></span><span class="op">(</span>refresh <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/japanese_name_download.html">japanese_name_download</a></span><span class="op">(</span>overwrite <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/japanese_name_load.html">japanese_name_load</a></span><span class="op">(</span>refresh <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
-<h2 id="handle-japanese-encoding-explicitly">Handle Japanese Encoding Explicitly<a class="anchor" aria-label="anchor" href="#handle-japanese-encoding-explicitly"></a>
+<h2 id="read-the-checklist-excel-file-explicitly">Read the Checklist Excel File Explicitly<a class="anchor" aria-label="anchor" href="#read-the-checklist-excel-file-explicitly"></a>
 </h2>
-<p>YList’s public tab-delimited file is read with CP932 decoding:</p>
+<p>The checklist is read from the <code>JN_dataset</code> sheet with
+<code>readxl</code>:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">utils</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/utils/read.table.html" class="external-link">read.delim</a></span><span class="op">(</span></span>
-<span>  file <span class="op">=</span> <span class="va">path</span>,</span>
-<span>  sep <span class="op">=</span> <span class="st">"\t"</span>,</span>
-<span>  fileEncoding <span class="op">=</span> <span class="st">"CP932"</span>,</span>
-<span>  encoding <span class="op">=</span> <span class="st">"UTF-8"</span>,</span>
-<span>  stringsAsFactors <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>  check.names <span class="op">=</span> <span class="cn">FALSE</span></span>
+<code class="sourceCode R"><span><span class="fu">readxl</span><span class="fu">::</span><span class="fu"><a href="https://readxl.tidyverse.org/reference/read_excel.html" class="external-link">read_excel</a></span><span class="op">(</span></span>
+<span>  path <span class="op">=</span> <span class="va">path</span>,</span>
+<span>  sheet <span class="op">=</span> <span class="st">"JN_dataset"</span>,</span>
+<span>  col_types <span class="op">=</span> <span class="st">"text"</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-<p>This is one of the most important implementation details. Japanese
-data sources often use Shift-JIS or CP932. If the package guessed the
-encoding implicitly, column names such as <code>和名</code>,
-<code>学名</code>, and <code>ステータス</code> could become unreadable
-on some systems.</p>
+<p>This is one of the most important implementation details. The package
+normalizes the checklist columns into the stable lookup columns used
+internally, such as <code>和名</code>, <code>別名</code>,
+<code>学名</code>, and <code>学名 withAuthor</code>.</p>
 <p>The package stores column names internally with Unicode escapes where
 that makes the source code safer to edit across environments.</p>
 </div>
 <div class="section level2">
 <h2 id="make-lookup-conservative">Make Lookup Conservative<a class="anchor" aria-label="anchor" href="#make-lookup-conservative"></a>
 </h2>
-<p><code><a href="../reference/academic_name.html">academic_name()</a></code> is designed for reproducible analysis,
+<p><code><a href="../reference/scientific_name.html">scientific_name()</a></code> is designed for reproducible analysis,
 not fuzzy search. Its contract is intentionally narrow:</p>
 <ul>
-<li>exact-match the YList <code>和名</code> column;</li>
+<li>exact-match the checklist <code>和名</code> and <code>別名</code>
+columns;</li>
 <li>use only rows where <code>ステータス == "標準"</code>;</li>
 <li>return <code>NA_character_</code> when no standard exact match
 exists;</li>
@@ -261,22 +259,22 @@ exists;</li>
 </ul>
 <p>That behavior prevents a script from silently choosing a questionable
 name. When a name is ambiguous, the user should inspect candidates with
-<code><a href="../reference/ylist_search.html">ylist_search()</a></code>.</p>
+<code><a href="../reference/japanese_name_search.html">japanese_name_search()</a></code>.</p>
 </div>
 <div class="section level2">
 <h2 id="test-with-synthetic-fixtures">Test with Synthetic Fixtures<a class="anchor" aria-label="anchor" href="#test-with-synthetic-fixtures"></a>
 </h2>
-<p>Unit tests should not download the full YList file. Instead,
+<p>Unit tests should not download the full checklist file. Instead,
 <code>ylistjp</code> uses a small synthetic fixture that contains just
 enough rows to test behavior:</p>
 <ul>
-<li>CP932 tab parsing;</li>
-<li>standard versus synonym filtering;</li>
+<li>Excel sheet parsing;</li>
+<li>common-name versus alias lookup;</li>
 <li>no-hit handling;</li>
 <li>ambiguity errors;</li>
 <li>cache reuse and refresh behavior.</li>
 </ul>
-<p>Network tests are kept optional. GBIF and YList live checks are
+<p>Network tests are kept optional. GBIF and checklist live checks are
 useful as smoke tests, but they should not be required for every local
 test or every pull request.</p>
 </div>
@@ -307,14 +305,16 @@ behavior:</p>
 <ul>
 <li>add explicit hiragana-to-katakana or width normalization before
 searching;</li>
-<li>add richer candidate ranking to <code><a href="../reference/ylist_search.html">ylist_search()</a></code>;</li>
+<li>add richer candidate ranking to
+<code><a href="../reference/japanese_name_search.html">japanese_name_search()</a></code>;</li>
 <li>add optional checks for WFO or Catalogue of Life;</li>
-<li>expose more metadata from YList when users need audit trails;</li>
-<li>add a small article showing how to join <code><a href="../reference/academic_name.html">academic_name()</a></code>
-results to a data frame.</li>
+<li>expose more metadata from the checklist when users need audit
+trails;</li>
+<li>add a small article showing how to join
+<code><a href="../reference/scientific_name.html">scientific_name()</a></code> results to a data frame.</li>
 </ul>
 <p>The safest pattern is to make exploratory features explicit in search
-or helper functions, while keeping <code><a href="../reference/academic_name.html">academic_name()</a></code>
+or helper functions, while keeping <code><a href="../reference/scientific_name.html">scientific_name()</a></code>
 predictable for scripts.</p>
 </div>
 <div class="section level2">

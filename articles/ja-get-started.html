@@ -70,9 +70,8 @@
 
     
     
-<p><code>ylistjp</code>
-は、YList（植物和名-学名インデックス）の公開タブ区切りデータを R
-から扱いやすくするための非公式パッケージです。</p>
+<p><code>ylistjp</code> は、「維管束植物和名チェックリスト ver. 1.10」を
+R から扱いやすくするための非公式パッケージです。</p>
 <p>「コナラ」のような和名から、解析や表作成で使う学名を再現可能な形で取得する
 ことを目的にしています。</p>
 <div class="section level2">
@@ -89,52 +88,53 @@
 <div class="section level2">
 <h2 id="まず和名から学名を調べる">まず和名から学名を調べる<a class="anchor" aria-label="anchor" href="#%E3%81%BE%E3%81%9A%E5%92%8C%E5%90%8D%E3%81%8B%E3%82%89%E5%AD%A6%E5%90%8D%E3%82%92%E8%AA%BF%E3%81%B9%E3%82%8B"></a>
 </h2>
-<p>和名から標準的な学名を取得するには <code><a href="../reference/academic_name.html">academic_name()</a></code>
+<p>和名から標準的な学名を取得するには <code><a href="../reference/scientific_name.html">scientific_name()</a></code>
 を使います。</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/academic_name.html">academic_name</a></span><span class="op">(</span><span class="st">"コナラ"</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/scientific_name.html">scientific_name</a></span><span class="op">(</span><span class="st">"コナラ"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] "Quercus serrata"</span></span></code></pre></div>
 <p>命名者付きの学名が必要な場合は <code>with_author = TRUE</code>
 を指定します。</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/academic_name.html">academic_name</a></span><span class="op">(</span><span class="st">"コナラ"</span>, with_author <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/scientific_name.html">scientific_name</a></span><span class="op">(</span><span class="st">"コナラ"</span>, with_author <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] "Quercus serrata Murray"</span></span></code></pre></div>
 <p>複数の和名をまとめて渡すこともできます。</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/academic_name.html">academic_name</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"コナラ"</span>, <span class="st">"ミズナラ"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/scientific_name.html">scientific_name</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"コナラ"</span>, <span class="st">"ミズナラ"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
-<h2 id="ylist-データの取得とキャッシュ">YList データの取得とキャッシュ<a class="anchor" aria-label="anchor" href="#ylist-%E3%83%87%E3%83%BC%E3%82%BF%E3%81%AE%E5%8F%96%E5%BE%97%E3%81%A8%E3%82%AD%E3%83%A3%E3%83%83%E3%82%B7%E3%83%A5"></a>
+<h2 id="チェックリストデータの取得とキャッシュ">チェックリストデータの取得とキャッシュ<a class="anchor" aria-label="anchor" href="#%E3%83%81%E3%82%A7%E3%83%83%E3%82%AF%E3%83%AA%E3%82%B9%E3%83%88%E3%83%87%E3%83%BC%E3%82%BF%E3%81%AE%E5%8F%96%E5%BE%97%E3%81%A8%E3%82%AD%E3%83%A3%E3%83%83%E3%82%B7%E3%83%A5"></a>
 </h2>
-<p><code>ylistjp</code> は YList
-データをパッケージ内に同梱しません。最初にデータが必要に
-なった時点で、YList の公開タブ区切りファイルをユーザーの R キャッシュへ
+<p><code>ylistjp</code>
+はチェックリストデータをパッケージ内に同梱しません。最初にデータが必要に
+なった時点で、チェックリストの Excel ファイルをユーザーの R キャッシュへ
 ダウンロードして読み込みます。</p>
 <p>明示的にダウンロードしたい場合は次のようにします。</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/ylist_download.html">ylist_download</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/japanese_name_download.html">japanese_name_download</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p>既存のキャッシュを更新したい場合は <code>overwrite = TRUE</code>
 を使います。</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/ylist_download.html">ylist_download</a></span><span class="op">(</span>overwrite <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/japanese_name_download.html">japanese_name_download</a></span><span class="op">(</span>overwrite <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <p>データ全体を <code>data.frame</code> として読み込みたい場合は
-<code><a href="../reference/ylist_load.html">ylist_load()</a></code> を使います。</p>
+<code><a href="../reference/japanese_name_load.html">japanese_name_load()</a></code> を使います。</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">ylist</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ylist_load.html">ylist_load</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">ylist</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">checklist</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/japanese_name_load.html">japanese_name_load</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">checklist</span><span class="op">)</span></span></code></pre></div>
 <p>読み込み前に必ず再取得したい場合は <code>refresh = TRUE</code>
 を指定します。</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">ylist</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ylist_load.html">ylist_load</a></span><span class="op">(</span>refresh <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">checklist</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/japanese_name_load.html">japanese_name_load</a></span><span class="op">(</span>refresh <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
-<h2 id="academic_name-の考え方">
-<code>academic_name()</code> の考え方<a class="anchor" aria-label="anchor" href="#academic_name-%E3%81%AE%E8%80%83%E3%81%88%E6%96%B9"></a>
+<h2 id="scientific_name-の考え方">
+<code>scientific_name()</code> の考え方<a class="anchor" aria-label="anchor" href="#scientific_name-%E3%81%AE%E8%80%83%E3%81%88%E6%96%B9"></a>
 </h2>
-<p><code><a href="../reference/academic_name.html">academic_name()</a></code>
+<p><code><a href="../reference/scientific_name.html">scientific_name()</a></code>
 は、解析で使いやすいように保守的な動作にしています。</p>
 <ul>
-<li>YList の <code>和名</code> 列を完全一致で検索します。</li>
+<li>チェックリストの <code>和名</code> 列と <code>別名</code>
+列を完全一致で検索します。</li>
 <li>
 <code>ステータス</code> が <code>標準</code>
 の行だけを使います。</li>
@@ -148,36 +148,36 @@
 <h2 id="候補を確認する">候補を確認する<a class="anchor" aria-label="anchor" href="#%E5%80%99%E8%A3%9C%E3%82%92%E7%A2%BA%E8%AA%8D%E3%81%99%E3%82%8B"></a>
 </h2>
 <p>部分一致や別名も含めて候補を確認したい場合は
-<code><a href="../reference/ylist_search.html">ylist_search()</a></code> を使います。</p>
+<code><a href="../reference/japanese_name_search.html">japanese_name_search()</a></code> を使います。</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/ylist_search.html">ylist_search</a></span><span class="op">(</span><span class="st">"コナラ"</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/japanese_name_search.html">japanese_name_search</a></span><span class="op">(</span><span class="st">"コナラ"</span><span class="op">)</span></span></code></pre></div>
 <p>検索対象の列を指定できます。</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># 学名から検索</span></span>
-<span><span class="fu"><a href="../reference/ylist_search.html">ylist_search</a></span><span class="op">(</span><span class="st">"Quercus serrata"</span>, field <span class="op">=</span> <span class="st">"scientific"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/japanese_name_search.html">japanese_name_search</a></span><span class="op">(</span><span class="st">"Quercus serrata"</span>, field <span class="op">=</span> <span class="st">"scientific"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># 別名から検索</span></span>
-<span><span class="fu"><a href="../reference/ylist_search.html">ylist_search</a></span><span class="op">(</span><span class="st">"ナラ"</span>, field <span class="op">=</span> <span class="st">"alias"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/japanese_name_search.html">japanese_name_search</a></span><span class="op">(</span><span class="st">"ナラ"</span>, field <span class="op">=</span> <span class="st">"alias"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># 和名・別名・学名をまとめて検索</span></span>
-<span><span class="fu"><a href="../reference/ylist_search.html">ylist_search</a></span><span class="op">(</span><span class="st">"コナラ"</span>, field <span class="op">=</span> <span class="st">"all"</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="../reference/japanese_name_search.html">japanese_name_search</a></span><span class="op">(</span><span class="st">"コナラ"</span>, field <span class="op">=</span> <span class="st">"all"</span><span class="op">)</span></span></code></pre></div>
 <p>完全一致で候補を確認したい場合は <code>exact = TRUE</code>
 を指定します。</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/ylist_search.html">ylist_search</a></span><span class="op">(</span><span class="st">"コナラ"</span>, exact <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/japanese_name_search.html">japanese_name_search</a></span><span class="op">(</span><span class="st">"コナラ"</span>, exact <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="実用的なワークフロー">実用的なワークフロー<a class="anchor" aria-label="anchor" href="#%E5%AE%9F%E7%94%A8%E7%9A%84%E3%81%AA%E3%83%AF%E3%83%BC%E3%82%AF%E3%83%95%E3%83%AD%E3%83%BC"></a>
 </h2>
 <p>データ整理では、次のような流れにすると扱いやすくなります。</p>
 <ol style="list-style-type: decimal">
-<li>和名リストに対して <code><a href="../reference/academic_name.html">academic_name()</a></code>
+<li>和名リストに対して <code><a href="../reference/scientific_name.html">scientific_name()</a></code>
 を使い、標準学名を付与します。</li>
 <li>
 <code>NA</code> になったものや確認が必要なものを
-<code><a href="../reference/ylist_search.html">ylist_search()</a></code> で調べます。</li>
+<code><a href="../reference/japanese_name_search.html">japanese_name_search()</a></code> で調べます。</li>
 <li>元の和名と取得した学名を両方残します。</li>
-<li>論文、報告書、公開データで使う場合は YList を引用します。</li>
+<li>論文、報告書、公開データで使う場合はチェックリストを引用します。</li>
 </ol>
 <p>例:</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
@@ -186,13 +186,13 @@
 <span>  stringsAsFactors <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">plants</span><span class="op">$</span><span class="va">scientific_name</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/academic_name.html">academic_name</a></span><span class="op">(</span><span class="va">plants</span><span class="op">$</span><span class="va">japanese_name</span><span class="op">)</span></span>
+<span><span class="va">plants</span><span class="op">$</span><span class="va">scientific_name</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/scientific_name.html">scientific_name</a></span><span class="op">(</span><span class="va">plants</span><span class="op">$</span><span class="va">japanese_name</span><span class="op">)</span></span>
 <span><span class="va">plants</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="gbif-で国際的な学名情報を確認する">GBIF で国際的な学名情報を確認する<a class="anchor" aria-label="anchor" href="#gbif-%E3%81%A7%E5%9B%BD%E9%9A%9B%E7%9A%84%E3%81%AA%E5%AD%A6%E5%90%8D%E6%83%85%E5%A0%B1%E3%82%92%E7%A2%BA%E8%AA%8D%E3%81%99%E3%82%8B"></a>
 </h2>
-<p>YList から得た学名を国際的なデータベースと照合したい場合は、
+<p>チェックリストから得た学名を国際的なデータベースと照合したい場合は、
 <code><a href="../reference/gbif_match.html">gbif_match()</a></code> を使えます。</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/gbif_match.html">gbif_match</a></span><span class="op">(</span><span class="st">"Quercus serrata"</span><span class="op">)</span></span></code></pre></div>
@@ -202,15 +202,17 @@
 <div class="section level2">
 <h2 id="データソースと引用">データソースと引用<a class="anchor" aria-label="anchor" href="#%E3%83%87%E3%83%BC%E3%82%BF%E3%82%BD%E3%83%BC%E3%82%B9%E3%81%A8%E5%BC%95%E7%94%A8"></a>
 </h2>
-<p><code>ylistjp</code> は YList の公式パッケージではなく、YList
-から承認・推奨された ものでもありません。YList の公開タブ区切りデータを
-R から扱いやすくする ための小さな補助パッケージです。</p>
-<p>YList データを利用する場合は、YList 本体を引用してください。</p>
+<p><code>ylistjp</code> は「維管束植物和名チェックリスト ver. 1.10」を
+lookup source として使います。 このチェックリストには YList
+由来・更新データが含まれますが、<code>ylistjp</code> は JBIF、YList、
+またはチェックリスト著者の公式パッケージではなく、承認・推奨されたものでもありません。</p>
+<p>チェックリストに基づく結果を利用する場合は、チェックリストを引用してください。</p>
 <blockquote>
-<p>米倉浩司・梶田忠 (2003-)「BG Plants
-和名－学名インデックス」（YList），<a href="http://ylist.info" class="external-link uri">http://ylist.info</a></p>
+<p>山ノ内崇志・首藤光太郎・大澤剛士・米倉浩司・加藤 将・志賀 隆. 2019.
+「維管束植物和名チェックリスト」 (<a href="https://gbif.jp/activities/checklist/wamei_checklist_110" class="external-link uri">https://gbif.jp/activities/checklist/wamei_checklist_110</a>)</p>
 </blockquote>
-<p>このパッケージのコードは MIT ライセンスです。ただし、YList データは
+<p>このパッケージのコードは MIT
+ライセンスです。ただし、チェックリストデータは
 パッケージに同梱しておらず、このパッケージのライセンス対象ではありません。</p>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

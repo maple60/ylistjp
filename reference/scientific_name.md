@@ -1,11 +1,13 @@
 # Look up scientific names from Japanese plant names
 
-Exact-matches Japanese names in the YList `和名` column and returns the
-standard scientific name where `ステータス == "標準"`.
+Exact-matches Japanese names in the cached checklist data and returns
+the scientific name.
 
 ## Usage
 
 ``` r
+scientific_name(name, with_author = FALSE)
+
 academic_name(name, with_author = FALSE)
 ```
 
@@ -24,11 +26,16 @@ academic_name(name, with_author = FALSE)
 A character vector with one result per input name. Missing names return
 `NA_character_`.
 
+## Details
+
+`academic_name()` is retained as a deprecated compatibility wrapper. Use
+`scientific_name()` for new code.
+
 ## Examples
 
 ``` r
 if (FALSE) { # \dontrun{
-academic_name("コナラ")
-academic_name("コナラ", with_author = TRUE)
+scientific_name("コナラ")
+scientific_name("コナラ", with_author = TRUE)
 } # }
 ```

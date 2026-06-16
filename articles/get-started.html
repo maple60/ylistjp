@@ -71,9 +71,10 @@
     
     
 <p><code>ylistjp</code> is an unofficial R package for looking up
-scientific plant names from Japanese plant names using YList data.</p>
-<p>YList is especially useful when your starting point is a Japanese
-plant name, such as <code>コナラ</code>, and you want the corresponding
+scientific plant names from Japanese plant names using the Vascular
+Plant Japanese Name Checklist ver. 1.10.</p>
+<p>The checklist is useful when your starting point is a Japanese plant
+name, such as <code>コナラ</code>, and you want the corresponding
 scientific name in a reproducible R workflow.</p>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
@@ -89,44 +90,45 @@ scientific name in a reproducible R workflow.</p>
 <div class="section level2">
 <h2 id="first-lookup">First Lookup<a class="anchor" aria-label="anchor" href="#first-lookup"></a>
 </h2>
-<p>Use <code><a href="../reference/academic_name.html">academic_name()</a></code> when you have a Japanese plant name
-and want the standard scientific name.</p>
+<p>Use <code><a href="../reference/scientific_name.html">scientific_name()</a></code> when you have a Japanese plant
+name and want the standard scientific name.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/academic_name.html">academic_name</a></span><span class="op">(</span><span class="st">"コナラ"</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/scientific_name.html">scientific_name</a></span><span class="op">(</span><span class="st">"コナラ"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] "Quercus serrata"</span></span></code></pre></div>
-<p>If you want the author string as recorded in YList, set
+<p>If you want the author string as recorded in the checklist, set
 <code>with_author = TRUE</code>.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/academic_name.html">academic_name</a></span><span class="op">(</span><span class="st">"コナラ"</span>, with_author <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/scientific_name.html">scientific_name</a></span><span class="op">(</span><span class="st">"コナラ"</span>, with_author <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] "Quercus serrata Murray"</span></span></code></pre></div>
 <p>The function is vectorized:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/academic_name.html">academic_name</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"コナラ"</span>, <span class="st">"ミズナラ"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/scientific_name.html">scientific_name</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"コナラ"</span>, <span class="st">"ミズナラ"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="how-the-data-is-loaded">How the Data Is Loaded<a class="anchor" aria-label="anchor" href="#how-the-data-is-loaded"></a>
 </h2>
-<p><code>ylistjp</code> does not bundle or redistribute YList data. The
-first call that needs the data downloads the public tab-delimited YList
-file and stores it in the user’s local R cache.</p>
+<p><code>ylistjp</code> does not bundle or redistribute checklist data.
+The first call that needs the data downloads the checklist Excel file
+and stores it in the user’s local R cache.</p>
 <p>You can also download or refresh the file explicitly:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/ylist_download.html">ylist_download</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="fu"><a href="../reference/ylist_download.html">ylist_download</a></span><span class="op">(</span>overwrite <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/japanese_name_download.html">japanese_name_download</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/japanese_name_download.html">japanese_name_download</a></span><span class="op">(</span>overwrite <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <p>Load the cached data as a regular data frame:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">ylist</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ylist_load.html">ylist_load</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">ylist</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">checklist</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/japanese_name_load.html">japanese_name_load</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">checklist</span><span class="op">)</span></span></code></pre></div>
 <p>To force a refresh before loading:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">ylist</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ylist_load.html">ylist_load</a></span><span class="op">(</span>refresh <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">checklist</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/japanese_name_load.html">japanese_name_load</a></span><span class="op">(</span>refresh <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="exact-lookup-behavior">Exact Lookup Behavior<a class="anchor" aria-label="anchor" href="#exact-lookup-behavior"></a>
 </h2>
-<p><code><a href="../reference/academic_name.html">academic_name()</a></code> is intentionally conservative:</p>
+<p><code><a href="../reference/scientific_name.html">scientific_name()</a></code> is intentionally conservative:</p>
 <ul>
-<li>it exact-matches the YList <code>和名</code> column;</li>
+<li>it exact-matches the checklist <code>和名</code> and
+<code>別名</code> columns;</li>
 <li>it only uses rows where <code>ステータス</code> is
 <code>標準</code>;</li>
 <li>it returns <code>NA_character_</code> when there is no standard
@@ -140,33 +142,33 @@ matching would be risky.</p>
 <div class="section level2">
 <h2 id="searching-candidates">Searching Candidates<a class="anchor" aria-label="anchor" href="#searching-candidates"></a>
 </h2>
-<p>Use <code><a href="../reference/ylist_search.html">ylist_search()</a></code> when you want to inspect possible
-matches.</p>
+<p>Use <code><a href="../reference/japanese_name_search.html">japanese_name_search()</a></code> when you want to inspect
+possible matches.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/ylist_search.html">ylist_search</a></span><span class="op">(</span><span class="st">"コナラ"</span><span class="op">)</span></span></code></pre></div>
-<p>By default, <code><a href="../reference/ylist_search.html">ylist_search()</a></code> searches Japanese names with
-partial matching. You can search specific fields:</p>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/japanese_name_search.html">japanese_name_search</a></span><span class="op">(</span><span class="st">"コナラ"</span><span class="op">)</span></span></code></pre></div>
+<p>By default, <code><a href="../reference/japanese_name_search.html">japanese_name_search()</a></code> searches Japanese
+names with partial matching. You can search specific fields:</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/ylist_search.html">ylist_search</a></span><span class="op">(</span><span class="st">"Quercus serrata"</span>, field <span class="op">=</span> <span class="st">"scientific"</span><span class="op">)</span></span>
-<span><span class="fu"><a href="../reference/ylist_search.html">ylist_search</a></span><span class="op">(</span><span class="st">"ナラ"</span>, field <span class="op">=</span> <span class="st">"alias"</span><span class="op">)</span></span>
-<span><span class="fu"><a href="../reference/ylist_search.html">ylist_search</a></span><span class="op">(</span><span class="st">"コナラ"</span>, field <span class="op">=</span> <span class="st">"all"</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/japanese_name_search.html">japanese_name_search</a></span><span class="op">(</span><span class="st">"Quercus serrata"</span>, field <span class="op">=</span> <span class="st">"scientific"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/japanese_name_search.html">japanese_name_search</a></span><span class="op">(</span><span class="st">"ナラ"</span>, field <span class="op">=</span> <span class="st">"alias"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/japanese_name_search.html">japanese_name_search</a></span><span class="op">(</span><span class="st">"コナラ"</span>, field <span class="op">=</span> <span class="st">"all"</span><span class="op">)</span></span></code></pre></div>
 <p>Use exact matching when you want only exact candidate rows:</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/ylist_search.html">ylist_search</a></span><span class="op">(</span><span class="st">"コナラ"</span>, exact <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/japanese_name_search.html">japanese_name_search</a></span><span class="op">(</span><span class="st">"コナラ"</span>, exact <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="a-practical-workflow">A Practical Workflow<a class="anchor" aria-label="anchor" href="#a-practical-workflow"></a>
 </h2>
 <p>A typical workflow is:</p>
 <ol style="list-style-type: decimal">
-<li>Use <code><a href="../reference/academic_name.html">academic_name()</a></code> for names that should be standard
+<li>Use <code><a href="../reference/scientific_name.html">scientific_name()</a></code> for names that should be standard
 and unambiguous.</li>
-<li>Use <code><a href="../reference/ylist_search.html">ylist_search()</a></code> for names that return
+<li>Use <code><a href="../reference/japanese_name_search.html">japanese_name_search()</a></code> for names that return
 <code>NA</code> or need manual checking.</li>
 <li>Keep both the original Japanese name and returned scientific name in
 your analysis table.</li>
-<li>Cite YList when you use YList-derived names in a report, paper, or
-dataset.</li>
+<li>Cite the checklist when you use checklist-based names in a report,
+paper, or dataset.</li>
 </ol>
 <p>Example:</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
@@ -175,16 +177,16 @@ dataset.</li>
 <span>  stringsAsFactors <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">plants</span><span class="op">$</span><span class="va">scientific_name</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/academic_name.html">academic_name</a></span><span class="op">(</span><span class="va">plants</span><span class="op">$</span><span class="va">japanese_name</span><span class="op">)</span></span>
+<span><span class="va">plants</span><span class="op">$</span><span class="va">scientific_name</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/scientific_name.html">scientific_name</a></span><span class="op">(</span><span class="va">plants</span><span class="op">$</span><span class="va">japanese_name</span><span class="op">)</span></span>
 <span><span class="va">plants</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="checking-names-with-gbif">Checking Names with GBIF<a class="anchor" aria-label="anchor" href="#checking-names-with-gbif"></a>
 </h2>
 <p><code><a href="../reference/gbif_match.html">gbif_match()</a></code> is a small optional helper around the GBIF
-species match API. Use it after obtaining a scientific name from YList
-when you want to check how the name is represented in an international
-biodiversity data source.</p>
+species match API. Use it after obtaining a scientific name from the
+checklist when you want to check how the name is represented in an
+international biodiversity data source.</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/gbif_match.html">gbif_match</a></span><span class="op">(</span><span class="st">"Quercus serrata"</span><span class="op">)</span></span></code></pre></div>
 <p>This function requires the suggested package
@@ -193,16 +195,17 @@ biodiversity data source.</p>
 <div class="section level2">
 <h2 id="data-source-and-citation">Data Source and Citation<a class="anchor" aria-label="anchor" href="#data-source-and-citation"></a>
 </h2>
-<p>This package is not affiliated with or endorsed by YList. It is only
-a small R interface for working with the public YList tab-delimited data
-file.</p>
-<p>When using YList data, cite the original source:</p>
+<p>This package uses the Vascular Plant Japanese Name Checklist ver.
+1.10 as the lookup source. The checklist includes YList-derived/update
+data, but this package is not affiliated with or endorsed by JBIF,
+YList, or the checklist authors.</p>
+<p>When using checklist-based results, cite the checklist:</p>
 <blockquote>
-<p>米倉浩司・梶田忠 (2003-)「BG Plants
-和名－学名インデックス」（YList），<a href="http://ylist.info" class="external-link uri">http://ylist.info</a></p>
+<p>Yamanouchi, T., Shutoh, K., Osawa, T., Yonekura, K., Kato, S., Shiga,
+T. 2019. A checklist of Japanese plant names (<a href="https://gbif.jp/activities/checklist/wamei_checklist_110" class="external-link uri">https://gbif.jp/activities/checklist/wamei_checklist_110</a>)</p>
 </blockquote>
-<p>The package code is MIT licensed. YList data is not included in the
-package and is not covered by the package license.</p>
+<p>The package code is MIT licensed. Checklist data is not included in
+the package and is not covered by the package license.</p>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>

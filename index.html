@@ -11,9 +11,9 @@
 <script src="deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="deps/headroom-0.11.0/headroom.min.js"></script><script src="deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="deps/search-1.0.0/fuse.min.js"></script><script src="deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="ylistjp">
-<meta name="description" content="Unofficial R helpers for looking up scientific plant names from Japanese names using the public YList tab-delimited data file.
+<meta name="description" content="Unofficial R helpers for looking up scientific plant names from Japanese names using the Vascular Plant Japanese Name Checklist ver. 1.10.
 ">
-<meta property="og:description" content="Unofficial R helpers for looking up scientific plant names from Japanese names using the public YList tab-delimited data file.
+<meta property="og:description" content="Unofficial R helpers for looking up scientific plant names from Japanese names using the Vascular Plant Japanese Name Checklist ver. 1.10.
 ">
 </head>
 <body>
@@ -62,7 +62,7 @@
   <main id="main" class="col-md-9"><div class="section level1">
 <div class="page-header"><h1 id="ylistjp">ylistjp<a class="anchor" aria-label="anchor" href="#ylistjp"></a>
 </h1></div>
-<p><code>ylistjp</code> is an unofficial R package for looking up scientific plant names from Japanese plant names using the public tab-delimited data file from <a href="http://www.ylist.info/" class="external-link">YList</a>, the “植物和名-学名インデックス”.</p>
+<p><code>ylistjp</code> is an unofficial R package for looking up scientific plant names from Japanese plant names using the Vascular Plant Japanese Name Checklist ver. 1.10 published by <a href="https://gbif.jp/activities/checklist/wamei_checklist_110/" class="external-link">JBIF</a>.</p>
 <p>Documentation site: <a href="https://maple60.github.io/ylistjp/">https://maple60.github.io/ylistjp/</a></p>
 <p>日本語で読みたい場合は <a href="https://maple60.github.io/ylistjp/README.ja.html">日本語 README</a> または <a href="https://maple60.github.io/ylistjp/articles/ja-get-started.html">日本語ガイド</a> を参照してください。</p>
 <div class="section level2">
@@ -78,18 +78,24 @@
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/maple60/ylistjp" class="external-link">ylistjp</a></span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu"><a href="reference/academic_name.html">academic_name</a></span><span class="op">(</span><span class="st">"コナラ"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="reference/japanese_name_info.html">japanese_name_info</a></span><span class="op">(</span><span class="st">"コナラ"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="reference/scientific_name.html">scientific_name</a></span><span class="op">(</span><span class="st">"コナラ"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] "Quercus serrata"</span></span>
 <span></span>
-<span><span class="fu"><a href="reference/academic_name.html">academic_name</a></span><span class="op">(</span><span class="st">"コナラ"</span>, with_author <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="fu"><a href="reference/scientific_name.html">scientific_name</a></span><span class="op">(</span><span class="st">"コナラ"</span>, with_author <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] "Quercus serrata Murray"</span></span>
 <span></span>
-<span><span class="fu"><a href="reference/ylist_search.html">ylist_search</a></span><span class="op">(</span><span class="st">"コナラ"</span><span class="op">)</span></span></code></pre></div>
-<p>The first function call that needs YList data downloads the public tab-delimited file into the user’s local R cache. After that, <code><a href="reference/academic_name.html">academic_name()</a></code>, <code><a href="reference/ylist_search.html">ylist_search()</a></code>, and <code><a href="reference/ylist_load.html">ylist_load()</a></code> read from the cached local file and do not query the YList server for every lookup. This keeps repeated use gentle on the YList server. To refresh the cached file intentionally:</p>
+<span><span class="fu"><a href="reference/japanese_name_search.html">japanese_name_search</a></span><span class="op">(</span><span class="st">"コナラ"</span><span class="op">)</span></span></code></pre></div>
+<p>The first function call that needs checklist data downloads the Excel file into the user’s local R cache. After that, <code><a href="reference/scientific_name.html">scientific_name()</a></code>, <code><a href="reference/japanese_name_search.html">japanese_name_search()</a></code>, and <code><a href="reference/japanese_name_load.html">japanese_name_load()</a></code> read from the cached local file and do not query an external server for every lookup. To refresh the cached file intentionally:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/ylist_download.html">ylist_download</a></span><span class="op">(</span>overwrite <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span><span class="fu"><a href="reference/ylist_load.html">ylist_load</a></span><span class="op">(</span>refresh <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="reference/japanese_name_download.html">japanese_name_download</a></span><span class="op">(</span>overwrite <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="fu"><a href="reference/japanese_name_load.html">japanese_name_load</a></span><span class="op">(</span>refresh <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <p><code><a href="reference/gbif_match.html">gbif_match()</a></code> is separate: it calls the GBIF API when you run it.</p>
+<p><code><a href="reference/japanese_name_info.html">japanese_name_info()</a></code> is the recommended convenient entry point when you want a compact summary. By default it uses only cached checklist data. WFO and GBIF checks are optional and may depend on external database content and API availability:</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="reference/japanese_name_info.html">japanese_name_info</a></span><span class="op">(</span><span class="st">"コナラ"</span>, wfo <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="fu"><a href="reference/japanese_name_info.html">japanese_name_info</a></span><span class="op">(</span><span class="st">"コナラ"</span>, wfo <span class="op">=</span> <span class="cn">TRUE</span>, gbif <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="guides">Guides<a class="anchor" aria-label="anchor" href="#guides"></a>
@@ -107,19 +113,36 @@
 <div class="section level2">
 <h2 id="international-name-checks">International Name Checks<a class="anchor" aria-label="anchor" href="#international-name-checks"></a>
 </h2>
-<p><code><a href="reference/gbif_match.html">gbif_match()</a></code> is a small optional helper around the GBIF species match API. It is intended for checking the scientific name returned from YList against an international biodiversity data source.</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="section level3">
+<h3 id="wfo-plant-list-checks">WFO Plant List checks<a class="anchor" aria-label="anchor" href="#wfo-plant-list-checks"></a>
+</h3>
+<p><code><a href="reference/scientific_name.html">scientific_name()</a></code> returns the checklist scientific name. <code><a href="reference/wfo_suggest.html">wfo_suggest()</a></code> checks WFO candidate names, and <code><a href="reference/wfo_accepted_name.html">wfo_accepted_name()</a></code> summarizes the best WFO accepted-name interpretation. These functions do not change checklist lookup results. WFO API use should stay small-scale; for larger workflows, keep caching enabled and record the WFO release or version used.</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">sci</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/scientific_name.html">scientific_name</a></span><span class="op">(</span><span class="st">"コナラ"</span><span class="op">)</span></span>
+<span><span class="va">sci</span></span>
+<span><span class="co">#&gt; [1] "Quercus serrata"</span></span>
+<span></span>
+<span><span class="fu"><a href="reference/wfo_suggest.html">wfo_suggest</a></span><span class="op">(</span><span class="va">sci</span><span class="op">)</span></span>
+<span><span class="fu"><a href="reference/wfo_accepted_name.html">wfo_accepted_name</a></span><span class="op">(</span><span class="va">sci</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div class="section level3">
+<h3 id="gbif-checks">GBIF checks<a class="anchor" aria-label="anchor" href="#gbif-checks"></a>
+</h3>
+<p><code><a href="reference/gbif_match.html">gbif_match()</a></code> is a small optional helper around the GBIF species match API. It is intended for checking the scientific name returned from the checklist lookup against an international biodiversity data source.</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/gbif_match.html">gbif_match</a></span><span class="op">(</span><span class="st">"Quercus serrata"</span><span class="op">)</span></span></code></pre></div>
+</div>
 </div>
 <div class="section level2">
 <h2 id="data-source-and-citation">Data Source and Citation<a class="anchor" aria-label="anchor" href="#data-source-and-citation"></a>
 </h2>
-<p>This package is not affiliated with or endorsed by YList.</p>
-<p>When using YList data, cite the original source:</p>
+<p>This package uses the Vascular Plant Japanese Name Checklist ver. 1.10 as the lookup source. The checklist includes YList-derived/update data, but this package is not affiliated with or endorsed by JBIF, YList, or the checklist authors.</p>
+<p>When using checklist-based results, cite the checklist:</p>
 <blockquote>
-<p>米倉浩司・梶田忠 (2003-)「BG Plants 和名－学名インデックス」（YList），<a href="http://ylist.info" class="external-link uri">http://ylist.info</a></p>
+<p>Yamanouchi, T., Shutoh, K., Osawa, T., Yonekura, K., Kato, S., Shiga, T. 2019. A checklist of Japanese plant names (<a href="https://gbif.jp/activities/checklist/wamei_checklist_110" class="external-link uri">https://gbif.jp/activities/checklist/wamei_checklist_110</a>)</p>
 </blockquote>
-<p>The package code is MIT licensed. YList data is not included in the package and is not covered by this package’s license.</p>
+<p>The package code is MIT licensed. Checklist data is not included in the package and is not covered by this package’s license.</p>
+<p>The older <code><a href="reference/scientific_name.html">academic_name()</a></code> and <code>ylist_*()</code> function names are retained as deprecated compatibility wrappers.</p>
 </div>
 </div>
   </main><aside class="col-md-3"><div class="links">

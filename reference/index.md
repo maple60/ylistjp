@@ -4,29 +4,45 @@
 
 - [`ylistjp`](https://maple60.github.io/ylistjp/reference/ylistjp-package.md)
   [`ylistjp-package`](https://maple60.github.io/ylistjp/reference/ylistjp-package.md)
-  : Unofficial Access to YList Japanese Plant Name Data
+  : Unofficial Japanese Plant Name Lookup Tools
 
 ## Data access
 
-Download and load the public YList tab-delimited file.
+Download and load the checklist Excel file.
 
-- [`ylist_download()`](https://maple60.github.io/ylistjp/reference/ylist_download.md)
-  : Download the public YList tab-delimited data file
-- [`ylist_load()`](https://maple60.github.io/ylistjp/reference/ylist_load.md)
-  : Load cached YList data
+- [`japanese_name_download()`](https://maple60.github.io/ylistjp/reference/japanese_name_download.md)
+  [`ylist_download()`](https://maple60.github.io/ylistjp/reference/japanese_name_download.md)
+  : Download the Japanese-name checklist data file
+- [`japanese_name_load()`](https://maple60.github.io/ylistjp/reference/japanese_name_load.md)
+  [`ylist_load()`](https://maple60.github.io/ylistjp/reference/japanese_name_load.md)
+  : Load cached Japanese-name checklist data
 
 ## Name lookup
 
-Search YList rows and retrieve scientific names.
+Search cached checklist rows and retrieve scientific names.
 
-- [`academic_name()`](https://maple60.github.io/ylistjp/reference/academic_name.md)
+- [`scientific_name()`](https://maple60.github.io/ylistjp/reference/scientific_name.md)
+  [`academic_name()`](https://maple60.github.io/ylistjp/reference/scientific_name.md)
   : Look up scientific names from Japanese plant names
-- [`ylist_search()`](https://maple60.github.io/ylistjp/reference/ylist_search.md)
-  : Search YList rows
+- [`japanese_name_search()`](https://maple60.github.io/ylistjp/reference/japanese_name_search.md)
+  [`ylist_search()`](https://maple60.github.io/ylistjp/reference/japanese_name_search.md)
+  : Search cached checklist rows
+- [`japanese_name_suggest()`](https://maple60.github.io/ylistjp/reference/japanese_name_suggest.md)
+  [`ylist_suggest()`](https://maple60.github.io/ylistjp/reference/japanese_name_suggest.md)
+  : Suggest lookup rows for an approximate Japanese plant name
+- [`japanese_name_info()`](https://maple60.github.io/ylistjp/reference/japanese_name_info.md)
+  [`print(`*`<japanese_name_info>`*`)`](https://maple60.github.io/ylistjp/reference/japanese_name_info.md)
+  [`ylist_info()`](https://maple60.github.io/ylistjp/reference/japanese_name_info.md)
+  [`print(`*`<ylist_info>`*`)`](https://maple60.github.io/ylistjp/reference/japanese_name_info.md)
+  : Get a high-level Japanese-name checklist summary
 
 ## International checks
 
-Optional helper for checking scientific names against GBIF.
+Optional helpers for checking scientific names against WFO and GBIF.
 
+- [`wfo_suggest()`](https://maple60.github.io/ylistjp/reference/wfo_suggest.md)
+  : Suggest WFO Plant List names for a scientific name
+- [`wfo_accepted_name()`](https://maple60.github.io/ylistjp/reference/wfo_accepted_name.md)
+  : Return the best accepted WFO Plant List name
 - [`gbif_match()`](https://maple60.github.io/ylistjp/reference/gbif_match.md)
   : Match scientific names against GBIF

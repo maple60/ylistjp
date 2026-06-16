@@ -43,7 +43,7 @@
 
 <div id="ylistjp" class="section level1">
 
-<p><code>ylistjp</code> は、<a href="http://www.ylist.info/" class="external-link">YList</a>（植物和名-学名インデックス）の 公開タブ区切りデータを利用して、和名から学名を調べるための非公式 R パッケージです。</p>
+<p><code>ylistjp</code> は、<a href="https://gbif.jp/activities/checklist/wamei_checklist_110/" class="external-link">JBIF</a> が公開する 「維管束植物和名チェックリスト ver. 1.10」を利用して、和名から学名を調べるための 非公式 R パッケージです。</p>
 <p>ドキュメントサイト: <a href="https://maple60.github.io/ylistjp/">https://maple60.github.io/ylistjp/</a></p>
 <p>English README: <a href="https://maple60.github.io/ylistjp/">https://maple60.github.io/ylistjp/</a></p>
 <div class="section level2">
@@ -57,18 +57,24 @@
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/maple60/ylistjp" class="external-link">ylistjp</a></span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu"><a href="reference/academic_name.html">academic_name</a></span><span class="op">(</span><span class="st">"コナラ"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="reference/japanese_name_info.html">japanese_name_info</a></span><span class="op">(</span><span class="st">"コナラ"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="reference/scientific_name.html">scientific_name</a></span><span class="op">(</span><span class="st">"コナラ"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] "Quercus serrata"</span></span>
 <span></span>
-<span><span class="fu"><a href="reference/academic_name.html">academic_name</a></span><span class="op">(</span><span class="st">"コナラ"</span>, with_author <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="fu"><a href="reference/scientific_name.html">scientific_name</a></span><span class="op">(</span><span class="st">"コナラ"</span>, with_author <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] "Quercus serrata Murray"</span></span>
 <span></span>
-<span><span class="fu"><a href="reference/ylist_search.html">ylist_search</a></span><span class="op">(</span><span class="st">"コナラ"</span><span class="op">)</span></span></code></pre></div>
-<p>最初に YList データが必要になった時点で、公開タブ区切りファイルをユーザーの R キャッシュへダウンロードします。その後の <code><a href="reference/academic_name.html">academic_name()</a></code>、<code><a href="reference/ylist_search.html">ylist_search()</a></code>、 <code><a href="reference/ylist_load.html">ylist_load()</a></code> はローカルのキャッシュファイルを読むため、検索のたびに YList サーバーへ問い合わせることはありません。これにより、YList への負荷は最小限に 抑えられます。キャッシュを明示的に更新したい場合は次のようにします。</p>
+<span><span class="fu"><a href="reference/japanese_name_search.html">japanese_name_search</a></span><span class="op">(</span><span class="st">"コナラ"</span><span class="op">)</span></span></code></pre></div>
+<p>最初にチェックリストデータが必要になった時点で、Excel ファイルをユーザーの R キャッシュへダウンロードします。その後の <code><a href="reference/scientific_name.html">scientific_name()</a></code>、<code><a href="reference/japanese_name_search.html">japanese_name_search()</a></code>、 <code><a href="reference/japanese_name_load.html">japanese_name_load()</a></code> はローカルのキャッシュファイルを読むため、検索のたびに外部サーバーへ 問い合わせることはありません。キャッシュを明示的に更新したい場合は次のようにします。</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/ylist_download.html">ylist_download</a></span><span class="op">(</span>overwrite <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span><span class="fu"><a href="reference/ylist_load.html">ylist_load</a></span><span class="op">(</span>refresh <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="reference/japanese_name_download.html">japanese_name_download</a></span><span class="op">(</span>overwrite <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="fu"><a href="reference/japanese_name_load.html">japanese_name_load</a></span><span class="op">(</span>refresh <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <p><code><a href="reference/gbif_match.html">gbif_match()</a></code> は別扱いで、実行時に GBIF API へ問い合わせます。</p>
+<p>和名から情報をまとめて確認したい場合は、便利な入口として <code><a href="reference/japanese_name_info.html">japanese_name_info()</a></code> が使えます。 既定ではキャッシュ済みのチェックリストデータだけを使います。WFO や GBIF の確認は任意で、 外部データベースの内容や API の利用可否に依存します。</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="reference/japanese_name_info.html">japanese_name_info</a></span><span class="op">(</span><span class="st">"コナラ"</span>, wfo <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="fu"><a href="reference/japanese_name_info.html">japanese_name_info</a></span><span class="op">(</span><span class="st">"コナラ"</span>, wfo <span class="op">=</span> <span class="cn">TRUE</span>, gbif <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="ガイド">ガイド<a class="anchor" aria-label="anchor" href="#%E3%82%AC%E3%82%A4%E3%83%89"></a></h2>
@@ -82,18 +88,30 @@
 </ul></div>
 <div class="section level2">
 <h2 id="国際的な学名確認">国際的な学名確認<a class="anchor" aria-label="anchor" href="#%E5%9B%BD%E9%9A%9B%E7%9A%84%E3%81%AA%E5%AD%A6%E5%90%8D%E7%A2%BA%E8%AA%8D"></a></h2>
-<p><code><a href="reference/gbif_match.html">gbif_match()</a></code> は GBIF species match API を呼び出す薄い補助関数です。 YList から得た学名を国際的な生物多様性データソースで確認したい場合に使います。</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<p><code><a href="reference/gbif_match.html">gbif_match()</a></code> は GBIF species match API を呼び出す薄い補助関数です。 チェックリストから得た学名を国際的な生物多様性データソースで確認したい場合に使います。</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/gbif_match.html">gbif_match</a></span><span class="op">(</span><span class="st">"Quercus serrata"</span><span class="op">)</span></span></code></pre></div>
+<div class="section level3">
+<h3 id="wfo-plant-list-checks">WFO Plant List checks<a class="anchor" aria-label="anchor" href="#wfo-plant-list-checks"></a></h3>
+<p><code><a href="reference/scientific_name.html">scientific_name()</a></code> はチェックリストの学名を返します。<code><a href="reference/wfo_suggest.html">wfo_suggest()</a></code> は WFO の候補名を確認し、 <code><a href="reference/wfo_accepted_name.html">wfo_accepted_name()</a></code> は WFO 上での採用名の解釈を 1 行にまとめます。これらの関数は チェックリストの結果を自動で置き換えません。WFO API は小規模な対話的確認に使い、大きな処理では キャッシュを使い、使った WFO のリリースやバージョンを記録してください。</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">sci</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/scientific_name.html">scientific_name</a></span><span class="op">(</span><span class="st">"コナラ"</span><span class="op">)</span></span>
+<span><span class="va">sci</span></span>
+<span><span class="co">#&gt; [1] "Quercus serrata"</span></span>
+<span></span>
+<span><span class="fu"><a href="reference/wfo_suggest.html">wfo_suggest</a></span><span class="op">(</span><span class="va">sci</span><span class="op">)</span></span>
+<span><span class="fu"><a href="reference/wfo_accepted_name.html">wfo_accepted_name</a></span><span class="op">(</span><span class="va">sci</span><span class="op">)</span></span></code></pre></div>
+</div>
 </div>
 <div class="section level2">
 <h2 id="データソースと引用">データソースと引用<a class="anchor" aria-label="anchor" href="#%E3%83%87%E3%83%BC%E3%82%BF%E3%82%BD%E3%83%BC%E3%82%B9%E3%81%A8%E5%BC%95%E7%94%A8"></a></h2>
-<p><code>ylistjp</code> は YList の公式パッケージではなく、YList から承認・推奨されたものでもありません。</p>
-<p>YList データを利用する場合は、YList 本体を引用してください。</p>
+<p><code>ylistjp</code> は「維管束植物和名チェックリスト ver. 1.10」を lookup source として使います。 このチェックリストには YList 由来・更新データが含まれますが、<code>ylistjp</code> は JBIF、YList、 またはチェックリスト著者の公式パッケージではなく、承認・推奨されたものでもありません。</p>
+<p>チェックリストに基づく結果を利用する場合は、チェックリストを引用してください。</p>
 <blockquote>
-<p>米倉浩司・梶田忠 (2003-)「BG Plants 和名－学名インデックス」（YList），<a href="http://ylist.info" class="external-link uri">http://ylist.info</a></p>
+<p>山ノ内崇志・首藤光太郎・大澤剛士・米倉浩司・加藤 将・志賀 隆. 2019. 「維管束植物和名チェックリスト」 (<a href="https://gbif.jp/activities/checklist/wamei_checklist_110" class="external-link uri">https://gbif.jp/activities/checklist/wamei_checklist_110</a>)</p>
 </blockquote>
-<p>このパッケージのコードは MIT ライセンスです。ただし、YList データはパッケージに同梱しておらず、 このパッケージのライセンス対象ではありません。</p>
+<p>このパッケージのコードは MIT ライセンスです。ただし、チェックリストデータはパッケージに同梱しておらず、 このパッケージのライセンス対象ではありません。</p>
+<p>旧 <code><a href="reference/scientific_name.html">academic_name()</a></code> と <code>ylist_*()</code> 関数名は、互換性のため非推奨ラッパーとして残しています。</p>
 </div>
 </div>
 

@@ -9,12 +9,11 @@
 Source:
 [`DESCRIPTION`](https://github.com/maple60/ylistjp/blob/main/DESCRIPTION)
 
-contributors y (2026). *ylistjp: Unofficial Access to YList Japanese
-Plant Name Data*. R package version 0.1.0,
-<https://github.com/maple60/ylistjp>.
+contributors y (2026). *ylistjp: Unofficial Japanese Plant Name Lookup
+Tools*. R package version 0.1.0, <https://github.com/maple60/ylistjp>.
 
     @Manual{,
-      title = {ylistjp: Unofficial Access to YList Japanese Plant Name Data},
+      title = {ylistjp: Unofficial Japanese Plant Name Lookup Tools},
       author = {ylistjp contributors},
       year = {2026},
       note = {R package version 0.1.0},

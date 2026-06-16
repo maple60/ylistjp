@@ -11,10 +11,10 @@ For Japanese, see [日本語:
 
 | If you want to change… | Edit these files |
 |----|----|
-| YList download URL, cache file name, or cache location | `R/cache.R` |
-| How the tab-delimited YList file is parsed | `R/load.R` |
-| [`academic_name()`](https://maple60.github.io/ylistjp/reference/academic_name.md) behavior | `R/lookup.R`, `tests/testthat/test-lookup.R` |
-| [`ylist_search()`](https://maple60.github.io/ylistjp/reference/ylist_search.md) fields or matching rules | `R/lookup.R`, `tests/testthat/test-lookup.R` |
+| Checklist download URL, cache file name, or cache location | `R/cache.R` |
+| How the checklist Excel file is parsed | `R/load.R` |
+| [`scientific_name()`](https://maple60.github.io/ylistjp/reference/scientific_name.md) behavior | `R/lookup.R`, `tests/testthat/test-lookup.R` |
+| [`japanese_name_search()`](https://maple60.github.io/ylistjp/reference/japanese_name_search.md) fields or matching rules | `R/lookup.R`, `tests/testthat/test-lookup.R` |
 | GBIF response fields or API behavior | `R/gbif.R`, `tests/testthat/test-gbif.R` |
 | Exported functions | `NAMESPACE`, matching `.Rd` files in `man/` |
 | Package metadata, dependencies, site URL | `DESCRIPTION` |
@@ -29,13 +29,13 @@ For Japanese, see [日本語:
 
 ## Function Behavior
 
-### `ylist_download()`
+### `japanese_name_download()`
 
 Implemented in `R/cache.R`.
 
 Change this file when:
 
-- the public YList tab file URL changes;
+- the checklist Excel file URL changes;
 - the cache file name should change;
 - you want to change how local fixture sources are copied in tests;
 - you want to change the cache directory policy.
@@ -43,21 +43,20 @@ Change this file when:
 The function should keep returning the cached file path invisibly. Tests
 for cache behavior live in `tests/testthat/test-cache-load.R`.
 
-### `ylist_load()`
+### `japanese_name_load()`
 
 Implemented in `R/load.R`.
 
 Change this file when:
 
-- the YList file encoding changes;
-- the delimiter or header handling changes;
+- the checklist sheet or required columns change;
 - required post-processing is added after reading the file.
 
-YList’s public tab-delimited file is currently read with CP932 decoding.
-Keep encoding tests in the synthetic fixture rather than downloading the
-full YList file during unit tests.
+The checklist Excel file is read from the `JN_dataset` sheet. Keep
+structure tests in the synthetic fixture rather than downloading the
+full checklist file during unit tests.
 
-### `academic_name()`
+### `scientific_name()`
 
 Implemented in `R/lookup.R`.
 
@@ -71,7 +70,7 @@ Change this file when:
 
 The current contract is intentionally conservative:
 
-- exact-match the `和名` column;
+- exact-match the `和名` and `別名` columns;
 - use only rows where `ステータス == "標準"`;
 - return `NA_character_` when there is no standard exact match;
 - error when multiple standard exact matches are found.
@@ -79,7 +78,7 @@ The current contract is intentionally conservative:
 If this contract changes, update the README, both usage guides, and
 tests.
 
-### `ylist_search()`
+### `japanese_name_search()`
 
 Implemented in `R/lookup.R`.
 
@@ -92,7 +91,7 @@ Change this file when:
 
 Add tests for each new search mode. Search should remain explicit and
 inspectable; avoid silently changing
-[`academic_name()`](https://maple60.github.io/ylistjp/reference/academic_name.md)
+[`scientific_name()`](https://maple60.github.io/ylistjp/reference/scientific_name.md)
 into a fuzzy lookup.
 
 ### `gbif_match()`

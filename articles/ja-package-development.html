@@ -81,16 +81,17 @@ as an R package</a></p>
 </h2>
 <p>最初の目標は単純です。</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/academic_name.html">academic_name</a></span><span class="op">(</span><span class="st">"コナラ"</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/scientific_name.html">scientific_name</a></span><span class="op">(</span><span class="st">"コナラ"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] "Quercus serrata"</span></span></code></pre></div>
 <p>この短い API の裏側には、いくつかの設計判断があります。</p>
 <ul>
-<li>YList の非公式 wrapper として作る。</li>
-<li>YList データはパッケージに同梱しない。</li>
-<li>公開タブ区切りファイルは、必要になったときだけ取得する。</li>
+<li>「維管束植物和名チェックリスト ver. 1.10」の非公式 wrapper
+として作る。</li>
+<li>チェックリストデータはパッケージに同梱しない。</li>
+<li>チェックリスト Excel ファイルは、必要になったときだけ取得する。</li>
 <li>2 回目以降の検索ではローカルキャッシュを使う。</li>
 <li>完全一致を基本にし、曖昧な候補を自動で選ばない。</li>
-<li>国際的な学名確認は任意機能として YList 検索から分ける。</li>
+<li>国際的な学名確認は任意機能としてチェックリスト検索から分ける。</li>
 </ul>
 <p>小さな関数群ですが、データ取得、文字コード、キャッシュ、テスト、
 ドキュメント、GitHub Actions まで含むため、R パッケージ作成の教材として
@@ -129,7 +130,7 @@ as an R package</a></p>
 </tr>
 <tr class="odd">
 <td><code>tests/testthat/</code></td>
-<td>単体テストと小さな合成 YList fixture。</td>
+<td>単体テストと小さな合成チェックリスト fixture。</td>
 </tr>
 <tr class="even">
 <td><code>vignettes/</code></td>
@@ -157,9 +158,9 @@ as an R package</a></p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/maple60/ylistjp" class="external-link">ylistjp</a></span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu"><a href="../reference/academic_name.html">academic_name</a></span><span class="op">(</span><span class="st">"コナラ"</span><span class="op">)</span></span>
-<span><span class="fu"><a href="../reference/academic_name.html">academic_name</a></span><span class="op">(</span><span class="st">"コナラ"</span>, with_author <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span><span class="fu"><a href="../reference/ylist_search.html">ylist_search</a></span><span class="op">(</span><span class="st">"コナラ"</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="../reference/scientific_name.html">scientific_name</a></span><span class="op">(</span><span class="st">"コナラ"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/scientific_name.html">scientific_name</a></span><span class="op">(</span><span class="st">"コナラ"</span>, with_author <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/japanese_name_search.html">japanese_name_search</a></span><span class="op">(</span><span class="st">"コナラ"</span><span class="op">)</span></span></code></pre></div>
 <p>その周辺に、役割のはっきりした関数を置いています。</p>
 <table class="table">
 <colgroup>
@@ -172,20 +173,20 @@ as an R package</a></p>
 </tr></thead>
 <tbody>
 <tr class="odd">
-<td><code><a href="../reference/ylist_download.html">ylist_download()</a></code></td>
-<td>YList の公開タブ区切りファイルをユーザーキャッシュへ保存する。</td>
+<td><code><a href="../reference/japanese_name_download.html">japanese_name_download()</a></code></td>
+<td>チェックリスト Excel ファイルをユーザーキャッシュへ保存する。</td>
 </tr>
 <tr class="even">
-<td><code><a href="../reference/ylist_load.html">ylist_load()</a></code></td>
+<td><code><a href="../reference/japanese_name_load.html">japanese_name_load()</a></code></td>
 <td>キャッシュ済みファイルを <code>data.frame</code>
 として読み込む。</td>
 </tr>
 <tr class="odd">
-<td><code><a href="../reference/academic_name.html">academic_name()</a></code></td>
+<td><code><a href="../reference/scientific_name.html">scientific_name()</a></code></td>
 <td>和名の完全一致から標準学名を返す。</td>
 </tr>
 <tr class="even">
-<td><code><a href="../reference/ylist_search.html">ylist_search()</a></code></td>
+<td><code><a href="../reference/japanese_name_search.html">japanese_name_search()</a></code></td>
 <td>候補行を返し、人間が確認できるようにする。</td>
 </tr>
 <tr class="odd">
@@ -194,87 +195,84 @@ as an R package</a></p>
 </tr>
 </tbody>
 </table>
-<p>この分け方にすると、簡単な用途は <code><a href="../reference/academic_name.html">academic_name()</a></code>
+<p>この分け方にすると、簡単な用途は <code><a href="../reference/scientific_name.html">scientific_name()</a></code>
 だけで済み、必要な人は 元データや候補行も確認できます。</p>
 </div>
 <div class="section level2">
-<h2 id="ylist-データをパッケージに同梱しない">YList データをパッケージに同梱しない<a class="anchor" aria-label="anchor" href="#ylist-%E3%83%87%E3%83%BC%E3%82%BF%E3%82%92%E3%83%91%E3%83%83%E3%82%B1%E3%83%BC%E3%82%B8%E3%81%AB%E5%90%8C%E6%A2%B1%E3%81%97%E3%81%AA%E3%81%84"></a>
+<h2 id="チェックリストデータをパッケージに同梱しない">チェックリストデータをパッケージに同梱しない<a class="anchor" aria-label="anchor" href="#%E3%83%81%E3%82%A7%E3%83%83%E3%82%AF%E3%83%AA%E3%82%B9%E3%83%88%E3%83%87%E3%83%BC%E3%82%BF%E3%82%92%E3%83%91%E3%83%83%E3%82%B1%E3%83%BC%E3%82%B8%E3%81%AB%E5%90%8C%E6%A2%B1%E3%81%97%E3%81%AA%E3%81%84"></a>
 </h2>
-<p><code>ylistjp</code> は YList
-データをパッケージ内に入れていません。データの流れは 次の通りです。</p>
+<p><code>ylistjp</code>
+はチェックリストデータをパッケージ内に入れていません。データの流れは
+次の通りです。</p>
 <ol style="list-style-type: decimal">
 <li>
-<code><a href="../reference/academic_name.html">academic_name()</a></code>、<code><a href="../reference/ylist_search.html">ylist_search()</a></code>、<code><a href="../reference/ylist_load.html">ylist_load()</a></code>
-が YList データを必要とする。</li>
-<li>キャッシュがなければ <code><a href="../reference/ylist_download.html">ylist_download()</a></code>
-が公開タブ区切りファイルを取得する。</li>
+<code><a href="../reference/scientific_name.html">scientific_name()</a></code>、<code><a href="../reference/japanese_name_search.html">japanese_name_search()</a></code>、<code><a href="../reference/japanese_name_load.html">japanese_name_load()</a></code>
+がチェックリストデータを必要とする。</li>
+<li>キャッシュがなければ <code><a href="../reference/japanese_name_download.html">japanese_name_download()</a></code>
+がチェックリスト Excel ファイルを取得する。</li>
 <li>ファイルをユーザーの R キャッシュディレクトリに保存する。</li>
-<li>以後の検索では YList サーバーではなくローカルファイルを読む。</li>
+<li>以後の検索ではチェックリスト配布元ではなくローカルファイルを読む。</li>
 </ol>
 <p>この設計には 2 つの意味があります。まず、パッケージコードを MIT
-ライセンスで 公開しても、YList
-データそのものを再配布しません。次に、解析で何度検索しても、
-検索のたびに YList サーバーへ問い合わせることがありません。</p>
+ライセンスで
+公開しても、チェックリストデータそのものを再配布しません。次に、解析で何度検索しても、
+検索のたびに配布元サーバーへ問い合わせることがありません。</p>
 <p>明示的に更新したい場合だけ、次のようにします。</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/ylist_download.html">ylist_download</a></span><span class="op">(</span>overwrite <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span><span class="fu"><a href="../reference/ylist_load.html">ylist_load</a></span><span class="op">(</span>refresh <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/japanese_name_download.html">japanese_name_download</a></span><span class="op">(</span>overwrite <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/japanese_name_load.html">japanese_name_load</a></span><span class="op">(</span>refresh <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
-<h2 id="日本語データの文字コードを明示する">日本語データの文字コードを明示する<a class="anchor" aria-label="anchor" href="#%E6%97%A5%E6%9C%AC%E8%AA%9E%E3%83%87%E3%83%BC%E3%82%BF%E3%81%AE%E6%96%87%E5%AD%97%E3%82%B3%E3%83%BC%E3%83%89%E3%82%92%E6%98%8E%E7%A4%BA%E3%81%99%E3%82%8B"></a>
+<h2 id="チェックリスト-excel-を明示的に読む">チェックリスト Excel を明示的に読む<a class="anchor" aria-label="anchor" href="#%E3%83%81%E3%82%A7%E3%83%83%E3%82%AF%E3%83%AA%E3%82%B9%E3%83%88-excel-%E3%82%92%E6%98%8E%E7%A4%BA%E7%9A%84%E3%81%AB%E8%AA%AD%E3%82%80"></a>
 </h2>
-<p>YList の公開タブ区切りファイルは CP932 として読み込んでいます。</p>
+<p>チェックリストは <code>readxl</code> で <code>JN_dataset</code>
+シートを読み込んでいます。</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">utils</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/utils/read.table.html" class="external-link">read.delim</a></span><span class="op">(</span></span>
-<span>  file <span class="op">=</span> <span class="va">path</span>,</span>
-<span>  sep <span class="op">=</span> <span class="st">"\t"</span>,</span>
-<span>  fileEncoding <span class="op">=</span> <span class="st">"CP932"</span>,</span>
-<span>  encoding <span class="op">=</span> <span class="st">"UTF-8"</span>,</span>
-<span>  stringsAsFactors <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>  check.names <span class="op">=</span> <span class="cn">FALSE</span></span>
+<code class="sourceCode R"><span><span class="fu">readxl</span><span class="fu">::</span><span class="fu"><a href="https://readxl.tidyverse.org/reference/read_excel.html" class="external-link">read_excel</a></span><span class="op">(</span></span>
+<span>  path <span class="op">=</span> <span class="va">path</span>,</span>
+<span>  sheet <span class="op">=</span> <span class="st">"JN_dataset"</span>,</span>
+<span>  col_types <span class="op">=</span> <span class="st">"text"</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-<p>これは重要な実装ポイントです。日本語の公開データでは Shift-JIS や
-CP932 が 使われていることがあります。R
-に文字コードの推測を任せると、環境によって
-<code>和名</code>、<code>学名</code>、<code>ステータス</code>
-などの列名が読めなくなる可能性があります。</p>
+<p>これは重要な実装ポイントです。チェックリストの列を、パッケージ内部で使う
+<code>和名</code>、<code>別名</code>、<code>学名</code>、<code>学名 withAuthor</code>
+などの安定した列へ正規化します。</p>
 <p>ソースコード中の列名は、環境をまたいで編集しやすくするため、必要に応じて
 Unicode escape で保持しています。</p>
 </div>
 <div class="section level2">
 <h2 id="検索は保守的にする">検索は保守的にする<a class="anchor" aria-label="anchor" href="#%E6%A4%9C%E7%B4%A2%E3%81%AF%E4%BF%9D%E5%AE%88%E7%9A%84%E3%81%AB%E3%81%99%E3%82%8B"></a>
 </h2>
-<p><code><a href="../reference/academic_name.html">academic_name()</a></code> は fuzzy search
+<p><code><a href="../reference/scientific_name.html">scientific_name()</a></code> は fuzzy search
 ではなく、解析で安定して使うための関数です。
 現在の仕様は意図的に狭くしています。</p>
 <ul>
-<li>YList の <code>和名</code> 列を完全一致で検索する。</li>
+<li>チェックリストの <code>和名</code> 列と <code>別名</code>
+列を完全一致で検索する。</li>
 <li>
 <code>ステータス == "標準"</code> の行だけを使う。</li>
 <li>標準の完全一致がない場合は <code>NA_character_</code> を返す。</li>
 <li>標準の完全一致が複数ある場合はエラーにする。</li>
 </ul>
 <p>これにより、疑わしい候補をスクリプトが静かに採用することを避けます。
-曖昧な場合は <code><a href="../reference/ylist_search.html">ylist_search()</a></code> で候補を確認します。</p>
+曖昧な場合は <code><a href="../reference/japanese_name_search.html">japanese_name_search()</a></code>
+で候補を確認します。</p>
 </div>
 <div class="section level2">
 <h2 id="テストでは小さな-fixture-を使う">テストでは小さな fixture を使う<a class="anchor" aria-label="anchor" href="#%E3%83%86%E3%82%B9%E3%83%88%E3%81%A7%E3%81%AF%E5%B0%8F%E3%81%95%E3%81%AA-fixture-%E3%82%92%E4%BD%BF%E3%81%86"></a>
 </h2>
-<p>単体テストでは、YList
-本体の大きなファイルを毎回ダウンロードしません。
+<p>単体テストでは、チェックリスト本体の大きなファイルを毎回ダウンロードしません。
 代わりに、挙動確認に必要な最小限の行だけを含む合成 fixture
 を使います。</p>
 <p>この fixture で確認している主な点は次の通りです。</p>
 <ul>
-<li>CP932 のタブ区切りファイルを読めること。</li>
-<li>
-<code>標準</code> 行と synonym 行を区別できること。</li>
+<li>Excel シートを読めること。</li>
+<li>common name と another name の検索を確認できること。</li>
 <li>見つからない場合に <code>NA_character_</code> を返すこと。</li>
 <li>複数候補がある場合にエラーになること。</li>
 <li>キャッシュの再利用と更新が動くこと。</li>
 </ul>
-<p>GBIF や YList への live test は任意にします。外部 API の確認は smoke
-test としては 有用ですが、通常のローカルテストや pull request
+<p>GBIF やチェックリストへの live test は任意にします。外部 API の確認は
+smoke test としては 有用ですが、通常のローカルテストや pull request
 のたびに必須にすると不安定に なりやすいためです。</p>
 </div>
 <div class="section level2">
@@ -304,15 +302,16 @@ test としては 有用ですが、通常のローカルテストや pull reque
 <ul>
 <li>ひらがな・カタカナ変換や全角・半角の正規化を明示的に追加する。</li>
 <li>
-<code><a href="../reference/ylist_search.html">ylist_search()</a></code> に候補ランキングを追加する。</li>
+<code><a href="../reference/japanese_name_search.html">japanese_name_search()</a></code>
+に候補ランキングを追加する。</li>
 <li>WFO や Catalogue of Life などの任意チェック関数を追加する。</li>
-<li>監査用に YList の追加メタデータを返せるようにする。</li>
+<li>監査用にチェックリストの追加メタデータを返せるようにする。</li>
 <li>
-<code><a href="../reference/academic_name.html">academic_name()</a></code>
+<code><a href="../reference/scientific_name.html">scientific_name()</a></code>
 の結果をデータフレームに結合する実例記事を追加する。</li>
 </ul>
-<p>探索的な機能は <code><a href="../reference/ylist_search.html">ylist_search()</a></code>
-や補助関数に寄せ、<code><a href="../reference/academic_name.html">academic_name()</a></code> はスクリプトで
+<p>探索的な機能は <code><a href="../reference/japanese_name_search.html">japanese_name_search()</a></code>
+や補助関数に寄せ、<code><a href="../reference/scientific_name.html">scientific_name()</a></code> はスクリプトで
 予測しやすい挙動のままにしておくのが基本方針です。</p>
 </div>
 <div class="section level2">
