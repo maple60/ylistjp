@@ -57,11 +57,11 @@ test_that("japanese_name_info handles invalid input without lookup errors", {
 test_that("japanese_name_info does not call external APIs by default", {
   calls <- character()
   old_options <- options(
-    ylistjp.wfo_graphql = function(query, variables, endpoint) {
+    jpplantnames.wfo_graphql = function(query, variables, endpoint) {
       calls <<- c(calls, "wfo")
       stop("WFO should not be called.", call. = FALSE)
     },
-    ylistjp.gbif_match = function(scientific_name) {
+    jpplantnames.gbif_match = function(scientific_name) {
       calls <<- c(calls, "gbif")
       stop("GBIF should not be called.", call. = FALSE)
     }
@@ -90,7 +90,7 @@ test_that("print.japanese_name_info does not error", {
 test_that("japanese_name_info can add a mocked WFO accepted-name summary", {
   calls <- character()
   old_options <- options(
-    ylistjp.wfo_graphql = function(query, variables, endpoint) {
+    jpplantnames.wfo_graphql = function(query, variables, endpoint) {
       calls <<- c(calls, variables$termsString)
       accepted <- list(
         id = "wfo-0000293164",
@@ -124,7 +124,7 @@ test_that("japanese_name_info can add a mocked WFO accepted-name summary", {
 
 test_that("japanese_name_info records WFO failures without failing the whole call", {
   old_options <- options(
-    ylistjp.wfo_graphql = function(query, variables, endpoint) {
+    jpplantnames.wfo_graphql = function(query, variables, endpoint) {
       stop("mock WFO failure", call. = FALSE)
     }
   )
@@ -143,7 +143,7 @@ test_that("japanese_name_info records WFO failures without failing the whole cal
 test_that("japanese_name_info can add a mocked GBIF match summary", {
   calls <- character()
   old_options <- options(
-    ylistjp.gbif_match = function(scientific_name) {
+    jpplantnames.gbif_match = function(scientific_name) {
       calls <<- scientific_name
       data.frame(
         input = scientific_name,
@@ -178,7 +178,7 @@ test_that("japanese_name_info can add a mocked GBIF match summary", {
 
 test_that("japanese_name_info records GBIF failures without failing the whole call", {
   old_options <- options(
-    ylistjp.gbif_match = function(scientific_name) {
+    jpplantnames.gbif_match = function(scientific_name) {
       stop("mock GBIF failure", call. = FALSE)
     }
   )

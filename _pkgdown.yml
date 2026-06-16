@@ -1,10 +1,10 @@
-url: https://maple60.github.io/ylistjp/
+url: https://maple60.github.io/jpplantnames/
 
 template:
   bootstrap: 5
 
 home:
-  title: ylistjp
+  title: jpplantnames
   description: >
     Unofficial R helpers for looking up scientific plant names from Japanese
     names using the Vascular Plant Japanese Name Checklist ver. 1.10.
@@ -53,7 +53,7 @@ articles:
 reference:
 - title: Overview
   contents:
-  - ylistjp-package
+  - jpplantnames-package
 - title: Data access
   desc: Download and load the checklist Excel file.
   contents:

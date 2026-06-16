@@ -301,13 +301,13 @@ zip_crc32_table <- local({
 
 with_fixture_cache <- function(code) {
   source <- tempfile(fileext = ".xlsx")
-  cache_dir <- tempfile("ylistjp-cache-")
+  cache_dir <- tempfile("jpplantnames-cache-")
   write_checklist_fixture(source)
 
   old_options <- options(
-    ylistjp.source_url = source,
-    ylistjp.cache_dir = cache_dir,
-    ylistjp.data = NULL
+    jpplantnames.source_url = source,
+    jpplantnames.cache_dir = cache_dir,
+    jpplantnames.data = NULL
   )
   on.exit(options(old_options), add = TRUE)
   on.exit(unlink(c(source, cache_dir), recursive = TRUE, force = TRUE), add = TRUE)

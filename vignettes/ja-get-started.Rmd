@@ -1,8 +1,8 @@
 ---
-title: "ylistjp の使い方"
+title: "jpplantnames の使い方"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{ylistjp の使い方}
+  %\VignetteIndexEntry{jpplantnames の使い方}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -15,7 +15,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-`ylistjp` は、「維管束植物和名チェックリスト ver. 1.10」を
+`jpplantnames` は、「維管束植物和名チェックリスト ver. 1.10」を
 R から扱いやすくするための非公式パッケージです。
 
 「コナラ」のような和名から、解析や表作成で使う学名を再現可能な形で取得する
@@ -27,13 +27,13 @@ GitHub からインストールします。
 
 ```{r}
 # install.packages("pak")
-pak::pak("maple60/ylistjp")
+pak::pak("maple60/jpplantnames")
 ```
 
 読み込みます。
 
 ```{r}
-library(ylistjp)
+library(jpplantnames)
 ```
 
 ## まず和名から学名を調べる
@@ -60,7 +60,7 @@ scientific_name(c("コナラ", "ミズナラ"))
 
 ## チェックリストデータの取得とキャッシュ
 
-`ylistjp` はチェックリストデータをパッケージ内に同梱しません。最初にデータが必要に
+`jpplantnames` はチェックリストデータをパッケージ内に同梱しません。最初にデータが必要に
 なった時点で、チェックリストの Excel ファイルをユーザーの R キャッシュへ
 ダウンロードして読み込みます。
 
@@ -163,8 +163,8 @@ gbif_match("Quercus serrata")
 
 ## データソースと引用
 
-`ylistjp` は「維管束植物和名チェックリスト ver. 1.10」を lookup source として使います。
-このチェックリストには YList 由来・更新データが含まれますが、`ylistjp` は JBIF、YList、
+`jpplantnames` は「維管束植物和名チェックリスト ver. 1.10」を lookup source として使います。
+このチェックリストには YList 由来・更新データが含まれますが、`jpplantnames` は JBIF、YList、
 またはチェックリスト著者の公式パッケージではなく、承認・推奨されたものでもありません。
 
 チェックリストに基づく結果を利用する場合は、チェックリストを引用してください。

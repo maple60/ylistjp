@@ -154,8 +154,8 @@ wfo_with_mock_graphql <- function(response, code) {
   }
 
   old_options <- options(
-    ylistjp.wfo_graphql = mock,
-    ylistjp.wfo_gql_url = "https://example.test/gql"
+    jpplantnames.wfo_graphql = mock,
+    jpplantnames.wfo_gql_url = "https://example.test/gql"
   )
   on.exit(options(old_options), add = TRUE)
 
@@ -183,7 +183,7 @@ test_that("wfo_accepted_name returns stable columns for invalid input", {
 })
 
 test_that("parse_wfo_suggest_response preserves WFO fields and is_accepted logic", {
-  rows <- ylistjp:::parse_wfo_suggest_response(
+  rows <- jpplantnames:::parse_wfo_suggest_response(
     wfo_basic_response(),
     "Quercus serrata",
     cached = TRUE
@@ -200,7 +200,7 @@ test_that("parse_wfo_suggest_response preserves WFO fields and is_accepted logic
 })
 
 test_that("missing fields in WFO-like responses do not crash parsing", {
-  rows <- ylistjp:::parse_wfo_suggest_response(
+  rows <- jpplantnames:::parse_wfo_suggest_response(
     wfo_response(list(list(id = "wfo-missing"))),
     "Missing fields",
     cached = FALSE
@@ -306,21 +306,21 @@ test_that("WFO cache files are read and can be refreshed", {
 
   cache_dir <- tempfile("wfo-cache-")
   old_options <- options(
-    ylistjp.wfo_cache_dir = cache_dir,
-    ylistjp.wfo_gql_url = "https://example.test/gql"
+    jpplantnames.wfo_cache_dir = cache_dir,
+    jpplantnames.wfo_gql_url = "https://example.test/gql"
   )
   on.exit(options(old_options), add = TRUE)
   on.exit(unlink(cache_dir, recursive = TRUE, force = TRUE), add = TRUE)
 
-  path <- ylistjp:::wfo_cache_file(
+  path <- jpplantnames:::wfo_cache_file(
     function_name = "wfo_suggest",
     scientific_name = "Quercus serrata",
     endpoint = "https://example.test/gql",
     limit = 10
   )
-  ylistjp:::wfo_write_cache(path, wfo_basic_response())
+  jpplantnames:::wfo_write_cache(path, wfo_basic_response())
 
-  old_graphql <- options(ylistjp.wfo_graphql = function(query, variables, endpoint) {
+  old_graphql <- options(jpplantnames.wfo_graphql = function(query, variables, endpoint) {
     stop("API should not be called when cache is available.", call. = FALSE)
   })
   on.exit(options(old_graphql), add = TRUE)
@@ -329,7 +329,7 @@ test_that("WFO cache files are read and can be refreshed", {
   expect_true(all(cached$cached))
 
   calls <- 0L
-  options(ylistjp.wfo_graphql = function(query, variables, endpoint) {
+  options(jpplantnames.wfo_graphql = function(query, variables, endpoint) {
     calls <<- calls + 1L
     wfo_variety_first_response()
   })

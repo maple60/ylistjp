@@ -6,8 +6,8 @@ test_that("gbif_match requires jsonlite", {
 
 test_that("gbif_match can query GBIF when network tests are enabled", {
   skip_if_not(
-    identical(Sys.getenv("YLISTJP_RUN_NETWORK_TESTS"), "true"),
-    "Set YLISTJP_RUN_NETWORK_TESTS=true to run live GBIF tests."
+    identical(Sys.getenv("JPPLANTNAMES_RUN_NETWORK_TESTS"), "true"),
+    "Set JPPLANTNAMES_RUN_NETWORK_TESTS=true to run live GBIF tests."
   )
   skip_if_not(requireNamespace("jsonlite", quietly = TRUE), "jsonlite is not installed.")
 

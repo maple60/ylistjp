@@ -386,7 +386,7 @@ japanese_name_info_call_wfo <- function(scientific_name,
 japanese_name_info_call_gbif <- function(scientific_name) {
   tryCatch(
     {
-      matcher <- getOption("ylistjp.gbif_match", gbif_match)
+      matcher <- getOption("jpplantnames.gbif_match", gbif_match)
       matcher(scientific_name)
     },
     error = function(error) {

@@ -120,7 +120,7 @@ checklist_column <- function(data, column) {
 }
 
 japanese_name_data <- function() {
-  data <- getOption("ylistjp.data", NULL)
+  data <- getOption("jpplantnames.data", NULL)
   if (!is.null(data)) {
     return(data)
   }

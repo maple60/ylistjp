@@ -1,7 +1,7 @@
 \docType{package}
-\name{ylistjp-package}
-\alias{ylistjp}
-\alias{ylistjp-package}
+\name{jpplantnames-package}
+\alias{jpplantnames}
+\alias{jpplantnames-package}
 \title{Unofficial Japanese Plant Name Lookup Tools}
 \description{
 Fetches and caches the Vascular Plant Japanese Name Checklist ver. 1.10 and

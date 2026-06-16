@@ -41,7 +41,7 @@ test_that("scientific_name errors on ambiguous standard exact matches", {
     check.names = FALSE
   )
 
-  old_options <- options(ylistjp.data = data)
+  old_options <- options(jpplantnames.data = data)
   on.exit(options(old_options), add = TRUE)
 
   expect_error(scientific_name("コナラ"), "Multiple standard lookup matches")

@@ -1,8 +1,8 @@
 ---
-title: "ylistjp パッケージ開発チュートリアル"
+title: "jpplantnames パッケージ開発チュートリアル"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{ylistjp パッケージ開発チュートリアル}
+  %\VignetteIndexEntry{jpplantnames パッケージ開発チュートリアル}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -15,11 +15,11 @@ knitr::opts_chunk$set(
 )
 ```
 
-この記事では、`ylistjp` が小さな R パッケージとしてどのように構成されているかを
+この記事では、`jpplantnames` が小さな R パッケージとしてどのように構成されているかを
 説明します。公開データを、再現可能な解析用の道具に変える例として読むことを
 想定しています。
 
-English version: [Building ylistjp as an R package](package-development.html)
+English version: [Building jpplantnames as an R package](package-development.html)
 
 ## 小さな課題から始める
 
@@ -45,7 +45,7 @@ scientific_name("コナラ")
 
 ## パッケージの骨格
 
-`ylistjp` は、多くの R パッケージで使われる標準的な構成を使っています。
+`jpplantnames` は、多くの R パッケージで使われる標準的な構成を使っています。
 
 | パス | このパッケージでの役割 |
 | --- | --- |
@@ -67,7 +67,7 @@ scientific_name("コナラ")
 中心になる使い方は次の形です。
 
 ```{r}
-library(ylistjp)
+library(jpplantnames)
 
 scientific_name("コナラ")
 scientific_name("コナラ", with_author = TRUE)
@@ -89,7 +89,7 @@ japanese_name_search("コナラ")
 
 ## チェックリストデータをパッケージに同梱しない
 
-`ylistjp` はチェックリストデータをパッケージ内に入れていません。データの流れは
+`jpplantnames` はチェックリストデータをパッケージ内に入れていません。データの流れは
 次の通りです。
 
 1. `scientific_name()`、`japanese_name_search()`、`japanese_name_load()` がチェックリストデータを必要とする。

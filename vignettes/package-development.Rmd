@@ -1,8 +1,8 @@
 ---
-title: "Building ylistjp as an R package"
+title: "Building jpplantnames as an R package"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Building ylistjp as an R package}
+  %\VignetteIndexEntry{Building jpplantnames as an R package}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -15,7 +15,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-This article explains how `ylistjp` is organized as a small R package. It is a
+This article explains how `jpplantnames` is organized as a small R package. It is a
 worked example for people who want to learn how an R package can turn a useful
 public data source into a reproducible analysis tool.
 
@@ -46,7 +46,7 @@ Actions.
 
 ## Package Skeleton
 
-`ylistjp` follows the standard structure used by many R packages.
+`jpplantnames` follows the standard structure used by many R packages.
 
 | Path | Role in this package |
 | --- | --- |
@@ -68,7 +68,7 @@ documentation in `vignettes/`, and automation in `.github/`.
 The core user workflow is:
 
 ```{r}
-library(ylistjp)
+library(jpplantnames)
 
 scientific_name("コナラ")
 scientific_name("コナラ", with_author = TRUE)
@@ -90,7 +90,7 @@ users to inspect the underlying data.
 
 ## Keep Checklist Data Outside the Package
 
-`ylistjp` does not bundle checklist data. Instead, the data flow is:
+`jpplantnames` does not bundle checklist data. Instead, the data flow is:
 
 1. `scientific_name()`, `japanese_name_search()`, or `japanese_name_load()` needs checklist data.
 2. If no cached file exists, `japanese_name_download()` downloads the checklist Excel file.
@@ -142,7 +142,7 @@ a name is ambiguous, the user should inspect candidates with `japanese_name_sear
 
 ## Test with Synthetic Fixtures
 
-Unit tests should not download the full checklist file. Instead, `ylistjp` uses a
+Unit tests should not download the full checklist file. Instead, `jpplantnames` uses a
 small synthetic fixture that contains just enough rows to test behavior:
 
 - Excel sheet parsing;

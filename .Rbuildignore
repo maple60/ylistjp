@@ -4,6 +4,6 @@
 ^README\.ja\.md$
 ^docs$
 ^.*\.Rcheck$
-^ylistjp_.*\.tar\.gz$
+^.*\.tar\.gz$
 ^outputs$
 ^work$

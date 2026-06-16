@@ -1,4 +1,4 @@
 library(testthat)
-library(ylistjp)
+library(jpplantnames)
 
-test_check("ylistjp")
+test_check("jpplantnames")

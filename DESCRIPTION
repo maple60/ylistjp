@@ -1,15 +1,15 @@
-Package: ylistjp
+Package: jpplantnames
 Title: Unofficial Japanese Plant Name Lookup Tools
 Version: 0.1.0
 Authors@R:
     person(
-        given = "ylistjp",
+        given = "jpplantnames",
         family = "contributors",
         email = "noreply@example.com",
         role = c("aut", "cre")
     )
-Author: ylistjp contributors
-Maintainer: ylistjp contributors <noreply@example.com>
+Author: jpplantnames contributors
+Maintainer: jpplantnames contributors <noreply@example.com>
 Description: Fetches and caches the Vascular Plant Japanese Name Checklist
     ver. 1.10 and provides helpers for looking up scientific plant names from
     Japanese names. It also includes small optional helpers for checking
@@ -17,8 +17,8 @@ Description: Fetches and caches the Vascular Plant Japanese Name Checklist
     This package is not affiliated with or endorsed by JBIF, YList, or the
     checklist authors.
 License: MIT + file LICENSE
-URL: https://github.com/maple60/ylistjp, https://maple60.github.io/ylistjp/
-BugReports: https://github.com/maple60/ylistjp/issues
+URL: https://github.com/maple60/jpplantnames, https://maple60.github.io/jpplantnames/
+BugReports: https://github.com/maple60/jpplantnames/issues
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.2

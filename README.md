@@ -1,27 +1,27 @@
-# ylistjp
+# jpplantnames
 
-`ylistjp` is an unofficial R package for looking up scientific plant names from
+`jpplantnames` is an unofficial R package for looking up scientific plant names from
 Japanese plant names using the Vascular Plant Japanese Name Checklist ver. 1.10
 published by [JBIF](https://gbif.jp/activities/checklist/wamei_checklist_110/).
 
 Documentation site:
-[https://maple60.github.io/ylistjp/](https://maple60.github.io/ylistjp/)
+[https://maple60.github.io/jpplantnames/](https://maple60.github.io/jpplantnames/)
 
-日本語で読みたい場合は [日本語 README](https://maple60.github.io/ylistjp/README.ja.html) または
-[日本語ガイド](https://maple60.github.io/ylistjp/articles/ja-get-started.html)
+日本語で読みたい場合は [日本語 README](https://maple60.github.io/jpplantnames/README.ja.html) または
+[日本語ガイド](https://maple60.github.io/jpplantnames/articles/ja-get-started.html)
 を参照してください。
 
 ## Installation
 
 ```r
 # install.packages("pak")
-pak::pak("maple60/ylistjp")
+pak::pak("maple60/jpplantnames")
 ```
 
 ## Quick Start
 
 ```r
-library(ylistjp)
+library(jpplantnames)
 
 japanese_name_info("コナラ")
 
@@ -59,13 +59,13 @@ japanese_name_info("コナラ", wfo = TRUE, gbif = TRUE)
 
 ## Guides
 
-- [Usage guide](https://maple60.github.io/ylistjp/articles/get-started.html)
-- [日本語: 使い方ガイド](https://maple60.github.io/ylistjp/articles/ja-get-started.html)
-- [Maintenance guide](https://maple60.github.io/ylistjp/articles/maintenance.html)
-- [日本語: メンテナンスガイド](https://maple60.github.io/ylistjp/articles/ja-maintenance.html)
-- [Package development tutorial](https://maple60.github.io/ylistjp/articles/package-development.html)
-- [日本語: パッケージ開発チュートリアル](https://maple60.github.io/ylistjp/articles/ja-package-development.html)
-- [Function reference](https://maple60.github.io/ylistjp/reference/index.html)
+- [Usage guide](https://maple60.github.io/jpplantnames/articles/get-started.html)
+- [日本語: 使い方ガイド](https://maple60.github.io/jpplantnames/articles/ja-get-started.html)
+- [Maintenance guide](https://maple60.github.io/jpplantnames/articles/maintenance.html)
+- [日本語: メンテナンスガイド](https://maple60.github.io/jpplantnames/articles/ja-maintenance.html)
+- [Package development tutorial](https://maple60.github.io/jpplantnames/articles/package-development.html)
+- [日本語: パッケージ開発チュートリアル](https://maple60.github.io/jpplantnames/articles/ja-package-development.html)
+- [Function reference](https://maple60.github.io/jpplantnames/reference/index.html)
 
 ## International Name Checks
 

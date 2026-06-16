@@ -260,7 +260,7 @@ wfo_suggest_one <- function(scientific_name,
 }
 
 wfo_endpoint <- function() {
-  getOption("ylistjp.wfo_gql_url", "https://list.worldfloraonline.org/gql.php")
+  getOption("jpplantnames.wfo_gql_url", "https://list.worldfloraonline.org/gql.php")
 }
 
 wfo_suggest_query <- function() {
@@ -298,7 +298,7 @@ wfo_suggest_query <- function() {
 wfo_graphql <- function(query,
                         variables,
                         endpoint = wfo_endpoint()) {
-  mock <- getOption("ylistjp.wfo_graphql", NULL)
+  mock <- getOption("jpplantnames.wfo_graphql", NULL)
   if (is.function(mock)) {
     return(mock(query = query, variables = variables, endpoint = endpoint))
   }
@@ -618,12 +618,12 @@ wfo_require_jsonlite <- function(reason) {
 }
 
 wfo_cache_dir <- function() {
-  cache_dir <- getOption("ylistjp.wfo_cache_dir", NULL)
+  cache_dir <- getOption("jpplantnames.wfo_cache_dir", NULL)
   if (!is.null(cache_dir)) {
     return(cache_dir)
   }
 
-  file.path(tools::R_user_dir("ylistjp", which = "cache"), "wfo")
+  file.path(tools::R_user_dir("jpplantnames", which = "cache"), "wfo")
 }
 
 wfo_cache_file <- function(function_name,

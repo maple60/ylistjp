@@ -2,16 +2,16 @@ CHECKLIST_URL <- "https://gbif.jp/activities/checklist/wamei_checklist_110/excel
 CHECKLIST_CACHE_FILE <- "wamei_checklist_ver.1.10.xlsx"
 
 checklist_source_url <- function() {
-  getOption("ylistjp.source_url", CHECKLIST_URL)
+  getOption("jpplantnames.source_url", CHECKLIST_URL)
 }
 
 checklist_cache_dir <- function() {
-  cache_dir <- getOption("ylistjp.cache_dir", NULL)
+  cache_dir <- getOption("jpplantnames.cache_dir", NULL)
   if (!is.null(cache_dir)) {
     return(cache_dir)
   }
 
-  tools::R_user_dir("ylistjp", which = "cache")
+  tools::R_user_dir("jpplantnames", which = "cache")
 }
 
 checklist_cache_path <- function() {
