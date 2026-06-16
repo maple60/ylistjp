@@ -1,11 +1,11 @@
-WAMEI_CHECKLIST_URL <- "https://gbif.jp/activities/checklist/wamei_checklist_110/excel/wamei_checklist_ver.1.10.xlsx"
-YLIST_CACHE_FILE <- "wamei_checklist_ver.1.10.xlsx"
+CHECKLIST_URL <- "https://gbif.jp/activities/checklist/wamei_checklist_110/excel/wamei_checklist_ver.1.10.xlsx"
+CHECKLIST_CACHE_FILE <- "wamei_checklist_ver.1.10.xlsx"
 
-ylist_source_url <- function() {
-  getOption("ylistjp.source_url", WAMEI_CHECKLIST_URL)
+checklist_source_url <- function() {
+  getOption("ylistjp.source_url", CHECKLIST_URL)
 }
 
-ylist_cache_dir <- function() {
+checklist_cache_dir <- function() {
   cache_dir <- getOption("ylistjp.cache_dir", NULL)
   if (!is.null(cache_dir)) {
     return(cache_dir)
@@ -14,8 +14,8 @@ ylist_cache_dir <- function() {
   tools::R_user_dir("ylistjp", which = "cache")
 }
 
-ylist_cache_path <- function() {
-  file.path(ylist_cache_dir(), YLIST_CACHE_FILE)
+checklist_cache_path <- function() {
+  file.path(checklist_cache_dir(), CHECKLIST_CACHE_FILE)
 }
 
 is_probably_url <- function(x) {
@@ -31,20 +31,30 @@ is_probably_url <- function(x) {
 #'
 #' @return The path to the cached file, invisibly.
 #' @export
+japanese_name_download <- function(overwrite = FALSE) {
+  checklist_download(overwrite = overwrite)
+}
+
+#' @export
 ylist_download <- function(overwrite = FALSE) {
+  .Deprecated("japanese_name_download")
+  japanese_name_download(overwrite = overwrite)
+}
+
+checklist_download <- function(overwrite = FALSE) {
   if (!isTRUE(overwrite) && !identical(overwrite, FALSE)) {
     stop("`overwrite` must be TRUE or FALSE.", call. = FALSE)
   }
 
-  path <- ylist_cache_path()
+  path <- checklist_cache_path()
   if (file.exists(path) && !overwrite) {
     return(invisible(path))
   }
 
   dir.create(dirname(path), recursive = TRUE, showWarnings = FALSE)
 
-  source <- ylist_source_url()
-  tmp <- tempfile(fileext = ".txt")
+  source <- checklist_source_url()
+  tmp <- tempfile(fileext = ".xlsx")
   on.exit(unlink(tmp), add = TRUE)
 
   if (!is_probably_url(source) && file.exists(source)) {

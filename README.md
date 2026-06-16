@@ -23,37 +23,38 @@ pak::pak("maple60/ylistjp")
 ```r
 library(ylistjp)
 
-ylist_info("コナラ")
+japanese_name_info("コナラ")
 
-academic_name("コナラ")
+scientific_name("コナラ")
 #> [1] "Quercus serrata"
 
-academic_name("コナラ", with_author = TRUE)
+scientific_name("コナラ", with_author = TRUE)
 #> [1] "Quercus serrata Murray"
 
-ylist_search("コナラ")
+japanese_name_search("コナラ")
 ```
 
 The first function call that needs checklist data downloads the Excel file into
-the user's local R cache. After that, `academic_name()`,
-`ylist_search()`, and `ylist_load()` read from the cached local file and do not
-query an external server for every lookup. To refresh the cached file
-intentionally:
+the user's local R cache. After that, `scientific_name()`,
+`japanese_name_search()`, and `japanese_name_load()` read from the cached local
+file and do not query an external server for every lookup. To refresh the
+cached file intentionally:
 
 ```r
-ylist_download(overwrite = TRUE)
-ylist_load(refresh = TRUE)
+japanese_name_download(overwrite = TRUE)
+japanese_name_load(refresh = TRUE)
 ```
 
 `gbif_match()` is separate: it calls the GBIF API when you run it.
 
-`ylist_info()` is the recommended convenient entry point when you want a compact
-summary. By default it uses only cached checklist data. WFO and GBIF checks are
-optional and may depend on external database content and API availability:
+`japanese_name_info()` is the recommended convenient entry point when you want a
+compact summary. By default it uses only cached checklist data. WFO and GBIF
+checks are optional and may depend on external database content and API
+availability:
 
 ```r
-ylist_info("コナラ", wfo = TRUE)
-ylist_info("コナラ", wfo = TRUE, gbif = TRUE)
+japanese_name_info("コナラ", wfo = TRUE)
+japanese_name_info("コナラ", wfo = TRUE, gbif = TRUE)
 ```
 
 ## Guides
@@ -70,7 +71,7 @@ ylist_info("コナラ", wfo = TRUE, gbif = TRUE)
 
 ### WFO Plant List checks
 
-`academic_name()` returns the checklist scientific name. `wfo_suggest()` checks
+`scientific_name()` returns the checklist scientific name. `wfo_suggest()` checks
 WFO candidate names, and `wfo_accepted_name()` summarizes the best WFO
 accepted-name interpretation. These functions do not change checklist lookup
 results.
@@ -78,7 +79,7 @@ WFO API use should stay small-scale; for larger workflows, keep caching enabled
 and record the WFO release or version used.
 
 ```r
-sci <- academic_name("コナラ")
+sci <- scientific_name("コナラ")
 sci
 #> [1] "Quercus serrata"
 
@@ -111,3 +112,6 @@ When using checklist-based results, cite the checklist:
 
 The package code is MIT licensed. Checklist data is not included in the package
 and is not covered by this package's license.
+
+The older `academic_name()` and `ylist_*()` function names are retained as
+deprecated compatibility wrappers.

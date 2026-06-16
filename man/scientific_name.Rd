@@ -1,7 +1,10 @@
-\name{academic_name}
+\name{scientific_name}
+\alias{scientific_name}
 \alias{academic_name}
 \title{Look up scientific names from Japanese plant names}
 \usage{
+scientific_name(name, with_author = FALSE)
+
 academic_name(name, with_author = FALSE)
 }
 \arguments{
@@ -18,9 +21,13 @@ A character vector with one result per input name. Missing names return
 Exact-matches Japanese names in the cached checklist data and returns the
 scientific name.
 }
+\details{
+\code{academic_name()} is retained as a deprecated compatibility wrapper.
+Use \code{scientific_name()} for new code.
+}
 \examples{
 \dontrun{
-academic_name("コナラ")
-academic_name("コナラ", with_author = TRUE)
+scientific_name("コナラ")
+scientific_name("コナラ", with_author = TRUE)
 }
 }

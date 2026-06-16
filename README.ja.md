@@ -21,36 +21,36 @@ pak::pak("maple60/ylistjp")
 ```r
 library(ylistjp)
 
-ylist_info("コナラ")
+japanese_name_info("コナラ")
 
-academic_name("コナラ")
+scientific_name("コナラ")
 #> [1] "Quercus serrata"
 
-academic_name("コナラ", with_author = TRUE)
+scientific_name("コナラ", with_author = TRUE)
 #> [1] "Quercus serrata Murray"
 
-ylist_search("コナラ")
+japanese_name_search("コナラ")
 ```
 
 最初にチェックリストデータが必要になった時点で、Excel ファイルをユーザーの
-R キャッシュへダウンロードします。その後の `academic_name()`、`ylist_search()`、
-`ylist_load()` はローカルのキャッシュファイルを読むため、検索のたびに外部サーバーへ
+R キャッシュへダウンロードします。その後の `scientific_name()`、`japanese_name_search()`、
+`japanese_name_load()` はローカルのキャッシュファイルを読むため、検索のたびに外部サーバーへ
 問い合わせることはありません。キャッシュを明示的に更新したい場合は次のようにします。
 
 ```r
-ylist_download(overwrite = TRUE)
-ylist_load(refresh = TRUE)
+japanese_name_download(overwrite = TRUE)
+japanese_name_load(refresh = TRUE)
 ```
 
 `gbif_match()` は別扱いで、実行時に GBIF API へ問い合わせます。
 
-和名から情報をまとめて確認したい場合は、便利な入口として `ylist_info()` が使えます。
+和名から情報をまとめて確認したい場合は、便利な入口として `japanese_name_info()` が使えます。
 既定ではキャッシュ済みのチェックリストデータだけを使います。WFO や GBIF の確認は任意で、
 外部データベースの内容や API の利用可否に依存します。
 
 ```r
-ylist_info("コナラ", wfo = TRUE)
-ylist_info("コナラ", wfo = TRUE, gbif = TRUE)
+japanese_name_info("コナラ", wfo = TRUE)
+japanese_name_info("コナラ", wfo = TRUE, gbif = TRUE)
 ```
 
 ## ガイド
@@ -74,13 +74,13 @@ gbif_match("Quercus serrata")
 
 ### WFO Plant List checks
 
-`academic_name()` はチェックリストの学名を返します。`wfo_suggest()` は WFO の候補名を確認し、
+`scientific_name()` はチェックリストの学名を返します。`wfo_suggest()` は WFO の候補名を確認し、
 `wfo_accepted_name()` は WFO 上での採用名の解釈を 1 行にまとめます。これらの関数は
 チェックリストの結果を自動で置き換えません。WFO API は小規模な対話的確認に使い、大きな処理では
 キャッシュを使い、使った WFO のリリースやバージョンを記録してください。
 
 ```r
-sci <- academic_name("コナラ")
+sci <- scientific_name("コナラ")
 sci
 #> [1] "Quercus serrata"
 
@@ -102,3 +102,5 @@ wfo_accepted_name(sci)
 
 このパッケージのコードは MIT ライセンスです。ただし、チェックリストデータはパッケージに同梱しておらず、
 このパッケージのライセンス対象ではありません。
+
+旧 `academic_name()` と `ylist_*()` 関数名は、互換性のため非推奨ラッパーとして残しています。

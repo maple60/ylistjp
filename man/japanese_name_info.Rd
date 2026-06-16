@@ -1,8 +1,25 @@
-\name{ylist_info}
+\name{japanese_name_info}
+\alias{japanese_name_info}
 \alias{ylist_info}
+\alias{print.japanese_name_info}
 \alias{print.ylist_info}
-\title{Get a high-level YList summary for Japanese plant names}
+\title{Get a high-level Japanese-name checklist summary}
 \usage{
+japanese_name_info(
+  name,
+  with_author = TRUE,
+  wfo = FALSE,
+  gbif = FALSE,
+  rank = "species",
+  limit = 10,
+  cache = TRUE,
+  refresh = FALSE,
+  delay = 0.2,
+  ...
+)
+
+\method{print}{japanese_name_info}(x, ...)
+
 ylist_info(
   name,
   with_author = TRUE,
@@ -44,35 +61,41 @@ scientific name.}
 \item{...}{Additional arguments passed to
 \code{\link[=wfo_accepted_name]{wfo_accepted_name()}} when \code{wfo = TRUE}.}
 
-\item{x}{A \code{ylist_info} object.}
+\item{x}{A \code{japanese_name_info} object.}
 }
 \value{
-A named list with class \code{"ylist_info"} containing:
+A named list with class \code{"japanese_name_info"} containing:
 \itemize{
 \item \code{query}: the original input vector.
 \item \code{summary}: one summary row per input name.
-\item \code{ylist}: checklist candidate rows with input metadata.
+\item \code{japanese_name}: checklist candidate rows with input metadata.
+\item \code{ylist}: deprecated compatibility alias for \code{japanese_name}.
 \item \code{wfo}: WFO accepted-name rows, or \code{NULL}.
 \item \code{gbif}: GBIF match rows, or \code{NULL}.
 }
 }
 \description{
-\code{ylist_info()} is a convenient wrapper for users who want a compact,
+\code{japanese_name_info()} is a convenient wrapper for users who want a compact,
 browser-like summary from a Japanese plant name. It keeps the cached
 Japanese-name checklist lookup separate from WFO or GBIF checks, which are
 only run when explicitly requested.
 }
 \details{
 The summary keeps the preferred checklist match separate from optional WFO and
-GBIF checks. Alternative checklist candidate rows are kept in \code{x$ylist};
+GBIF checks. Alternative checklist candidate rows are kept in
+\code{x$japanese_name}; \code{x$ylist} is retained as a deprecated
+compatibility alias.
 WFO and GBIF results do not overwrite checklist names.
+
+\code{ylist_info()} is retained as a deprecated compatibility wrapper.
+Use \code{japanese_name_info()} for new code.
 }
 \examples{
 \dontrun{
-ylist_info("コナラ")
-ylist_info(c("コナラ", "ミズナラ"))
+japanese_name_info("コナラ")
+japanese_name_info(c("コナラ", "ミズナラ"))
 
-ylist_info("コナラ", wfo = TRUE)
-ylist_info("コナラ", wfo = TRUE, gbif = TRUE)
+japanese_name_info("コナラ", wfo = TRUE)
+japanese_name_info("コナラ", wfo = TRUE, gbif = TRUE)
 }
 }

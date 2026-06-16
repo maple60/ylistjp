@@ -1,8 +1,8 @@
-write_ylist_fixture <- function(path) {
-  write_zip_store(path, xlsx_fixture_files(wamei_fixture_sheets()))
+write_checklist_fixture <- function(path) {
+  write_zip_store(path, xlsx_fixture_files(checklist_fixture_sheets()))
 }
 
-wamei_fixture_sheets <- function() {
+checklist_fixture_sheets <- function() {
   konara <- "\u30b3\u30ca\u30e9"
   nara <- "\u30ca\u30e9"
   hahaso <- "\u30cf\u30cf\u30bd"
@@ -302,7 +302,7 @@ zip_crc32_table <- local({
 with_fixture_cache <- function(code) {
   source <- tempfile(fileext = ".xlsx")
   cache_dir <- tempfile("ylistjp-cache-")
-  write_ylist_fixture(source)
+  write_checklist_fixture(source)
 
   old_options <- options(
     ylistjp.source_url = source,
