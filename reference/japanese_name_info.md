@@ -99,7 +99,9 @@ A named list with class `"japanese_name_info"` containing:
 
 - `query`: the original input vector.
 
-- `summary`: one summary row per input name.
+- `summary`: one summary row per input name, including preferred
+  checklist scientific, family, Japanese family, and genus names where
+  available.
 
 - `japanese_name`: checklist candidate rows with input metadata.
 
