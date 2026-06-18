@@ -184,7 +184,7 @@ source として使います。 このチェックリストには YList
 
 > 山ノ内崇志・首藤光太郎・大澤剛士・米倉浩司・加藤 将・志賀 隆. 2019.
 > 「維管束植物和名チェックリスト」
-> (<https://gbif.jp/activities/checklist/wamei_checklist_110>)
+> (https://gbif.jp/activities/checklist/wamei_checklist_110)
 
 このパッケージのコードは MIT
 ライセンスです。ただし、チェックリストデータは

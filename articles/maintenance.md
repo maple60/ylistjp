@@ -21,9 +21,9 @@ For Japanese, see [日本語:
 | README and pkgdown home page | `README.md` |
 | Japanese README | `README.ja.md` |
 | pkgdown navigation and reference sections | `_pkgdown.yml` |
-| User guides | `vignettes/get-started.Rmd`, `vignettes/ja-get-started.Rmd` |
-| Maintenance guides | `vignettes/maintenance.Rmd`, `vignettes/ja-maintenance.Rmd` |
-| Package development tutorial | `vignettes/package-development.Rmd`, `vignettes/ja-package-development.Rmd` |
+| User guides | `vignettes/get-started.qmd`, `vignettes/ja-get-started.qmd` |
+| Maintenance guides | `vignettes/maintenance.qmd`, `vignettes/ja-maintenance.qmd` |
+| Package development tutorial | `vignettes/package-development.qmd`, `vignettes/ja-package-development.qmd` |
 | GitHub Actions R package check | `.github/workflows/R-CMD-check.yaml` |
 | GitHub Pages / pkgdown deployment | `.github/workflows/pkgdown.yaml` |
 
@@ -124,12 +124,12 @@ Use this split:
 
 - `README.md`: English top-level landing page.
 - `README.ja.md`: Japanese landing page.
-- `vignettes/get-started.Rmd`: English user guide.
-- `vignettes/ja-get-started.Rmd`: Japanese user guide.
-- `vignettes/maintenance.Rmd`: English maintainer guide.
-- `vignettes/ja-maintenance.Rmd`: Japanese maintainer guide.
-- `vignettes/package-development.Rmd`: English package-build tutorial.
-- `vignettes/ja-package-development.Rmd`: Japanese package-build
+- `vignettes/get-started.qmd`: English user guide.
+- `vignettes/ja-get-started.qmd`: Japanese user guide.
+- `vignettes/maintenance.qmd`: English maintainer guide.
+- `vignettes/ja-maintenance.qmd`: Japanese maintainer guide.
+- `vignettes/package-development.qmd`: English package-build tutorial.
+- `vignettes/ja-package-development.qmd`: Japanese package-build
   tutorial.
 - `_pkgdown.yml`: site navigation, article groups, and reference
   sections.

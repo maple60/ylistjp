@@ -165,7 +165,7 @@ smoke test としては 有用ですが、通常のローカルテストや pull
 
 - `README.md` は英語トップページになる。
 - `README.ja.md` は日本語の入口になる。
-- `vignettes/*.Rmd` は article ページになる。
+- `vignettes/*.qmd` は article ページになる。
 - `_pkgdown.yml` でナビゲーションと reference 分類を決める。
 
 GitHub Actions で pkgdown を実行し、生成されたサイトを GitHub Pages

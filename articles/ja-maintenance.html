@@ -10,7 +10,9 @@
 <link href="../deps/bootstrap-5.3.8/bootstrap.min.css" rel="stylesheet">
 <script src="../deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
-<script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="メンテナンスガイド">
+<script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><script src="ja-maintenance_files/libs/quarto-html/popper.min.js"></script><script src="ja-maintenance_files/libs/quarto-html/tippy.umd.min.js"></script><link href="ja-maintenance_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="ja-maintenance_files/libs/quarto-html/light-border.css" rel="stylesheet">
+<!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="メンテナンスガイド">
 </head>
 <body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
@@ -53,34 +55,32 @@
 
 
   </div>
-</nav><div class="container template-article">
-
-
-
-
+</nav><div class="container template-quarto">
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
 
       <h1>メンテナンスガイド</h1>
-            
-      
-      <small class="dont-index">Source: <a href="https://github.com/maple60/jpplantnames/blob/main/vignettes/ja-maintenance.Rmd" class="external-link"><code>vignettes/ja-maintenance.Rmd</code></a></small>
-      <div class="d-none name"><code>ja-maintenance.Rmd</code></div>
+
+
+
+
+      <small class="dont-index">Source: <a href="https://github.com/maple60/jpplantnames/blob/main/vignettes/ja-maintenance.qmd" class="external-link"><code>vignettes/ja-maintenance.qmd</code></a></small>
+      <div class="d-none name"><code></code></div>
     </div>
 
-    
-    
-<p>このガイドは、<code>jpplantnames</code>
-を保守するときに「何を直したい場合、どのファイルを
-見ればよいか」を素早く判断するための開発者向けメモです。</p>
+
+
+
+
+
+    <p>このガイドは、<code>jpplantnames</code> を保守するときに「何を直したい場合、どのファイルを 見ればよいか」を素早く判断するための開発者向けメモです。</p>
 <p>English version: <a href="maintenance.html">Maintenance guide</a></p>
-<div class="section level2">
-<h2 id="どこを直すか">どこを直すか<a class="anchor" aria-label="anchor" href="#%E3%81%A9%E3%81%93%E3%82%92%E7%9B%B4%E3%81%99%E3%81%8B"></a>
+<section class="level2"><h2 id="どこを直すか">どこを直すか<a class="anchor" aria-label="anchor" href="#%E3%81%A9%E3%81%93%E3%82%92%E7%9B%B4%E3%81%99%E3%81%8B"></a>
 </h2>
-<table class="table">
+<table class="table caption-top">
 <colgroup>
-<col width="50%">
-<col width="50%">
+<col style="width: 50%">
+<col style="width: 50%">
 </colgroup>
 <thead><tr class="header">
 <th>直したいこと</th>
@@ -88,8 +88,7 @@
 </tr></thead>
 <tbody>
 <tr class="odd">
-<td>チェックリストのダウンロード
-URL、キャッシュファイル名、キャッシュ場所</td>
+<td>チェックリストのダウンロード URL、キャッシュファイル名、キャッシュ場所</td>
 <td><code>R/cache.R</code></td>
 </tr>
 <tr class="even">
@@ -100,16 +99,14 @@ URL、キャッシュファイル名、キャッシュ場所</td>
 <td>
 <code><a href="../reference/scientific_name.html">scientific_name()</a></code> の挙動</td>
 <td>
-<code>R/lookup.R</code>,
-<code>tests/testthat/test-lookup.R</code>
+<code>R/lookup.R</code>, <code>tests/testthat/test-lookup.R</code>
 </td>
 </tr>
 <tr class="even">
 <td>
 <code><a href="../reference/japanese_name_search.html">japanese_name_search()</a></code> の検索対象やマッチ規則</td>
 <td>
-<code>R/lookup.R</code>,
-<code>tests/testthat/test-lookup.R</code>
+<code>R/lookup.R</code>, <code>tests/testthat/test-lookup.R</code>
 </td>
 </tr>
 <tr class="odd">
@@ -121,8 +118,7 @@ URL、キャッシュファイル名、キャッシュ場所</td>
 <tr class="even">
 <td>export する関数</td>
 <td>
-<code>R/*.R</code> の roxygen コメント。<code>NAMESPACE</code> と
-<code>man/*.Rd</code> は再生成する</td>
+<code>R/*.R</code> の roxygen コメント。<code>NAMESPACE</code> と <code>man/*.Rd</code> は再生成する</td>
 </tr>
 <tr class="odd">
 <td>パッケージ情報、依存関係、サイト URL</td>
@@ -143,22 +139,19 @@ URL、キャッシュファイル名、キャッシュ場所</td>
 <tr class="odd">
 <td>使い方ガイド</td>
 <td>
-<code>vignettes/get-started.Rmd</code>,
-<code>vignettes/ja-get-started.Rmd</code>
+<code>vignettes/get-started.qmd</code>, <code>vignettes/ja-get-started.qmd</code>
 </td>
 </tr>
 <tr class="even">
 <td>メンテナンスガイド</td>
 <td>
-<code>vignettes/maintenance.Rmd</code>,
-<code>vignettes/ja-maintenance.Rmd</code>
+<code>vignettes/maintenance.qmd</code>, <code>vignettes/ja-maintenance.qmd</code>
 </td>
 </tr>
 <tr class="odd">
 <td>パッケージ開発チュートリアル</td>
 <td>
-<code>vignettes/package-development.Rmd</code>,
-<code>vignettes/ja-package-development.Rmd</code>
+<code>vignettes/package-development.qmd</code>, <code>vignettes/ja-package-development.qmd</code>
 </td>
 </tr>
 <tr class="even">
@@ -170,13 +163,9 @@ URL、キャッシュファイル名、キャッシュ場所</td>
 <td><code>.github/workflows/pkgdown.yaml</code></td>
 </tr>
 </tbody>
-</table>
-</div>
-<div class="section level2">
-<h2 id="関数ごとの保守ポイント">関数ごとの保守ポイント<a class="anchor" aria-label="anchor" href="#%E9%96%A2%E6%95%B0%E3%81%94%E3%81%A8%E3%81%AE%E4%BF%9D%E5%AE%88%E3%83%9D%E3%82%A4%E3%83%B3%E3%83%88"></a>
+</table></section><section class="level2"><h2 id="関数ごとの保守ポイント">関数ごとの保守ポイント<a class="anchor" aria-label="anchor" href="#%E9%96%A2%E6%95%B0%E3%81%94%E3%81%A8%E3%81%AE%E4%BF%9D%E5%AE%88%E3%83%9D%E3%82%A4%E3%83%B3%E3%83%88"></a>
 </h2>
-<div class="section level3">
-<h3 id="japanese_name_download">
+<section class="level3"><h3 id="japanese_name_download">
 <code>japanese_name_download()</code><a class="anchor" aria-label="anchor" href="#japanese_name_download"></a>
 </h3>
 <p>実装は <code>R/cache.R</code> です。</p>
@@ -187,12 +176,8 @@ URL、キャッシュファイル名、キャッシュ場所</td>
 <li>テスト用 fixture のコピー方法を変えたい。</li>
 <li>キャッシュディレクトリの決め方を変えたい。</li>
 </ul>
-<p>返り値は、現在の仕様ではキャッシュ済みファイルパスを invisibly
-に返します。 キャッシュ関連のテストは
-<code>tests/testthat/test-cache-load.R</code> にあります。</p>
-</div>
-<div class="section level3">
-<h3 id="japanese_name_load">
+<p>返り値は、現在の仕様ではキャッシュ済みファイルパスを invisibly に返します。 キャッシュ関連のテストは <code>tests/testthat/test-cache-load.R</code> にあります。</p>
+</section><section class="level3"><h3 id="japanese_name_load">
 <code>japanese_name_load()</code><a class="anchor" aria-label="anchor" href="#japanese_name_load"></a>
 </h3>
 <p>実装は <code>R/load.R</code> です。</p>
@@ -201,13 +186,8 @@ URL、キャッシュファイル名、キャッシュ場所</td>
 <li>チェックリストのシート名や必須列が変わった。</li>
 <li>読み込み後の整形処理を追加したい。</li>
 </ul>
-<p>現在はチェックリスト Excel ファイルの <code>JN_dataset</code>
-シートを読み込んでいます。
-単体テストでは本番の巨大ファイルを直接ダウンロードせず、小さな合成
-fixture で列構造を確認します。</p>
-</div>
-<div class="section level3">
-<h3 id="scientific_name">
+<p>現在はチェックリスト Excel ファイルの <code>JN_dataset</code> シートを読み込んでいます。 単体テストでは本番の巨大ファイルを直接ダウンロードせず、小さな合成 fixture で列構造を確認します。</p>
+</section><section class="level3"><h3 id="scientific_name">
 <code>scientific_name()</code><a class="anchor" aria-label="anchor" href="#scientific_name"></a>
 </h3>
 <p>実装は <code>R/lookup.R</code> です。</p>
@@ -221,17 +201,14 @@ fixture で列構造を確認します。</p>
 </ul>
 <p>現在の仕様は保守的です。</p>
 <ul>
-<li>チェックリストの <code>和名</code> 列と <code>別名</code>
-列を完全一致で検索します。</li>
+<li>チェックリストの <code>和名</code> 列と <code>別名</code> 列を完全一致で検索します。</li>
 <li>
 <code>ステータス == "標準"</code> の行だけを使います。</li>
 <li>見つからない場合は <code>NA_character_</code> を返します。</li>
 <li>標準行が複数ある場合は自動で選ばず、エラーにします。</li>
 </ul>
 <p>この仕様を変えた場合は、README、日英の使い方ガイド、テストも一緒に更新します。</p>
-</div>
-<div class="section level3">
-<h3 id="japanese_name_search">
+</section><section class="level3"><h3 id="japanese_name_search">
 <code>japanese_name_search()</code><a class="anchor" aria-label="anchor" href="#japanese_name_search"></a>
 </h3>
 <p>実装は <code>R/lookup.R</code> です。</p>
@@ -243,12 +220,8 @@ fixture で列構造を確認します。</p>
 <li>ひらがな・カタカナ変換などの正規化を入れたい。</li>
 <li>候補のランキングを追加したい。</li>
 </ul>
-<p>検索機能は、候補を人間が確認できるようにするための関数です。
-<code><a href="../reference/scientific_name.html">scientific_name()</a></code> を暗黙の fuzzy lookup
-に変えるより、検索候補を明示的に返す設計を優先します。</p>
-</div>
-<div class="section level3">
-<h3 id="gbif_match">
+<p>検索機能は、候補を人間が確認できるようにするための関数です。 <code><a href="../reference/scientific_name.html">scientific_name()</a></code> を暗黙の fuzzy lookup に変えるより、検索候補を明示的に返す設計を優先します。</p>
+</section><section class="level3"><h3 id="gbif_match">
 <code>gbif_match()</code><a class="anchor" aria-label="anchor" href="#gbif_match"></a>
 </h3>
 <p>実装は <code>R/gbif.R</code> です。</p>
@@ -258,24 +231,11 @@ fixture で列構造を確認します。</p>
 <li>API エラー時の扱いを変えたい。</li>
 <li>WFO や Catalogue of Life など別の国際 API を追加したい。</li>
 </ul>
-<p>GBIF の live test は通常 skip
-されます。ネットワークテストを明示的に走らせる場合は
-<code>JPPLANTNAMES_RUN_NETWORK_TESTS=true</code> を設定します。</p>
-</div>
-</div>
-<div class="section level2">
-<h2 id="ドキュメントの方針">ドキュメントの方針<a class="anchor" aria-label="anchor" href="#%E3%83%89%E3%82%AD%E3%83%A5%E3%83%A1%E3%83%B3%E3%83%88%E3%81%AE%E6%96%B9%E9%87%9D"></a>
+<p>GBIF の live test は通常 skip されます。ネットワークテストを明示的に走らせる場合は <code>JPPLANTNAMES_RUN_NETWORK_TESTS=true</code> を設定します。</p>
+</section></section><section class="level2"><h2 id="ドキュメントの方針">ドキュメントの方針<a class="anchor" aria-label="anchor" href="#%E3%83%89%E3%82%AD%E3%83%A5%E3%83%A1%E3%83%B3%E3%83%88%E3%81%AE%E6%96%B9%E9%87%9D"></a>
 </h2>
-<p>pkgdown のトップページは <code>README.md</code>
-から生成されます。そのため、トップページは
-英語を正にし、日本語で読みたい人には <code>README.ja.md</code>
-と日本語ガイドへ誘導します。</p>
-<p>関数リファレンスは <code>R/*.R</code> の roxygen
-コメントから生成します。人間が保守する原本は roxygen
-コメントです。<code>man/</code> 以下の <code>.Rd</code>
-ファイルは自動生成物なので、直接編集しません。
-引数説明、examples、details、alias、非推奨 wrapper
-の説明を変える場合は、関数の近くの roxygen block を直します。</p>
+<p>pkgdown のトップページは <code>README.md</code> から生成されます。そのため、トップページは 英語を正にし、日本語で読みたい人には <code>README.ja.md</code> と日本語ガイドへ誘導します。</p>
+<p>関数リファレンスは <code>R/*.R</code> の roxygen コメントから生成します。人間が保守する原本は roxygen コメントです。<code>man/</code> 以下の <code>.Rd</code> ファイルは自動生成物なので、直接編集しません。 引数説明、examples、details、alias、非推奨 wrapper の説明を変える場合は、関数の近くの roxygen block を直します。</p>
 <p>役割分担は次の通りです。</p>
 <ul>
 <li>
@@ -283,112 +243,160 @@ fixture で列構造を確認します。</p>
 <li>
 <code>README.ja.md</code>: 日本語のトップページ。</li>
 <li>
-<code>vignettes/get-started.Rmd</code>: 英語の使い方ガイド。</li>
+<code>vignettes/get-started.qmd</code>: 英語の使い方ガイド。</li>
 <li>
-<code>vignettes/ja-get-started.Rmd</code>:
-日本語の使い方ガイド。</li>
+<code>vignettes/ja-get-started.qmd</code>: 日本語の使い方ガイド。</li>
 <li>
-<code>vignettes/maintenance.Rmd</code>:
-英語のメンテナンスガイド。</li>
+<code>vignettes/maintenance.qmd</code>: 英語のメンテナンスガイド。</li>
 <li>
-<code>vignettes/ja-maintenance.Rmd</code>:
-日本語のメンテナンスガイド。</li>
+<code>vignettes/ja-maintenance.qmd</code>: 日本語のメンテナンスガイド。</li>
 <li>
-<code>vignettes/package-development.Rmd</code>:
-英語のパッケージ開発チュートリアル。</li>
+<code>vignettes/package-development.qmd</code>: 英語のパッケージ開発チュートリアル。</li>
 <li>
-<code>vignettes/ja-package-development.Rmd</code>:
-日本語のパッケージ開発チュートリアル。</li>
+<code>vignettes/ja-package-development.qmd</code>: 日本語のパッケージ開発チュートリアル。</li>
 <li>
-<code>_pkgdown.yml</code>:
-サイトのナビゲーション、記事分類、reference 分類。</li>
-</ul>
-</div>
-<div class="section level2">
-<h2 id="ローカルでのドキュメント更新手順">ローカルでのドキュメント更新手順<a class="anchor" aria-label="anchor" href="#%E3%83%AD%E3%83%BC%E3%82%AB%E3%83%AB%E3%81%A7%E3%81%AE%E3%83%89%E3%82%AD%E3%83%A5%E3%83%A1%E3%83%B3%E3%83%88%E6%9B%B4%E6%96%B0%E6%89%8B%E9%A0%86"></a>
+<code>_pkgdown.yml</code>: サイトのナビゲーション、記事分類、reference 分類。</li>
+</ul></section><section class="level2"><h2 id="ローカルでのドキュメント更新手順">ローカルでのドキュメント更新手順<a class="anchor" aria-label="anchor" href="#%E3%83%AD%E3%83%BC%E3%82%AB%E3%83%AB%E3%81%A7%E3%81%AE%E3%83%89%E3%82%AD%E3%83%A5%E3%83%A1%E3%83%B3%E3%83%88%E6%9B%B4%E6%96%B0%E6%89%8B%E9%A0%86"></a>
 </h2>
 <p>関数リファレンスを変える場合:</p>
-<ol style="list-style-type: decimal">
+<ol type="1">
 <li>
 <code>R/*.R</code> の roxygen コメントを編集します。</li>
 <li>reference 用ファイルを再生成します。</li>
 </ol>
-<div class="sourceCode" id="cb1"><pre class="sourceCode powershell"><code class="sourceCode powershell"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a>Rscript <span class="op">-</span>e <span class="st">"roxygen2::roxygenise()"</span></span></code></pre></div>
-<ol start="3" style="list-style-type: decimal">
+<div class="sourceCode" id="cb1"><pre class="sourceCode powershell"><code class="sourceCode powershell"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>Rscript <span class="op">-</span>e <span class="st">"roxygen2::roxygenise()"</span></span></code></pre></div>
+<ol start="3" type="1">
 <li>生成された差分を確認します。</li>
 </ol>
-<div class="sourceCode" id="cb2"><pre class="sourceCode powershell"><code class="sourceCode powershell"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a>git <span class="fu">diff</span> <span class="op">--</span> <span class="fu">R</span><span class="op">/</span> <span class="fu">man</span><span class="op">/</span> NAMESPACE</span></code></pre></div>
-<p>README、vignette、pkgdown のナビゲーションを変えた場合は、可能なら
-pkgdown サイトも ローカルでビルドします。</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb2"><pre class="sourceCode powershell"><code class="sourceCode powershell"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>git <span class="fu">diff</span> <span class="op">--</span> <span class="fu">R</span><span class="op">/</span> <span class="fu">man</span><span class="op">/</span> NAMESPACE</span></code></pre></div>
+<p>README、vignette、pkgdown のナビゲーションを変えた場合は、可能なら pkgdown サイトも ローカルでビルドします。</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">pkgdown</span><span class="fu">::</span><span class="fu"><a href="https://pkgdown.r-lib.org/reference/build_site.html" class="external-link">build_site</a></span><span class="op">(</span>preview <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
-<p><code>docs/</code> が空ではなく、pkgdown
-が作ったサイトとして認識されないというエラーが出た場合は、
-ローカル生成物を消してから作り直します。</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+</div>
+<p><code>docs/</code> が空ではなく、pkgdown が作ったサイトとして認識されないというエラーが出た場合は、 ローカル生成物を消してから作り直します。</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">pkgdown</span><span class="fu">::</span><span class="fu"><a href="https://pkgdown.r-lib.org/reference/clean.html" class="external-link">clean_site</a></span><span class="op">(</span>force <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="fu">pkgdown</span><span class="fu">::</span><span class="fu"><a href="https://pkgdown.r-lib.org/reference/build_site.html" class="external-link">build_site</a></span><span class="op">(</span>preview <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
-<p>このリポジトリでは <code>docs/</code>
-はローカル確認用で、<code>.gitignore</code> に入っています。公開サイトは
-GitHub Actions が <code>gh-pages</code> ブランチへ deploy
-するため、通常のドキュメント更新では ローカルの <code>docs/</code> を
-stage しません。</p>
-<p>Windows でローカル pkgdown build を行う場合、Pandoc と書き込み可能な
-R cache を 環境変数で指定する必要があることがあります。</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode powershell"><code class="sourceCode powershell"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="va">$env</span><span class="op">:</span><span class="va">RSTUDIO_PANDOC</span> <span class="op">=</span> <span class="st">"C:\Program Files\RStudio\resources\app\bin\quarto\bin\tools"</span></span>
-<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a><span class="va">$env</span><span class="op">:</span><span class="va">R_USER_CACHE_DIR</span> <span class="op">=</span> <span class="st">"C:\Users\Konrai\github\ylistjp\work\r-cache"</span></span></code></pre></div>
-<p><code>realfavicongenerator.net</code>、<code>cloud.r-project.org</code>、Bioconductor
-への接続で ローカル build
-が失敗する場合は、ドキュメント原本の問題ではなく、ローカル環境または
-ネットワーク制限による失敗として扱います。その場合は roxygen と vignette
-の変更を push し、 ネットワークのある CI 環境で動く GitHub Actions の
-pkgdown workflow を確認します。</p>
 </div>
-<div class="section level2">
-<h2 id="テストと確認">テストと確認<a class="anchor" aria-label="anchor" href="#%E3%83%86%E3%82%B9%E3%83%88%E3%81%A8%E7%A2%BA%E8%AA%8D"></a>
+<p>このリポジトリでは <code>docs/</code> はローカル確認用で、<code>.gitignore</code> に入っています。公開サイトは GitHub Actions が <code>gh-pages</code> ブランチへ deploy するため、通常のドキュメント更新では ローカルの <code>docs/</code> を stage しません。</p>
+<p>Windows でローカル pkgdown build を行う場合、Pandoc と書き込み可能な R cache を 環境変数で指定する必要があることがあります。</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode powershell"><code class="sourceCode powershell"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="va">$env</span><span class="op">:</span><span class="va">RSTUDIO_PANDOC</span> <span class="op">=</span> <span class="st">"C:\Program Files\RStudio\resources\app\bin\quarto\bin\tools"</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="va">$env</span><span class="op">:</span><span class="va">R_USER_CACHE_DIR</span> <span class="op">=</span> <span class="st">"C:\Users\Konrai\github\ylistjp\work\r-cache"</span></span></code></pre></div>
+<p><code>realfavicongenerator.net</code>、<code>cloud.r-project.org</code>、Bioconductor への接続で ローカル build が失敗する場合は、ドキュメント原本の問題ではなく、ローカル環境または ネットワーク制限による失敗として扱います。その場合は roxygen と vignette の変更を push し、 ネットワークのある CI 環境で動く GitHub Actions の pkgdown workflow を確認します。</p>
+</section><section class="level2"><h2 id="テストと確認">テストと確認<a class="anchor" aria-label="anchor" href="#%E3%83%86%E3%82%B9%E3%83%88%E3%81%A8%E7%A2%BA%E8%AA%8D"></a>
 </h2>
 <p>単体テスト:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode powershell"><code class="sourceCode powershell"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a>Rscript <span class="op">-</span>e <span class="st">"testthat::test_local('.', reporter = 'summary')"</span></span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode powershell"><code class="sourceCode powershell"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>Rscript <span class="op">-</span>e <span class="st">"testthat::test_local('.', reporter = 'summary')"</span></span></code></pre></div>
 <p>パッケージ build/check:</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode powershell"><code class="sourceCode powershell"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="fu">R</span> CMD build <span class="op">.</span></span>
-<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a><span class="fu">R</span> CMD check jpplantnames_0<span class="op">.</span><span class="dv">1.0</span><span class="op">.</span><span class="fu">tar</span><span class="op">.</span><span class="fu">gz</span> <span class="op">--</span>no-manual</span></code></pre></div>
-<p>Windows で Pandoc が <code>PATH</code> にない場合は、vignettes や
-pkgdown の build 前に <code>RSTUDIO_PANDOC</code> をインストール済み
-Pandoc のディレクトリへ向けます。</p>
-<p>ドキュメントだけの変更でも、commit
-前には最終的な対象ファイルを確認します。</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode powershell"><code class="sourceCode powershell"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a>git status <span class="op">--</span>short</span></code></pre></div>
-<p>commit するのは、編集した原本と roxygen 生成物です。たとえば
-<code>R/*.R</code>、 <code>man/*.Rd</code>、変更があれば
-<code>NAMESPACE</code> を含めます。通常の運用では、ローカルの pkgdown
-build でできた <code>docs/</code> は commit しません。</p>
-</div>
-<div class="section level2">
-<h2 id="変更前後のチェックリスト">変更前後のチェックリスト<a class="anchor" aria-label="anchor" href="#%E5%A4%89%E6%9B%B4%E5%89%8D%E5%BE%8C%E3%81%AE%E3%83%81%E3%82%A7%E3%83%83%E3%82%AF%E3%83%AA%E3%82%B9%E3%83%88"></a>
+<div class="sourceCode" id="cb7"><pre class="sourceCode powershell"><code class="sourceCode powershell"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">R</span> CMD build <span class="op">.</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">R</span> CMD check jpplantnames_0<span class="op">.</span><span class="dv">1.0</span><span class="op">.</span><span class="fu">tar</span><span class="op">.</span><span class="fu">gz</span> <span class="op">--</span>no-manual</span></code></pre></div>
+<p>Windows で Pandoc が <code>PATH</code> にない場合は、vignettes や pkgdown の build 前に <code>RSTUDIO_PANDOC</code> をインストール済み Pandoc のディレクトリへ向けます。</p>
+<p>ドキュメントだけの変更でも、commit 前には最終的な対象ファイルを確認します。</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode powershell"><code class="sourceCode powershell"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>git status <span class="op">--</span>short</span></code></pre></div>
+<p>commit するのは、編集した原本と roxygen 生成物です。たとえば <code>R/*.R</code>、 <code>man/*.Rd</code>、変更があれば <code>NAMESPACE</code> を含めます。通常の運用では、ローカルの pkgdown build でできた <code>docs/</code> は commit しません。</p>
+</section><section class="level2"><h2 id="変更前後のチェックリスト">変更前後のチェックリスト<a class="anchor" aria-label="anchor" href="#%E5%A4%89%E6%9B%B4%E5%89%8D%E5%BE%8C%E3%81%AE%E3%83%81%E3%82%A7%E3%83%83%E3%82%AF%E3%83%AA%E3%82%B9%E3%83%88"></a>
 </h2>
 <p>保守変更を push する前に、次を確認します。</p>
-<ol style="list-style-type: decimal">
+<ol type="1">
 <li>挙動を変えた場合はテストを更新する。</li>
-<li>ユーザーに見える挙動を変えた場合は README
-と日英の使い方ガイドを更新する。</li>
-<li>roxygen コメントを変えた場合は <code>roxygen2::roxygenise()</code>
-を実行する。</li>
+<li>ユーザーに見える挙動を変えた場合は README と日英の使い方ガイドを更新する。</li>
+<li>roxygen コメントを変えた場合は <code>roxygen2::roxygenise()</code> を実行する。</li>
 <li>
 <code><a href="https://testthat.r-lib.org/reference/test_package.html" class="external-link">testthat::test_local()</a></code> を実行する。</li>
 <li>
-<code>R CMD build</code> と <code>R CMD check</code>
-を実行する。</li>
+<code>R CMD build</code> と <code>R CMD check</code> を実行する。</li>
 <li>ドキュメントを変えた場合は pkgdown をローカル build する。</li>
 <li>push 後に GitHub Actions の 2 つの workflow を確認する。</li>
 <li>
-<a href="https://maple60.github.io/jpplantnames/" class="uri">https://maple60.github.io/jpplantnames/</a>
-が更新されているか確認する。</li>
-</ol>
-</div>
-  </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
+<a href="https://maple60.github.io/jpplantnames/" class="uri">https://maple60.github.io/jpplantnames/</a> が更新されているか確認する。</li>
+</ol></section><script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'light-border',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config);
+    }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script></main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>
 </div>
-
 
 
     <footer><div class="pkgdown-footer-left">

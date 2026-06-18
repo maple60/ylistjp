@@ -10,7 +10,9 @@
 <link href="../deps/bootstrap-5.3.8/bootstrap.min.css" rel="stylesheet">
 <script src="../deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
-<script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="jpplantnames の使い方">
+<script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><script src="ja-get-started_files/libs/quarto-html/popper.min.js"></script><script src="ja-get-started_files/libs/quarto-html/tippy.umd.min.js"></script><link href="ja-get-started_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="ja-get-started_files/libs/quarto-html/light-border.css" rel="stylesheet">
+<!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="jpplantnames の使い方">
 </head>
 <body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
@@ -53,106 +55,102 @@
 
 
   </div>
-</nav><div class="container template-article">
-
-
-
-
+</nav><div class="container template-quarto">
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
 
       <h1>jpplantnames の使い方</h1>
-            
-      
-      <small class="dont-index">Source: <a href="https://github.com/maple60/jpplantnames/blob/main/vignettes/ja-get-started.Rmd" class="external-link"><code>vignettes/ja-get-started.Rmd</code></a></small>
-      <div class="d-none name"><code>ja-get-started.Rmd</code></div>
+
+
+
+
+      <small class="dont-index">Source: <a href="https://github.com/maple60/jpplantnames/blob/main/vignettes/ja-get-started.qmd" class="external-link"><code>vignettes/ja-get-started.qmd</code></a></small>
+      <div class="d-none name"><code></code></div>
     </div>
 
-    
-    
-<p><code>jpplantnames</code> は、「維管束植物和名チェックリスト ver.
-1.10」を R から扱いやすくするための非公式パッケージです。</p>
-<p>「コナラ」のような和名から、解析や表作成で使う学名を再現可能な形で取得する
-ことを目的にしています。</p>
-<div class="section level2">
-<h2 id="インストール">インストール<a class="anchor" aria-label="anchor" href="#%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB"></a>
+
+
+
+
+
+    <p><code>jpplantnames</code> は、「維管束植物和名チェックリスト ver. 1.10」を R から扱いやすくするための非公式パッケージです。</p>
+<p>「コナラ」のような和名から、解析や表作成で使う学名を再現可能な形で取得する ことを目的にしています。</p>
+<section class="level2"><h2 id="インストール">インストール<a class="anchor" aria-label="anchor" href="#%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB"></a>
 </h2>
 <p>GitHub からインストールします。</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># install.packages("pak")</span></span>
 <span><span class="fu">pak</span><span class="fu">::</span><span class="fu"><a href="https://pak.r-lib.org/reference/pak.html" class="external-link">pak</a></span><span class="op">(</span><span class="st">"maple60/jpplantnames"</span><span class="op">)</span></span></code></pre></div>
 <p>読み込みます。</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/maple60/jpplantnames" class="external-link">jpplantnames</a></span><span class="op">)</span></span></code></pre></div>
 </div>
-<div class="section level2">
-<h2 id="まず和名から学名を調べる">まず和名から学名を調べる<a class="anchor" aria-label="anchor" href="#%E3%81%BE%E3%81%9A%E5%92%8C%E5%90%8D%E3%81%8B%E3%82%89%E5%AD%A6%E5%90%8D%E3%82%92%E8%AA%BF%E3%81%B9%E3%82%8B"></a>
+</section><section class="level2"><h2 id="まず和名から学名を調べる">まず和名から学名を調べる<a class="anchor" aria-label="anchor" href="#%E3%81%BE%E3%81%9A%E5%92%8C%E5%90%8D%E3%81%8B%E3%82%89%E5%AD%A6%E5%90%8D%E3%82%92%E8%AA%BF%E3%81%B9%E3%82%8B"></a>
 </h2>
-<p>和名から標準的な学名を取得するには <code><a href="../reference/scientific_name.html">scientific_name()</a></code>
-を使います。</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<p>和名から標準的な学名を取得するには <code><a href="../reference/scientific_name.html">scientific_name()</a></code> を使います。</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/scientific_name.html">scientific_name</a></span><span class="op">(</span><span class="st">"コナラ"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] "Quercus serrata"</span></span></code></pre></div>
-<p>命名者付きの学名が必要な場合は <code>with_author = TRUE</code>
-を指定します。</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+</div>
+<p>命名者付きの学名が必要な場合は <code>with_author = TRUE</code> を指定します。</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/scientific_name.html">scientific_name</a></span><span class="op">(</span><span class="st">"コナラ"</span>, with_author <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] "Quercus serrata Murray"</span></span></code></pre></div>
+</div>
 <p>複数の和名をまとめて渡すこともできます。</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/scientific_name.html">scientific_name</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"コナラ"</span>, <span class="st">"ミズナラ"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 </div>
-<div class="section level2">
-<h2 id="チェックリストデータの取得とキャッシュ">チェックリストデータの取得とキャッシュ<a class="anchor" aria-label="anchor" href="#%E3%83%81%E3%82%A7%E3%83%83%E3%82%AF%E3%83%AA%E3%82%B9%E3%83%88%E3%83%87%E3%83%BC%E3%82%BF%E3%81%AE%E5%8F%96%E5%BE%97%E3%81%A8%E3%82%AD%E3%83%A3%E3%83%83%E3%82%B7%E3%83%A5"></a>
+</section><section class="level2"><h2 id="チェックリストデータの取得とキャッシュ">チェックリストデータの取得とキャッシュ<a class="anchor" aria-label="anchor" href="#%E3%83%81%E3%82%A7%E3%83%83%E3%82%AF%E3%83%AA%E3%82%B9%E3%83%88%E3%83%87%E3%83%BC%E3%82%BF%E3%81%AE%E5%8F%96%E5%BE%97%E3%81%A8%E3%82%AD%E3%83%A3%E3%83%83%E3%82%B7%E3%83%A5"></a>
 </h2>
-<p><code>jpplantnames</code>
-はチェックリストデータをパッケージ内に同梱しません。最初にデータが必要に
-なった時点で、チェックリストの Excel ファイルをユーザーの R キャッシュへ
-ダウンロードして読み込みます。</p>
+<p><code>jpplantnames</code> はチェックリストデータをパッケージ内に同梱しません。最初にデータが必要に なった時点で、チェックリストの Excel ファイルをユーザーの R キャッシュへ ダウンロードして読み込みます。</p>
 <p>明示的にダウンロードしたい場合は次のようにします。</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/japanese_name_download.html">japanese_name_download</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p>既存のキャッシュを更新したい場合は <code>overwrite = TRUE</code>
-を使います。</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+</div>
+<p>既存のキャッシュを更新したい場合は <code>overwrite = TRUE</code> を使います。</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/japanese_name_download.html">japanese_name_download</a></span><span class="op">(</span>overwrite <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
-<p>データ全体を <code>data.frame</code> として読み込みたい場合は
-<code><a href="../reference/japanese_name_load.html">japanese_name_load()</a></code> を使います。</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+</div>
+<p>データ全体を <code>data.frame</code> として読み込みたい場合は <code><a href="../reference/japanese_name_load.html">japanese_name_load()</a></code> を使います。</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">checklist</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/japanese_name_load.html">japanese_name_load</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">checklist</span><span class="op">)</span></span></code></pre></div>
-<p>読み込み前に必ず再取得したい場合は <code>refresh = TRUE</code>
-を指定します。</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+</div>
+<p>読み込み前に必ず再取得したい場合は <code>refresh = TRUE</code> を指定します。</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">checklist</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/japanese_name_load.html">japanese_name_load</a></span><span class="op">(</span>refresh <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 </div>
-<div class="section level2">
-<h2 id="scientific_name-の考え方">
+</section><section class="level2"><h2 id="scientific_name-の考え方">
 <code>scientific_name()</code> の考え方<a class="anchor" aria-label="anchor" href="#scientific_name-%E3%81%AE%E8%80%83%E3%81%88%E6%96%B9"></a>
 </h2>
-<p><code><a href="../reference/scientific_name.html">scientific_name()</a></code>
-は、解析で使いやすいように保守的な動作にしています。</p>
+<p><code><a href="../reference/scientific_name.html">scientific_name()</a></code> は、解析で使いやすいように保守的な動作にしています。</p>
 <ul>
-<li>チェックリストの <code>和名</code> 列と <code>別名</code>
-列を完全一致で検索します。</li>
+<li>チェックリストの <code>和名</code> 列と <code>別名</code> 列を完全一致で検索します。</li>
 <li>
-<code>ステータス</code> が <code>標準</code>
-の行だけを使います。</li>
+<code>ステータス</code> が <code>標準</code> の行だけを使います。</li>
 <li>見つからない場合は <code>NA_character_</code> を返します。</li>
 <li>標準行が複数見つかった場合は、自動で一つに決めずエラーにします。</li>
 </ul>
-<p>この挙動にしている理由は、学名の対応付けで曖昧な候補を静かに採用すると、
-後の解析や報告で誤りに気づきにくくなるためです。</p>
-</div>
-<div class="section level2">
-<h2 id="候補を確認する">候補を確認する<a class="anchor" aria-label="anchor" href="#%E5%80%99%E8%A3%9C%E3%82%92%E7%A2%BA%E8%AA%8D%E3%81%99%E3%82%8B"></a>
+<p>この挙動にしている理由は、学名の対応付けで曖昧な候補を静かに採用すると、 後の解析や報告で誤りに気づきにくくなるためです。</p>
+</section><section class="level2"><h2 id="候補を確認する">候補を確認する<a class="anchor" aria-label="anchor" href="#%E5%80%99%E8%A3%9C%E3%82%92%E7%A2%BA%E8%AA%8D%E3%81%99%E3%82%8B"></a>
 </h2>
-<p>部分一致や別名も含めて候補を確認したい場合は
-<code><a href="../reference/japanese_name_search.html">japanese_name_search()</a></code> を使います。</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<p>部分一致や別名も含めて候補を確認したい場合は <code><a href="../reference/japanese_name_search.html">japanese_name_search()</a></code> を使います。</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/japanese_name_search.html">japanese_name_search</a></span><span class="op">(</span><span class="st">"コナラ"</span><span class="op">)</span></span></code></pre></div>
+</div>
 <p>検索対象の列を指定できます。</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># 学名から検索</span></span>
 <span><span class="fu"><a href="../reference/japanese_name_search.html">japanese_name_search</a></span><span class="op">(</span><span class="st">"Quercus serrata"</span>, field <span class="op">=</span> <span class="st">"scientific"</span><span class="op">)</span></span>
 <span></span>
@@ -161,26 +159,25 @@
 <span></span>
 <span><span class="co"># 和名・別名・学名をまとめて検索</span></span>
 <span><span class="fu"><a href="../reference/japanese_name_search.html">japanese_name_search</a></span><span class="op">(</span><span class="st">"コナラ"</span>, field <span class="op">=</span> <span class="st">"all"</span><span class="op">)</span></span></code></pre></div>
-<p>完全一致で候補を確認したい場合は <code>exact = TRUE</code>
-を指定します。</p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+</div>
+<p>完全一致で候補を確認したい場合は <code>exact = TRUE</code> を指定します。</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/japanese_name_search.html">japanese_name_search</a></span><span class="op">(</span><span class="st">"コナラ"</span>, exact <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 </div>
-<div class="section level2">
-<h2 id="実用的なワークフロー">実用的なワークフロー<a class="anchor" aria-label="anchor" href="#%E5%AE%9F%E7%94%A8%E7%9A%84%E3%81%AA%E3%83%AF%E3%83%BC%E3%82%AF%E3%83%95%E3%83%AD%E3%83%BC"></a>
+</section><section class="level2"><h2 id="実用的なワークフロー">実用的なワークフロー<a class="anchor" aria-label="anchor" href="#%E5%AE%9F%E7%94%A8%E7%9A%84%E3%81%AA%E3%83%AF%E3%83%BC%E3%82%AF%E3%83%95%E3%83%AD%E3%83%BC"></a>
 </h2>
 <p>データ整理では、次のような流れにすると扱いやすくなります。</p>
-<ol style="list-style-type: decimal">
-<li>和名リストに対して <code><a href="../reference/scientific_name.html">scientific_name()</a></code>
-を使い、標準学名を付与します。</li>
+<ol type="1">
+<li>和名リストに対して <code><a href="../reference/scientific_name.html">scientific_name()</a></code> を使い、標準学名を付与します。</li>
 <li>
-<code>NA</code> になったものや確認が必要なものを
-<code><a href="../reference/japanese_name_search.html">japanese_name_search()</a></code> で調べます。</li>
+<code>NA</code> になったものや確認が必要なものを <code><a href="../reference/japanese_name_search.html">japanese_name_search()</a></code> で調べます。</li>
 <li>元の和名と取得した学名を両方残します。</li>
 <li>論文、報告書、公開データで使う場合はチェックリストを引用します。</li>
 </ol>
 <p>例:</p>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">plants</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
 <span>  japanese_name <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"コナラ"</span>, <span class="st">"ミズナラ"</span>, <span class="st">"存在しない植物名"</span><span class="op">)</span>,</span>
 <span>  stringsAsFactors <span class="op">=</span> <span class="cn">FALSE</span></span>
@@ -189,37 +186,108 @@
 <span><span class="va">plants</span><span class="op">$</span><span class="va">scientific_name</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/scientific_name.html">scientific_name</a></span><span class="op">(</span><span class="va">plants</span><span class="op">$</span><span class="va">japanese_name</span><span class="op">)</span></span>
 <span><span class="va">plants</span></span></code></pre></div>
 </div>
-<div class="section level2">
-<h2 id="gbif-で国際的な学名情報を確認する">GBIF で国際的な学名情報を確認する<a class="anchor" aria-label="anchor" href="#gbif-%E3%81%A7%E5%9B%BD%E9%9A%9B%E7%9A%84%E3%81%AA%E5%AD%A6%E5%90%8D%E6%83%85%E5%A0%B1%E3%82%92%E7%A2%BA%E8%AA%8D%E3%81%99%E3%82%8B"></a>
+</section><section class="level2"><h2 id="gbif-で国際的な学名情報を確認する">GBIF で国際的な学名情報を確認する<a class="anchor" aria-label="anchor" href="#gbif-%E3%81%A7%E5%9B%BD%E9%9A%9B%E7%9A%84%E3%81%AA%E5%AD%A6%E5%90%8D%E6%83%85%E5%A0%B1%E3%82%92%E7%A2%BA%E8%AA%8D%E3%81%99%E3%82%8B"></a>
 </h2>
-<p>チェックリストから得た学名を国際的なデータベースと照合したい場合は、
-<code><a href="../reference/gbif_match.html">gbif_match()</a></code> を使えます。</p>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<p>チェックリストから得た学名を国際的なデータベースと照合したい場合は、 <code><a href="../reference/gbif_match.html">gbif_match()</a></code> を使えます。</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/gbif_match.html">gbif_match</a></span><span class="op">(</span><span class="st">"Quercus serrata"</span><span class="op">)</span></span></code></pre></div>
-<p>これは GBIF species match API を呼び出す薄い補助関数です。利用には
-<code>jsonlite</code> パッケージが必要です。</p>
 </div>
-<div class="section level2">
-<h2 id="データソースと引用">データソースと引用<a class="anchor" aria-label="anchor" href="#%E3%83%87%E3%83%BC%E3%82%BF%E3%82%BD%E3%83%BC%E3%82%B9%E3%81%A8%E5%BC%95%E7%94%A8"></a>
+<p>これは GBIF species match API を呼び出す薄い補助関数です。利用には <code>jsonlite</code> パッケージが必要です。</p>
+</section><section class="level2"><h2 id="データソースと引用">データソースと引用<a class="anchor" aria-label="anchor" href="#%E3%83%87%E3%83%BC%E3%82%BF%E3%82%BD%E3%83%BC%E3%82%B9%E3%81%A8%E5%BC%95%E7%94%A8"></a>
 </h2>
-<p><code>jpplantnames</code> は「維管束植物和名チェックリスト ver.
-1.10」を lookup source として使います。 このチェックリストには YList
-由来・更新データが含まれますが、<code>jpplantnames</code> は
-JBIF、YList、
-またはチェックリスト著者の公式パッケージではなく、承認・推奨されたものでもありません。</p>
+<p><code>jpplantnames</code> は「維管束植物和名チェックリスト ver. 1.10」を lookup source として使います。 このチェックリストには YList 由来・更新データが含まれますが、<code>jpplantnames</code> は JBIF、YList、 またはチェックリスト著者の公式パッケージではなく、承認・推奨されたものでもありません。</p>
 <p>チェックリストに基づく結果を利用する場合は、チェックリストを引用してください。</p>
 <blockquote>
-<p>山ノ内崇志・首藤光太郎・大澤剛士・米倉浩司・加藤 将・志賀 隆. 2019.
-「維管束植物和名チェックリスト」 (<a href="https://gbif.jp/activities/checklist/wamei_checklist_110" class="external-link uri">https://gbif.jp/activities/checklist/wamei_checklist_110</a>)</p>
+<p>山ノ内崇志・首藤光太郎・大澤剛士・米倉浩司・加藤 将・志賀 隆. 2019. 「維管束植物和名チェックリスト」 (https://gbif.jp/activities/checklist/wamei_checklist_110)</p>
 </blockquote>
-<p>このパッケージのコードは MIT
-ライセンスです。ただし、チェックリストデータは
-パッケージに同梱しておらず、このパッケージのライセンス対象ではありません。</p>
-</div>
-  </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
+<p>このパッケージのコードは MIT ライセンスです。ただし、チェックリストデータは パッケージに同梱しておらず、このパッケージのライセンス対象ではありません。</p>
+</section><script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'light-border',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config);
+    }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script></main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>
 </div>
-
 
 
     <footer><div class="pkgdown-footer-left">

@@ -10,7 +10,9 @@
 <link href="../deps/bootstrap-5.3.8/bootstrap.min.css" rel="stylesheet">
 <script src="../deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
-<script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="jpplantnames パッケージ開発チュートリアル">
+<script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><script src="ja-package-development_files/libs/quarto-html/popper.min.js"></script><script src="ja-package-development_files/libs/quarto-html/tippy.umd.min.js"></script><link href="ja-package-development_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="ja-package-development_files/libs/quarto-html/light-border.css" rel="stylesheet">
+<!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="jpplantnames パッケージ開発チュートリアル">
 </head>
 <body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
@@ -53,59 +55,51 @@
 
 
   </div>
-</nav><div class="container template-article">
-
-
-
-
+</nav><div class="container template-quarto">
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
 
       <h1>jpplantnames パッケージ開発チュートリアル</h1>
-            
-      
-      <small class="dont-index">Source: <a href="https://github.com/maple60/jpplantnames/blob/main/vignettes/ja-package-development.Rmd" class="external-link"><code>vignettes/ja-package-development.Rmd</code></a></small>
-      <div class="d-none name"><code>ja-package-development.Rmd</code></div>
+
+
+
+
+      <small class="dont-index">Source: <a href="https://github.com/maple60/jpplantnames/blob/main/vignettes/ja-package-development.qmd" class="external-link"><code>vignettes/ja-package-development.qmd</code></a></small>
+      <div class="d-none name"><code></code></div>
     </div>
 
-    
-    
-<p>この記事では、<code>jpplantnames</code> が小さな R
-パッケージとしてどのように構成されているかを
-説明します。公開データを、再現可能な解析用の道具に変える例として読むことを
-想定しています。</p>
-<p>English version: <a href="package-development.html">Building
-jpplantnames as an R package</a></p>
-<div class="section level2">
-<h2 id="小さな課題から始める">小さな課題から始める<a class="anchor" aria-label="anchor" href="#%E5%B0%8F%E3%81%95%E3%81%AA%E8%AA%B2%E9%A1%8C%E3%81%8B%E3%82%89%E5%A7%8B%E3%82%81%E3%82%8B"></a>
+
+
+
+
+
+    <p>この記事では、<code>jpplantnames</code> が小さな R パッケージとしてどのように構成されているかを 説明します。公開データを、再現可能な解析用の道具に変える例として読むことを 想定しています。</p>
+<p>English version: <a href="package-development.html">Building jpplantnames as an R package</a></p>
+<section class="level2"><h2 id="小さな課題から始める">小さな課題から始める<a class="anchor" aria-label="anchor" href="#%E5%B0%8F%E3%81%95%E3%81%AA%E8%AA%B2%E9%A1%8C%E3%81%8B%E3%82%89%E5%A7%8B%E3%82%81%E3%82%8B"></a>
 </h2>
 <p>最初の目標は単純です。</p>
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/scientific_name.html">scientific_name</a></span><span class="op">(</span><span class="st">"コナラ"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] "Quercus serrata"</span></span></code></pre></div>
+</div>
 <p>この短い API の裏側には、いくつかの設計判断があります。</p>
 <ul>
-<li>「維管束植物和名チェックリスト ver. 1.10」の非公式 wrapper
-として作る。</li>
+<li>「維管束植物和名チェックリスト ver. 1.10」の非公式 wrapper として作る。</li>
 <li>チェックリストデータはパッケージに同梱しない。</li>
 <li>チェックリスト Excel ファイルは、必要になったときだけ取得する。</li>
 <li>2 回目以降の検索ではローカルキャッシュを使う。</li>
 <li>完全一致を基本にし、曖昧な候補を自動で選ばない。</li>
 <li>国際的な学名確認は任意機能としてチェックリスト検索から分ける。</li>
 </ul>
-<p>小さな関数群ですが、データ取得、文字コード、キャッシュ、テスト、
-ドキュメント、GitHub Actions まで含むため、R パッケージ作成の教材として
-扱いやすい題材です。</p>
-</div>
-<div class="section level2">
-<h2 id="パッケージの骨格">パッケージの骨格<a class="anchor" aria-label="anchor" href="#%E3%83%91%E3%83%83%E3%82%B1%E3%83%BC%E3%82%B8%E3%81%AE%E9%AA%A8%E6%A0%BC"></a>
+<p>小さな関数群ですが、データ取得、文字コード、キャッシュ、テスト、 ドキュメント、GitHub Actions まで含むため、R パッケージ作成の教材として 扱いやすい題材です。</p>
+</section><section class="level2"><h2 id="パッケージの骨格">パッケージの骨格<a class="anchor" aria-label="anchor" href="#%E3%83%91%E3%83%83%E3%82%B1%E3%83%BC%E3%82%B8%E3%81%AE%E9%AA%A8%E6%A0%BC"></a>
 </h2>
-<p><code>jpplantnames</code> は、多くの R
-パッケージで使われる標準的な構成を使っています。</p>
-<table class="table">
+<p><code>jpplantnames</code> は、多くの R パッケージで使われる標準的な構成を使っています。</p>
+<table class="table caption-top">
 <colgroup>
-<col width="50%">
-<col width="50%">
+<col style="width: 50%">
+<col style="width: 50%">
 </colgroup>
 <thead><tr class="header">
 <th>パス</th>
@@ -146,26 +140,23 @@ jpplantnames as an R package</a></p>
 </tr>
 </tbody>
 </table>
-<p>小さなパッケージでは、この構成で十分です。重要なのは、コードは
-<code>R/</code>、 テストは <code>tests/</code>、長めの説明は
-<code>vignettes/</code>、自動化は <code>.github/</code> というように、
-役割を分けておくことです。</p>
-</div>
-<div class="section level2">
-<h2 id="先に公開-api-を決める">先に公開 API を決める<a class="anchor" aria-label="anchor" href="#%E5%85%88%E3%81%AB%E5%85%AC%E9%96%8B-api-%E3%82%92%E6%B1%BA%E3%82%81%E3%82%8B"></a>
+<p>小さなパッケージでは、この構成で十分です。重要なのは、コードは <code>R/</code>、 テストは <code>tests/</code>、長めの説明は <code>vignettes/</code>、自動化は <code>.github/</code> というように、 役割を分けておくことです。</p>
+</section><section class="level2"><h2 id="先に公開-api-を決める">先に公開 API を決める<a class="anchor" aria-label="anchor" href="#%E5%85%88%E3%81%AB%E5%85%AC%E9%96%8B-api-%E3%82%92%E6%B1%BA%E3%82%81%E3%82%8B"></a>
 </h2>
 <p>中心になる使い方は次の形です。</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/maple60/jpplantnames" class="external-link">jpplantnames</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="../reference/scientific_name.html">scientific_name</a></span><span class="op">(</span><span class="st">"コナラ"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/scientific_name.html">scientific_name</a></span><span class="op">(</span><span class="st">"コナラ"</span>, with_author <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/japanese_name_search.html">japanese_name_search</a></span><span class="op">(</span><span class="st">"コナラ"</span><span class="op">)</span></span></code></pre></div>
+</div>
 <p>その周辺に、役割のはっきりした関数を置いています。</p>
-<table class="table">
+<table class="table caption-top">
 <colgroup>
-<col width="50%">
-<col width="50%">
+<col style="width: 50%">
+<col style="width: 50%">
 </colgroup>
 <thead><tr class="header">
 <th>関数</th>
@@ -178,8 +169,7 @@ jpplantnames as an R package</a></p>
 </tr>
 <tr class="even">
 <td><code><a href="../reference/japanese_name_load.html">japanese_name_load()</a></code></td>
-<td>キャッシュ済みファイルを <code>data.frame</code>
-として読み込む。</td>
+<td>キャッシュ済みファイルを <code>data.frame</code> として読み込む。</td>
 </tr>
 <tr class="odd">
 <td><code><a href="../reference/scientific_name.html">scientific_name()</a></code></td>
@@ -195,74 +185,51 @@ jpplantnames as an R package</a></p>
 </tr>
 </tbody>
 </table>
-<p>この分け方にすると、簡単な用途は <code><a href="../reference/scientific_name.html">scientific_name()</a></code>
-だけで済み、必要な人は 元データや候補行も確認できます。</p>
-</div>
-<div class="section level2">
-<h2 id="チェックリストデータをパッケージに同梱しない">チェックリストデータをパッケージに同梱しない<a class="anchor" aria-label="anchor" href="#%E3%83%81%E3%82%A7%E3%83%83%E3%82%AF%E3%83%AA%E3%82%B9%E3%83%88%E3%83%87%E3%83%BC%E3%82%BF%E3%82%92%E3%83%91%E3%83%83%E3%82%B1%E3%83%BC%E3%82%B8%E3%81%AB%E5%90%8C%E6%A2%B1%E3%81%97%E3%81%AA%E3%81%84"></a>
+<p>この分け方にすると、簡単な用途は <code><a href="../reference/scientific_name.html">scientific_name()</a></code> だけで済み、必要な人は 元データや候補行も確認できます。</p>
+</section><section class="level2"><h2 id="チェックリストデータをパッケージに同梱しない">チェックリストデータをパッケージに同梱しない<a class="anchor" aria-label="anchor" href="#%E3%83%81%E3%82%A7%E3%83%83%E3%82%AF%E3%83%AA%E3%82%B9%E3%83%88%E3%83%87%E3%83%BC%E3%82%BF%E3%82%92%E3%83%91%E3%83%83%E3%82%B1%E3%83%BC%E3%82%B8%E3%81%AB%E5%90%8C%E6%A2%B1%E3%81%97%E3%81%AA%E3%81%84"></a>
 </h2>
-<p><code>jpplantnames</code>
-はチェックリストデータをパッケージ内に入れていません。データの流れは
-次の通りです。</p>
-<ol style="list-style-type: decimal">
+<p><code>jpplantnames</code> はチェックリストデータをパッケージ内に入れていません。データの流れは 次の通りです。</p>
+<ol type="1">
 <li>
-<code><a href="../reference/scientific_name.html">scientific_name()</a></code>、<code><a href="../reference/japanese_name_search.html">japanese_name_search()</a></code>、<code><a href="../reference/japanese_name_load.html">japanese_name_load()</a></code>
-がチェックリストデータを必要とする。</li>
-<li>キャッシュがなければ <code><a href="../reference/japanese_name_download.html">japanese_name_download()</a></code>
-がチェックリスト Excel ファイルを取得する。</li>
+<code><a href="../reference/scientific_name.html">scientific_name()</a></code>、<code><a href="../reference/japanese_name_search.html">japanese_name_search()</a></code>、<code><a href="../reference/japanese_name_load.html">japanese_name_load()</a></code> がチェックリストデータを必要とする。</li>
+<li>キャッシュがなければ <code><a href="../reference/japanese_name_download.html">japanese_name_download()</a></code> がチェックリスト Excel ファイルを取得する。</li>
 <li>ファイルをユーザーの R キャッシュディレクトリに保存する。</li>
 <li>以後の検索ではチェックリスト配布元ではなくローカルファイルを読む。</li>
 </ol>
-<p>この設計には 2 つの意味があります。まず、パッケージコードを MIT
-ライセンスで
-公開しても、チェックリストデータそのものを再配布しません。次に、解析で何度検索しても、
-検索のたびに配布元サーバーへ問い合わせることがありません。</p>
+<p>この設計には 2 つの意味があります。まず、パッケージコードを MIT ライセンスで 公開しても、チェックリストデータそのものを再配布しません。次に、解析で何度検索しても、 検索のたびに配布元サーバーへ問い合わせることがありません。</p>
 <p>明示的に更新したい場合だけ、次のようにします。</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/japanese_name_download.html">japanese_name_download</a></span><span class="op">(</span>overwrite <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/japanese_name_load.html">japanese_name_load</a></span><span class="op">(</span>refresh <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 </div>
-<div class="section level2">
-<h2 id="チェックリスト-excel-を明示的に読む">チェックリスト Excel を明示的に読む<a class="anchor" aria-label="anchor" href="#%E3%83%81%E3%82%A7%E3%83%83%E3%82%AF%E3%83%AA%E3%82%B9%E3%83%88-excel-%E3%82%92%E6%98%8E%E7%A4%BA%E7%9A%84%E3%81%AB%E8%AA%AD%E3%82%80"></a>
+</section><section class="level2"><h2 id="チェックリスト-excel-を明示的に読む">チェックリスト Excel を明示的に読む<a class="anchor" aria-label="anchor" href="#%E3%83%81%E3%82%A7%E3%83%83%E3%82%AF%E3%83%AA%E3%82%B9%E3%83%88-excel-%E3%82%92%E6%98%8E%E7%A4%BA%E7%9A%84%E3%81%AB%E8%AA%AD%E3%82%80"></a>
 </h2>
-<p>チェックリストは <code>readxl</code> で <code>JN_dataset</code>
-シートを読み込んでいます。</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<p>チェックリストは <code>readxl</code> で <code>JN_dataset</code> シートを読み込んでいます。</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">readxl</span><span class="fu">::</span><span class="fu"><a href="https://readxl.tidyverse.org/reference/read_excel.html" class="external-link">read_excel</a></span><span class="op">(</span></span>
 <span>  path <span class="op">=</span> <span class="va">path</span>,</span>
 <span>  sheet <span class="op">=</span> <span class="st">"JN_dataset"</span>,</span>
 <span>  col_types <span class="op">=</span> <span class="st">"text"</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-<p>これは重要な実装ポイントです。チェックリストの列を、パッケージ内部で使う
-<code>和名</code>、<code>別名</code>、<code>学名</code>、<code>学名 withAuthor</code>
-などの安定した列へ正規化します。</p>
-<p>ソースコード中の列名は、環境をまたいで編集しやすくするため、必要に応じて
-Unicode escape で保持しています。</p>
 </div>
-<div class="section level2">
-<h2 id="検索は保守的にする">検索は保守的にする<a class="anchor" aria-label="anchor" href="#%E6%A4%9C%E7%B4%A2%E3%81%AF%E4%BF%9D%E5%AE%88%E7%9A%84%E3%81%AB%E3%81%99%E3%82%8B"></a>
+<p>これは重要な実装ポイントです。チェックリストの列を、パッケージ内部で使う <code>和名</code>、<code>別名</code>、<code>学名</code>、<code>学名 withAuthor</code> などの安定した列へ正規化します。</p>
+<p>ソースコード中の列名は、環境をまたいで編集しやすくするため、必要に応じて Unicode escape で保持しています。</p>
+</section><section class="level2"><h2 id="検索は保守的にする">検索は保守的にする<a class="anchor" aria-label="anchor" href="#%E6%A4%9C%E7%B4%A2%E3%81%AF%E4%BF%9D%E5%AE%88%E7%9A%84%E3%81%AB%E3%81%99%E3%82%8B"></a>
 </h2>
-<p><code><a href="../reference/scientific_name.html">scientific_name()</a></code> は fuzzy search
-ではなく、解析で安定して使うための関数です。
-現在の仕様は意図的に狭くしています。</p>
+<p><code><a href="../reference/scientific_name.html">scientific_name()</a></code> は fuzzy search ではなく、解析で安定して使うための関数です。 現在の仕様は意図的に狭くしています。</p>
 <ul>
-<li>チェックリストの <code>和名</code> 列と <code>別名</code>
-列を完全一致で検索する。</li>
+<li>チェックリストの <code>和名</code> 列と <code>別名</code> 列を完全一致で検索する。</li>
 <li>
 <code>ステータス == "標準"</code> の行だけを使う。</li>
 <li>標準の完全一致がない場合は <code>NA_character_</code> を返す。</li>
 <li>標準の完全一致が複数ある場合はエラーにする。</li>
 </ul>
-<p>これにより、疑わしい候補をスクリプトが静かに採用することを避けます。
-曖昧な場合は <code><a href="../reference/japanese_name_search.html">japanese_name_search()</a></code>
-で候補を確認します。</p>
-</div>
-<div class="section level2">
-<h2 id="テストでは小さな-fixture-を使う">テストでは小さな fixture を使う<a class="anchor" aria-label="anchor" href="#%E3%83%86%E3%82%B9%E3%83%88%E3%81%A7%E3%81%AF%E5%B0%8F%E3%81%95%E3%81%AA-fixture-%E3%82%92%E4%BD%BF%E3%81%86"></a>
+<p>これにより、疑わしい候補をスクリプトが静かに採用することを避けます。 曖昧な場合は <code><a href="../reference/japanese_name_search.html">japanese_name_search()</a></code> で候補を確認します。</p>
+</section><section class="level2"><h2 id="テストでは小さな-fixture-を使う">テストでは小さな fixture を使う<a class="anchor" aria-label="anchor" href="#%E3%83%86%E3%82%B9%E3%83%88%E3%81%A7%E3%81%AF%E5%B0%8F%E3%81%95%E3%81%AA-fixture-%E3%82%92%E4%BD%BF%E3%81%86"></a>
 </h2>
-<p>単体テストでは、チェックリスト本体の大きなファイルを毎回ダウンロードしません。
-代わりに、挙動確認に必要な最小限の行だけを含む合成 fixture
-を使います。</p>
+<p>単体テストでは、チェックリスト本体の大きなファイルを毎回ダウンロードしません。 代わりに、挙動確認に必要な最小限の行だけを含む合成 fixture を使います。</p>
 <p>この fixture で確認している主な点は次の通りです。</p>
 <ul>
 <li>Excel シートを読めること。</li>
@@ -271,12 +238,8 @@ Unicode escape で保持しています。</p>
 <li>複数候補がある場合にエラーになること。</li>
 <li>キャッシュの再利用と更新が動くこと。</li>
 </ul>
-<p>GBIF やチェックリストへの live test は任意にします。外部 API の確認は
-smoke test としては 有用ですが、通常のローカルテストや pull request
-のたびに必須にすると不安定に なりやすいためです。</p>
-</div>
-<div class="section level2">
-<h2 id="pkgdown-でドキュメントサイトを作る">pkgdown でドキュメントサイトを作る<a class="anchor" aria-label="anchor" href="#pkgdown-%E3%81%A7%E3%83%89%E3%82%AD%E3%83%A5%E3%83%A1%E3%83%B3%E3%83%88%E3%82%B5%E3%82%A4%E3%83%88%E3%82%92%E4%BD%9C%E3%82%8B"></a>
+<p>GBIF やチェックリストへの live test は任意にします。外部 API の確認は smoke test としては 有用ですが、通常のローカルテストや pull request のたびに必須にすると不安定に なりやすいためです。</p>
+</section><section class="level2"><h2 id="pkgdown-でドキュメントサイトを作る">pkgdown でドキュメントサイトを作る<a class="anchor" aria-label="anchor" href="#pkgdown-%E3%81%A7%E3%83%89%E3%82%AD%E3%83%A5%E3%83%A1%E3%83%B3%E3%83%88%E3%82%B5%E3%82%A4%E3%83%88%E3%82%92%E4%BD%9C%E3%82%8B"></a>
 </h2>
 <p>ドキュメントサイトは pkgdown で作ります。</p>
 <ul>
@@ -285,54 +248,119 @@ smoke test としては 有用ですが、通常のローカルテストや pull
 <li>
 <code>README.ja.md</code> は日本語の入口になる。</li>
 <li>
-<code>vignettes/*.Rmd</code> は article ページになる。</li>
+<code>vignettes/*.qmd</code> は article ページになる。</li>
 <li>
-<code>_pkgdown.yml</code> でナビゲーションと reference
-分類を決める。</li>
+<code>_pkgdown.yml</code> でナビゲーションと reference 分類を決める。</li>
 </ul>
-<p>GitHub Actions で pkgdown を実行し、生成されたサイトを GitHub Pages
-に公開します。
-これにより、コードとドキュメントを同じリポジトリで管理でき、push ごとに
-再現可能な形で公開できます。</p>
-</div>
-<div class="section level2">
-<h2 id="今後の拡張案">今後の拡張案<a class="anchor" aria-label="anchor" href="#%E4%BB%8A%E5%BE%8C%E3%81%AE%E6%8B%A1%E5%BC%B5%E6%A1%88"></a>
+<p>GitHub Actions で pkgdown を実行し、生成されたサイトを GitHub Pages に公開します。 これにより、コードとドキュメントを同じリポジトリで管理でき、push ごとに 再現可能な形で公開できます。</p>
+</section><section class="level2"><h2 id="今後の拡張案">今後の拡張案<a class="anchor" aria-label="anchor" href="#%E4%BB%8A%E5%BE%8C%E3%81%AE%E6%8B%A1%E5%BC%B5%E6%A1%88"></a>
 </h2>
 <p>次の機能を足す場合も、保守的な既定動作を保つのが安全です。</p>
 <ul>
 <li>ひらがな・カタカナ変換や全角・半角の正規化を明示的に追加する。</li>
 <li>
-<code><a href="../reference/japanese_name_search.html">japanese_name_search()</a></code>
-に候補ランキングを追加する。</li>
+<code><a href="../reference/japanese_name_search.html">japanese_name_search()</a></code> に候補ランキングを追加する。</li>
 <li>WFO や Catalogue of Life などの任意チェック関数を追加する。</li>
 <li>監査用にチェックリストの追加メタデータを返せるようにする。</li>
 <li>
-<code><a href="../reference/scientific_name.html">scientific_name()</a></code>
-の結果をデータフレームに結合する実例記事を追加する。</li>
+<code><a href="../reference/scientific_name.html">scientific_name()</a></code> の結果をデータフレームに結合する実例記事を追加する。</li>
 </ul>
-<p>探索的な機能は <code><a href="../reference/japanese_name_search.html">japanese_name_search()</a></code>
-や補助関数に寄せ、<code><a href="../reference/scientific_name.html">scientific_name()</a></code> はスクリプトで
-予測しやすい挙動のままにしておくのが基本方針です。</p>
-</div>
-<div class="section level2">
-<h2 id="次に読むもの">次に読むもの<a class="anchor" aria-label="anchor" href="#%E6%AC%A1%E3%81%AB%E8%AA%AD%E3%82%80%E3%82%82%E3%81%AE"></a>
+<p>探索的な機能は <code><a href="../reference/japanese_name_search.html">japanese_name_search()</a></code> や補助関数に寄せ、<code><a href="../reference/scientific_name.html">scientific_name()</a></code> はスクリプトで 予測しやすい挙動のままにしておくのが基本方針です。</p>
+</section><section class="level2"><h2 id="次に読むもの">次に読むもの<a class="anchor" aria-label="anchor" href="#%E6%AC%A1%E3%81%AB%E8%AA%AD%E3%82%80%E3%82%82%E3%81%AE"></a>
 </h2>
 <ul>
 <li>
-<a href="ja-get-started.html">使い方ガイド</a>:
-パッケージの使い方。</li>
+<a href="ja-get-started.html">使い方ガイド</a>: パッケージの使い方。</li>
 <li>
-<a href="ja-maintenance.html">メンテナンスガイド</a>:
-何を変えたいときにどのファイルを見るか。</li>
+<a href="ja-maintenance.html">メンテナンスガイド</a>: 何を変えたいときにどのファイルを見るか。</li>
 <li>
-<a href="../reference/index.html">関数リファレンス</a>:
-公開関数ごとの説明。</li>
-</ul>
-</div>
-  </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
+<a href="../reference/index.html">関数リファレンス</a>: 公開関数ごとの説明。</li>
+</ul></section><script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'light-border',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config);
+    }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script></main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>
 </div>
-
 
 
     <footer><div class="pkgdown-footer-left">

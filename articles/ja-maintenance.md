@@ -21,9 +21,9 @@ guide](https://maple60.github.io/jpplantnames/articles/maintenance.md)
 | README と pkgdown トップページ | `README.md` |
 | 日本語 README | `README.ja.md` |
 | pkgdown のナビゲーションや reference 分類 | `_pkgdown.yml` |
-| 使い方ガイド | `vignettes/get-started.Rmd`, `vignettes/ja-get-started.Rmd` |
-| メンテナンスガイド | `vignettes/maintenance.Rmd`, `vignettes/ja-maintenance.Rmd` |
-| パッケージ開発チュートリアル | `vignettes/package-development.Rmd`, `vignettes/ja-package-development.Rmd` |
+| 使い方ガイド | `vignettes/get-started.qmd`, `vignettes/ja-get-started.qmd` |
+| メンテナンスガイド | `vignettes/maintenance.qmd`, `vignettes/ja-maintenance.qmd` |
+| パッケージ開発チュートリアル | `vignettes/package-development.qmd`, `vignettes/ja-package-development.qmd` |
 | R パッケージチェックの GitHub Actions | `.github/workflows/R-CMD-check.yaml` |
 | GitHub Pages / pkgdown deploy | `.github/workflows/pkgdown.yaml` |
 
@@ -127,13 +127,13 @@ pkgdown のトップページは `README.md`
 
 - `README.md`: 英語のトップページ。
 - `README.ja.md`: 日本語のトップページ。
-- `vignettes/get-started.Rmd`: 英語の使い方ガイド。
-- `vignettes/ja-get-started.Rmd`: 日本語の使い方ガイド。
-- `vignettes/maintenance.Rmd`: 英語のメンテナンスガイド。
-- `vignettes/ja-maintenance.Rmd`: 日本語のメンテナンスガイド。
-- `vignettes/package-development.Rmd`:
+- `vignettes/get-started.qmd`: 英語の使い方ガイド。
+- `vignettes/ja-get-started.qmd`: 日本語の使い方ガイド。
+- `vignettes/maintenance.qmd`: 英語のメンテナンスガイド。
+- `vignettes/ja-maintenance.qmd`: 日本語のメンテナンスガイド。
+- `vignettes/package-development.qmd`:
   英語のパッケージ開発チュートリアル。
-- `vignettes/ja-package-development.Rmd`:
+- `vignettes/ja-package-development.qmd`:
   日本語のパッケージ開発チュートリアル。
 - `_pkgdown.yml`: サイトのナビゲーション、記事分類、reference 分類。
 

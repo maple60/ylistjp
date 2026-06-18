@@ -167,7 +167,7 @@ The documentation site is built with pkgdown:
 
 - `README.md` becomes the English home page;
 - `README.ja.md` provides the Japanese landing page;
-- `vignettes/*.Rmd` become article pages;
+- `vignettes/*.qmd` become article pages;
 - `_pkgdown.yml` controls navigation and reference grouping.
 
 GitHub Actions runs pkgdown and publishes the generated site to GitHub

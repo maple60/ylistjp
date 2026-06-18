@@ -181,7 +181,7 @@ When using checklist-based results, cite the checklist:
 
 > Yamanouchi, T., Shutoh, K., Osawa, T., Yonekura, K., Kato, S., Shiga,
 > T. 2019. A checklist of Japanese plant names
-> (<https://gbif.jp/activities/checklist/wamei_checklist_110>)
+> (https://gbif.jp/activities/checklist/wamei_checklist_110)
 
 The package code is MIT licensed. Checklist data is not included in the
 package and is not covered by the package license.
