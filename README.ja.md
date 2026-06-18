@@ -1,5 +1,7 @@
 # jpplantnames
 
+![jpplantnames logo](reference/figures/logo.png)
+
 `jpplantnames`
 は、[JBIF](https://gbif.jp/activities/checklist/wamei_checklist_110/)
 が公開する 「維管束植物和名チェックリスト ver.

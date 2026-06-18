@@ -13,6 +13,7 @@
 <script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><script src="package-development_files/libs/quarto-html/popper.min.js"></script><script src="package-development_files/libs/quarto-html/tippy.umd.min.js"></script><link href="package-development_files/libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="package-development_files/libs/quarto-html/light-border.css" rel="stylesheet">
 <!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Building jpplantnames as an R package">
+<meta property="og:image" content="https://maple60.github.io/jpplantnames/logo.svg">
 </head>
 <body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
@@ -58,8 +59,7 @@
 </nav><div class="container template-quarto">
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
-
-      <h1>Building jpplantnames as an R package</h1>
+      <img src="../logo.svg" class="logo" alt=""><h1>Building jpplantnames as an R package</h1>
 
 
 
@@ -116,7 +116,7 @@
 </tr>
 <tr class="odd">
 <td><code>R/</code></td>
-<td>Implementation code for cache, loading, lookup, and GBIF helpers.</td>
+<td>Implementation code for cache, loading, lookup, and optional GBIF/WFO helpers.</td>
 </tr>
 <tr class="even">
 <td><code>man/</code></td>
@@ -180,8 +180,24 @@
 <td>Return candidate rows for manual inspection.</td>
 </tr>
 <tr class="odd">
+<td><code><a href="../reference/japanese_name_suggest.html">japanese_name_suggest()</a></code></td>
+<td>Suggest likely checklist rows for approximate Japanese names.</td>
+</tr>
+<tr class="even">
+<td><code><a href="../reference/japanese_name_info.html">japanese_name_info()</a></code></td>
+<td>Summarize checklist lookup results, with optional WFO and GBIF checks.</td>
+</tr>
+<tr class="odd">
 <td><code><a href="../reference/gbif_match.html">gbif_match()</a></code></td>
 <td>Optionally check a scientific name against GBIF.</td>
+</tr>
+<tr class="even">
+<td><code><a href="../reference/wfo_suggest.html">wfo_suggest()</a></code></td>
+<td>Optionally query WFO Plant List candidate names for a scientific name.</td>
+</tr>
+<tr class="odd">
+<td><code><a href="../reference/wfo_accepted_name.html">wfo_accepted_name()</a></code></td>
+<td>Return the best WFO accepted-name interpretation for a scientific name.</td>
 </tr>
 </tbody>
 </table>
@@ -236,7 +252,7 @@
 <li>ambiguity errors;</li>
 <li>cache reuse and refresh behavior.</li>
 </ul>
-<p>Network tests are kept optional. GBIF and checklist live checks are useful as smoke tests, but they should not be required for every local test or every pull request.</p>
+<p>Network tests are kept optional. WFO and GBIF checks both depend on external APIs, and checklist live checks contact the source site. They are useful as smoke tests, but they should not be required for every local test or every pull request.</p>
 </section><section class="level2"><h2 id="build-documentation-with-pkgdown">Build Documentation with pkgdown<a class="anchor" aria-label="anchor" href="#build-documentation-with-pkgdown"></a>
 </h2>
 <p>The documentation site is built with pkgdown:</p>
@@ -257,7 +273,7 @@
 <ul>
 <li>add explicit hiragana-to-katakana or width normalization before searching;</li>
 <li>add richer candidate ranking to <code><a href="../reference/japanese_name_search.html">japanese_name_search()</a></code>;</li>
-<li>add optional checks for WFO or Catalogue of Life;</li>
+<li>extend the existing optional external checks, for example to Catalogue of Life;</li>
 <li>expose more metadata from the checklist when users need audit trails;</li>
 <li>add a small article showing how to join <code><a href="../reference/scientific_name.html">scientific_name()</a></code> results to a data frame.</li>
 </ul>

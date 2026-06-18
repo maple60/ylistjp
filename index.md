@@ -1,5 +1,7 @@
 # jpplantnames
 
+![jpplantnames logo](reference/figures/logo.png)
+
 `jpplantnames` is an unofficial R package for looking up scientific
 plant names from Japanese plant names using the Vascular Plant Japanese
 Name Checklist ver. 1.10 published by

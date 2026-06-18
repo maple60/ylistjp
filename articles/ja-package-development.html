@@ -13,6 +13,7 @@
 <script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><script src="ja-package-development_files/libs/quarto-html/popper.min.js"></script><script src="ja-package-development_files/libs/quarto-html/tippy.umd.min.js"></script><link href="ja-package-development_files/libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="ja-package-development_files/libs/quarto-html/light-border.css" rel="stylesheet">
 <!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="jpplantnames パッケージ開発チュートリアル">
+<meta property="og:image" content="https://maple60.github.io/jpplantnames/logo.svg">
 </head>
 <body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
@@ -58,8 +59,7 @@
 </nav><div class="container template-quarto">
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
-
-      <h1>jpplantnames パッケージ開発チュートリアル</h1>
+      <img src="../logo.svg" class="logo" alt=""><h1>jpplantnames パッケージ開発チュートリアル</h1>
 
 
 
@@ -116,7 +116,7 @@
 </tr>
 <tr class="odd">
 <td><code>R/</code></td>
-<td>キャッシュ、読み込み、検索、GBIF 補助関数の実装。</td>
+<td>キャッシュ、読み込み、検索、任意の GBIF/WFO 補助関数の実装。</td>
 </tr>
 <tr class="even">
 <td><code>man/</code></td>
@@ -180,8 +180,24 @@
 <td>候補行を返し、人間が確認できるようにする。</td>
 </tr>
 <tr class="odd">
+<td><code><a href="../reference/japanese_name_suggest.html">japanese_name_suggest()</a></code></td>
+<td>近似的な和名から候補行を提案する。</td>
+</tr>
+<tr class="even">
+<td><code><a href="../reference/japanese_name_info.html">japanese_name_info()</a></code></td>
+<td>チェックリスト検索結果を要約し、任意で WFO と GBIF も確認する。</td>
+</tr>
+<tr class="odd">
 <td><code><a href="../reference/gbif_match.html">gbif_match()</a></code></td>
 <td>学名を GBIF と照合する任意の補助関数。</td>
+</tr>
+<tr class="even">
+<td><code><a href="../reference/wfo_suggest.html">wfo_suggest()</a></code></td>
+<td>学名に対する WFO Plant List の候補名を任意で問い合わせる。</td>
+</tr>
+<tr class="odd">
+<td><code><a href="../reference/wfo_accepted_name.html">wfo_accepted_name()</a></code></td>
+<td>学名に対する WFO の accepted name 解釈を 1 件に要約する。</td>
 </tr>
 </tbody>
 </table>
@@ -238,7 +254,7 @@
 <li>複数候補がある場合にエラーになること。</li>
 <li>キャッシュの再利用と更新が動くこと。</li>
 </ul>
-<p>GBIF やチェックリストへの live test は任意にします。外部 API の確認は smoke test としては 有用ですが、通常のローカルテストや pull request のたびに必須にすると不安定に なりやすいためです。</p>
+<p>ネットワークを使うテストは任意にします。WFO と GBIF の確認はいずれも外部 API に依存し、 チェックリストの live test は配布元サイトに問い合わせます。これらは smoke test としては 有用ですが、通常のローカルテストや pull request のたびに必須にすると不安定になりやすいためです。</p>
 </section><section class="level2"><h2 id="pkgdown-でドキュメントサイトを作る">pkgdown でドキュメントサイトを作る<a class="anchor" aria-label="anchor" href="#pkgdown-%E3%81%A7%E3%83%89%E3%82%AD%E3%83%A5%E3%83%A1%E3%83%B3%E3%83%88%E3%82%B5%E3%82%A4%E3%83%88%E3%82%92%E4%BD%9C%E3%82%8B"></a>
 </h2>
 <p>ドキュメントサイトは pkgdown で作ります。</p>
@@ -260,7 +276,7 @@
 <li>ひらがな・カタカナ変換や全角・半角の正規化を明示的に追加する。</li>
 <li>
 <code><a href="../reference/japanese_name_search.html">japanese_name_search()</a></code> に候補ランキングを追加する。</li>
-<li>WFO や Catalogue of Life などの任意チェック関数を追加する。</li>
+<li>既存の任意外部チェックを、Catalogue of Life などにも広げる。</li>
 <li>監査用にチェックリストの追加メタデータを返せるようにする。</li>
 <li>
 <code><a href="../reference/scientific_name.html">scientific_name()</a></code> の結果をデータフレームに結合する実例記事を追加する。</li>

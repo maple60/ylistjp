@@ -42,7 +42,7 @@ documentation, and GitHub Actions.
 |----|----|
 | `DESCRIPTION` | Package metadata, dependencies, URLs, and vignette settings. |
 | `NAMESPACE` | Exported user-facing functions. |
-| `R/` | Implementation code for cache, loading, lookup, and GBIF helpers. |
+| `R/` | Implementation code for cache, loading, lookup, and optional GBIF/WFO helpers. |
 | `man/` | Function reference files generated from roxygen comments. |
 | `tests/testthat/` | Unit tests and synthetic checklist fixtures. |
 | `vignettes/` | Longer pkgdown articles such as usage and maintenance guides. |
@@ -75,7 +75,11 @@ The package then exposes a few focused functions around that workflow:
 | [`japanese_name_load()`](https://maple60.github.io/jpplantnames/reference/japanese_name_load.md) | Read the cached file as a `data.frame`. |
 | [`scientific_name()`](https://maple60.github.io/jpplantnames/reference/scientific_name.md) | Return the standard scientific name for an exact Japanese-name match. |
 | [`japanese_name_search()`](https://maple60.github.io/jpplantnames/reference/japanese_name_search.md) | Return candidate rows for manual inspection. |
+| [`japanese_name_suggest()`](https://maple60.github.io/jpplantnames/reference/japanese_name_suggest.md) | Suggest likely checklist rows for approximate Japanese names. |
+| [`japanese_name_info()`](https://maple60.github.io/jpplantnames/reference/japanese_name_info.md) | Summarize checklist lookup results, with optional WFO and GBIF checks. |
 | [`gbif_match()`](https://maple60.github.io/jpplantnames/reference/gbif_match.md) | Optionally check a scientific name against GBIF. |
+| [`wfo_suggest()`](https://maple60.github.io/jpplantnames/reference/wfo_suggest.md) | Optionally query WFO Plant List candidate names for a scientific name. |
+| [`wfo_accepted_name()`](https://maple60.github.io/jpplantnames/reference/wfo_accepted_name.md) | Return the best WFO accepted-name interpretation for a scientific name. |
 
 This split keeps the simple use case simple, while still allowing
 advanced users to inspect the underlying data.
@@ -157,9 +161,10 @@ rows to test behavior:
 - ambiguity errors;
 - cache reuse and refresh behavior.
 
-Network tests are kept optional. GBIF and checklist live checks are
-useful as smoke tests, but they should not be required for every local
-test or every pull request.
+Network tests are kept optional. WFO and GBIF checks both depend on
+external APIs, and checklist live checks contact the source site. They
+are useful as smoke tests, but they should not be required for every
+local test or every pull request.
 
 ## Build Documentation with pkgdown
 
@@ -182,7 +187,8 @@ Good next features should preserve the conservative default behavior:
   searching;
 - add richer candidate ranking to
   [`japanese_name_search()`](https://maple60.github.io/jpplantnames/reference/japanese_name_search.md);
-- add optional checks for WFO or Catalogue of Life;
+- extend the existing optional external checks, for example to Catalogue
+  of Life;
 - expose more metadata from the checklist when users need audit trails;
 - add a small article showing how to join
   [`scientific_name()`](https://maple60.github.io/jpplantnames/reference/scientific_name.md)

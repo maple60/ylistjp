@@ -41,7 +41,7 @@ scientific_name("コナラ")
 |----|----|
 | `DESCRIPTION` | パッケージ情報、依存関係、URL、vignette 設定。 |
 | `NAMESPACE` | ユーザーに公開する関数。 |
-| `R/` | キャッシュ、読み込み、検索、GBIF 補助関数の実装。 |
+| `R/` | キャッシュ、読み込み、検索、任意の GBIF/WFO 補助関数の実装。 |
 | `man/` | roxygen コメントから作られる関数リファレンス。 |
 | `tests/testthat/` | 単体テストと小さな合成チェックリスト fixture。 |
 | `vignettes/` | 使い方ガイドやメンテナンスガイドなどの記事。 |
@@ -73,7 +73,11 @@ japanese_name_search("コナラ")
 | [`japanese_name_load()`](https://maple60.github.io/jpplantnames/reference/japanese_name_load.md) | キャッシュ済みファイルを `data.frame` として読み込む。 |
 | [`scientific_name()`](https://maple60.github.io/jpplantnames/reference/scientific_name.md) | 和名の完全一致から標準学名を返す。 |
 | [`japanese_name_search()`](https://maple60.github.io/jpplantnames/reference/japanese_name_search.md) | 候補行を返し、人間が確認できるようにする。 |
+| [`japanese_name_suggest()`](https://maple60.github.io/jpplantnames/reference/japanese_name_suggest.md) | 近似的な和名から候補行を提案する。 |
+| [`japanese_name_info()`](https://maple60.github.io/jpplantnames/reference/japanese_name_info.md) | チェックリスト検索結果を要約し、任意で WFO と GBIF も確認する。 |
 | [`gbif_match()`](https://maple60.github.io/jpplantnames/reference/gbif_match.md) | 学名を GBIF と照合する任意の補助関数。 |
+| [`wfo_suggest()`](https://maple60.github.io/jpplantnames/reference/wfo_suggest.md) | 学名に対する WFO Plant List の候補名を任意で問い合わせる。 |
+| [`wfo_accepted_name()`](https://maple60.github.io/jpplantnames/reference/wfo_accepted_name.md) | 学名に対する WFO の accepted name 解釈を 1 件に要約する。 |
 
 この分け方にすると、簡単な用途は
 [`scientific_name()`](https://maple60.github.io/jpplantnames/reference/scientific_name.md)
@@ -155,9 +159,11 @@ Unicode escape で保持しています。
 - 複数候補がある場合にエラーになること。
 - キャッシュの再利用と更新が動くこと。
 
-GBIF やチェックリストへの live test は任意にします。外部 API の確認は
-smoke test としては 有用ですが、通常のローカルテストや pull request
-のたびに必須にすると不安定に なりやすいためです。
+ネットワークを使うテストは任意にします。WFO と GBIF の確認はいずれも外部
+API に依存し、 チェックリストの live test
+は配布元サイトに問い合わせます。これらは smoke test としては
+有用ですが、通常のローカルテストや pull request
+のたびに必須にすると不安定になりやすいためです。
 
 ## pkgdown でドキュメントサイトを作る
 
@@ -180,7 +186,7 @@ GitHub Actions で pkgdown を実行し、生成されたサイトを GitHub Pag
 - ひらがな・カタカナ変換や全角・半角の正規化を明示的に追加する。
 - [`japanese_name_search()`](https://maple60.github.io/jpplantnames/reference/japanese_name_search.md)
   に候補ランキングを追加する。
-- WFO や Catalogue of Life などの任意チェック関数を追加する。
+- 既存の任意外部チェックを、Catalogue of Life などにも広げる。
 - 監査用にチェックリストの追加メタデータを返せるようにする。
 - [`scientific_name()`](https://maple60.github.io/jpplantnames/reference/scientific_name.md)
   の結果をデータフレームに結合する実例記事を追加する。
