@@ -28,6 +28,7 @@ For Japanese, see [日本語:
 | Maintenance guides | `vignettes/maintenance.qmd`, `vignettes/ja-maintenance.qmd` |
 | Package development tutorial | `vignettes/package-development.qmd`, `vignettes/ja-package-development.qmd` |
 | GitHub Actions R package check | `.github/workflows/R-CMD-check.yaml` |
+| Manual live API smoke tests | `.github/workflows/network-smoke.yaml` |
 | GitHub Pages / pkgdown deployment | `.github/workflows/pkgdown.yaml` |
 
 ## Function Behavior
@@ -198,7 +199,9 @@ directory is `tools::R_user_dir("jpplantnames", which = "cache")/wfo`,
 unless `options(jpplantnames.wfo_cache_dir = ...)` is set. WFO results
 do not replace Japanese-name checklist results. Unit tests should use
 mocked GraphQL responses through
-`options(jpplantnames.wfo_graphql = ...)`, not live WFO requests.
+`options(jpplantnames.wfo_graphql = ...)`. Live WFO requests should stay
+behind `JPPLANTNAMES_RUN_NETWORK_TESTS=true` and the manual
+`network-smoke` workflow.
 
 ### `gbif_match()`
 
@@ -212,8 +215,8 @@ Change this file when:
   [`japanese_name_info()`](https://maple60.github.io/jpplantnames/reference/japanese_name_info.md).
 
 Live GBIF tests are skipped by default. Use
-`JPPLANTNAMES_RUN_NETWORK_TESTS=true` when you intentionally want to run
-network tests.
+`JPPLANTNAMES_RUN_NETWORK_TESTS=true` or run the manual `network-smoke`
+workflow when you intentionally want to run network tests.
 
 ## External APIs and Caches
 
@@ -346,5 +349,6 @@ Before pushing a maintenance change:
     [`testthat::test_local()`](https://testthat.r-lib.org/reference/test_package.html).
 5.  Run `R CMD build` and `R CMD check`.
 6.  Build pkgdown locally if documentation changed.
-7.  Push and verify both GitHub Actions workflows.
+7.  Push and verify `R-CMD-check` and `pkgdown`; run `network-smoke`
+    manually when live API behavior changed.
 8.  Confirm the site at <https://maple60.github.io/jpplantnames/>.

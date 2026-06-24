@@ -142,7 +142,7 @@
 </tr>
 <tr class="even">
 <td><code>.github/workflows/</code></td>
-<td>R package check と pkgdown deploy の GitHub Actions。</td>
+<td>R package check、手動 network smoke test、pkgdown deploy の GitHub Actions。</td>
 </tr>
 </tbody>
 </table>
@@ -260,7 +260,7 @@
 <li>複数候補がある場合にエラーになること。</li>
 <li>キャッシュの再利用と更新が動くこと。</li>
 </ul>
-<p>ネットワークを使うテストは任意にします。WFO と GBIF の確認はいずれも外部 API に依存し、 チェックリストの live test は配布元サイトに問い合わせます。これらは smoke test としては 有用ですが、通常のローカルテストや pull request のたびに必須にすると不安定になりやすいためです。</p>
+<p>ネットワークを使うテストは任意にします。WFO と GBIF の確認はいずれも外部 API に依存し、 チェックリストの live test は配布元サイトに問い合わせます。これらは smoke test としては 有用ですが、通常のローカルテストや pull request のたびに必須にすると不安定になりやすいためです。 CI では必須の OS matrix ではなく、手動の <code>network-smoke</code> workflow に留めます。</p>
 </section><section class="level2"><h2 id="pkgdown-でドキュメントサイトを作る">pkgdown でドキュメントサイトを作る<a class="anchor" aria-label="anchor" href="#pkgdown-%E3%81%A7%E3%83%89%E3%82%AD%E3%83%A5%E3%83%A1%E3%83%B3%E3%83%88%E3%82%B5%E3%82%A4%E3%83%88%E3%82%92%E4%BD%9C%E3%82%8B"></a>
 </h2>
 <p>ドキュメントサイトは pkgdown で作ります。</p>

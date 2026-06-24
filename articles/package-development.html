@@ -142,7 +142,7 @@
 </tr>
 <tr class="even">
 <td><code>.github/workflows/</code></td>
-<td>GitHub Actions for R package check and pkgdown deployment.</td>
+<td>GitHub Actions for R package check, manual network smoke tests, and pkgdown deployment.</td>
 </tr>
 </tbody>
 </table>
@@ -258,7 +258,7 @@
 <li>ambiguity errors;</li>
 <li>cache reuse and refresh behavior.</li>
 </ul>
-<p>Network tests are kept optional. WFO and GBIF checks both depend on external APIs, and checklist live checks contact the source site. They are useful as smoke tests, but they should not be required for every local test or every pull request.</p>
+<p>Network tests are kept optional. WFO and GBIF checks both depend on external APIs, and checklist live checks contact the source site. They are useful as smoke tests, but they should not be required for every local test or every pull request. In CI, keep them in the manual <code>network-smoke</code> workflow instead of the required OS matrix.</p>
 </section><section class="level2"><h2 id="build-documentation-with-pkgdown">Build Documentation with pkgdown<a class="anchor" aria-label="anchor" href="#build-documentation-with-pkgdown"></a>
 </h2>
 <p>The documentation site is built with pkgdown:</p>

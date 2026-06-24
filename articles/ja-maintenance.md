@@ -28,6 +28,7 @@ guide](https://maple60.github.io/jpplantnames/articles/maintenance.md)
 | メンテナンスガイド | `vignettes/maintenance.qmd`, `vignettes/ja-maintenance.qmd` |
 | パッケージ開発チュートリアル | `vignettes/package-development.qmd`, `vignettes/ja-package-development.qmd` |
 | R パッケージチェックの GitHub Actions | `.github/workflows/R-CMD-check.yaml` |
+| 手動の live API smoke test | `.github/workflows/network-smoke.yaml` |
 | GitHub Pages / pkgdown deploy | `.github/workflows/pkgdown.yaml` |
 
 ## 関数ごとの保守ポイント
@@ -193,9 +194,10 @@ raw API response を ローカルに保存し、`refresh = TRUE`
 `tools::R_user_dir("jpplantnames", which = "cache")/wfo`
 で、`options(jpplantnames.wfo_cache_dir = ...)`
 を設定すると変更できます。WFO
-の結果は和名チェックリストの結果を置き換えません。単体テストでは live
-WFO request ではなく、`options(jpplantnames.wfo_graphql = ...)` による
-mock response を使います。
+の結果は和名チェックリストの結果を置き換えません。単体テストでは
+`options(jpplantnames.wfo_graphql = ...)` による mock response
+を使います。live WFO request は `JPPLANTNAMES_RUN_NETWORK_TESTS=true`
+と手動の `network-smoke` workflow の中に留めます。
 
 ### `gbif_match()`
 
@@ -210,7 +212,8 @@ mock response を使います。
 
 GBIF の live test は通常 skip
 されます。ネットワークテストを明示的に走らせる場合は
-`JPPLANTNAMES_RUN_NETWORK_TESTS=true` を設定します。
+`JPPLANTNAMES_RUN_NETWORK_TESTS=true` を設定するか、手動の
+`network-smoke` workflow を実行します。
 
 ## 外部 API とキャッシュ
 
@@ -352,6 +355,7 @@ commit しません。
     を実行する。
 5.  `R CMD build` と `R CMD check` を実行する。
 6.  ドキュメントを変えた場合は pkgdown をローカル build する。
-7.  push 後に GitHub Actions の 2 つの workflow を確認する。
+7.  push 後に `R-CMD-check` と `pkgdown` を確認する。live API
+    の挙動を変えた場合は `network-smoke` を手動実行する。
 8.  <https://maple60.github.io/jpplantnames/>
     が更新されているか確認する。

@@ -185,6 +185,10 @@
 <td><code>.github/workflows/R-CMD-check.yaml</code></td>
 </tr>
 <tr class="even">
+<td>手動の live API smoke test</td>
+<td><code>.github/workflows/network-smoke.yaml</code></td>
+</tr>
+<tr class="odd">
 <td>GitHub Pages / pkgdown deploy</td>
 <td><code>.github/workflows/pkgdown.yaml</code></td>
 </tr>
@@ -312,7 +316,7 @@
 <li>
 <code>backend = "local"</code> を実装したい。</li>
 </ul>
-<p>WFO へのアクセスは、小規模な任意の外部 API 確認です。<code>cache = TRUE</code> では raw API response を ローカルに保存し、<code>refresh = TRUE</code> では既存キャッシュを無視して再取得します。既定のキャッシュ場所は <code>tools::R_user_dir("jpplantnames", which = "cache")/wfo</code> で、<code>options(jpplantnames.wfo_cache_dir = ...)</code> を設定すると変更できます。WFO の結果は和名チェックリストの結果を置き換えません。単体テストでは live WFO request ではなく、<code>options(jpplantnames.wfo_graphql = ...)</code> による mock response を使います。</p>
+<p>WFO へのアクセスは、小規模な任意の外部 API 確認です。<code>cache = TRUE</code> では raw API response を ローカルに保存し、<code>refresh = TRUE</code> では既存キャッシュを無視して再取得します。既定のキャッシュ場所は <code>tools::R_user_dir("jpplantnames", which = "cache")/wfo</code> で、<code>options(jpplantnames.wfo_cache_dir = ...)</code> を設定すると変更できます。WFO の結果は和名チェックリストの結果を置き換えません。単体テストでは <code>options(jpplantnames.wfo_graphql = ...)</code> による mock response を使います。live WFO request は <code>JPPLANTNAMES_RUN_NETWORK_TESTS=true</code> と手動の <code>network-smoke</code> workflow の中に留めます。</p>
 </section><section class="level3"><h3 id="gbif_match">
 <code>gbif_match()</code><a class="anchor" aria-label="anchor" href="#gbif_match"></a>
 </h3>
@@ -324,7 +328,7 @@
 <li>
 <code><a href="../reference/japanese_name_info.html">japanese_name_info()</a></code> が使う任意の GBIF API wrapper の挙動を変えたい。</li>
 </ul>
-<p>GBIF の live test は通常 skip されます。ネットワークテストを明示的に走らせる場合は <code>JPPLANTNAMES_RUN_NETWORK_TESTS=true</code> を設定します。</p>
+<p>GBIF の live test は通常 skip されます。ネットワークテストを明示的に走らせる場合は <code>JPPLANTNAMES_RUN_NETWORK_TESTS=true</code> を設定するか、手動の <code>network-smoke</code> workflow を実行します。</p>
 </section></section><section class="level2"><h2 id="外部-api-とキャッシュ">外部 API とキャッシュ<a class="anchor" aria-label="anchor" href="#%E5%A4%96%E9%83%A8-api-%E3%81%A8%E3%82%AD%E3%83%A3%E3%83%83%E3%82%B7%E3%83%A5"></a>
 </h2>
 <p>ネットワークに依存する挙動は、examples と tests で明示的に扱います。チェックリストデータは ダウンロード後のパッケージキャッシュから読み込みます。<code><a href="../reference/japanese_name_info.html">japanese_name_info()</a></code> は、WFO または GBIF の確認を明示した場合だけ外部 API を呼びます。</p>
@@ -405,7 +409,7 @@
 <li>
 <code>R CMD build</code> と <code>R CMD check</code> を実行する。</li>
 <li>ドキュメントを変えた場合は pkgdown をローカル build する。</li>
-<li>push 後に GitHub Actions の 2 つの workflow を確認する。</li>
+<li>push 後に <code>R-CMD-check</code> と <code>pkgdown</code> を確認する。live API の挙動を変えた場合は <code>network-smoke</code> を手動実行する。</li>
 <li>
 <a href="https://maple60.github.io/jpplantnames/" class="uri">https://maple60.github.io/jpplantnames/</a> が更新されているか確認する。</li>
 </ol></section><script id="quarto-html-after-body" type="application/javascript">

@@ -46,7 +46,7 @@ scientific_name("コナラ")
 | `tests/testthat/` | 単体テストと小さな合成チェックリスト fixture。 |
 | `vignettes/` | 使い方ガイドやメンテナンスガイドなどの記事。 |
 | `_pkgdown.yml` | ドキュメントサイトのナビゲーションと reference 分類。 |
-| `.github/workflows/` | R package check と pkgdown deploy の GitHub Actions。 |
+| `.github/workflows/` | R package check、手動 network smoke test、pkgdown deploy の GitHub Actions。 |
 
 小さなパッケージでは、この構成で十分です。重要なのは、コードは `R/`、
 テストは `tests/`、長めの説明は `vignettes/`、自動化は `.github/`
@@ -163,7 +163,8 @@ Unicode escape で保持しています。
 API に依存し、 チェックリストの live test
 は配布元サイトに問い合わせます。これらは smoke test としては
 有用ですが、通常のローカルテストや pull request
-のたびに必須にすると不安定になりやすいためです。
+のたびに必須にすると不安定になりやすいためです。 CI では必須の OS matrix
+ではなく、手動の `network-smoke` workflow に留めます。
 
 ## pkgdown でドキュメントサイトを作る
 

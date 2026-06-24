@@ -47,7 +47,7 @@ documentation, and GitHub Actions.
 | `tests/testthat/` | Unit tests and synthetic checklist fixtures. |
 | `vignettes/` | Longer pkgdown articles such as usage and maintenance guides. |
 | `_pkgdown.yml` | Documentation-site navigation and reference grouping. |
-| `.github/workflows/` | GitHub Actions for R package check and pkgdown deployment. |
+| `.github/workflows/` | GitHub Actions for R package check, manual network smoke tests, and pkgdown deployment. |
 
 For a small package, this structure is enough. The key is to keep each
 directory responsible for one kind of work: code in `R/`, tests in
@@ -164,7 +164,8 @@ rows to test behavior:
 Network tests are kept optional. WFO and GBIF checks both depend on
 external APIs, and checklist live checks contact the source site. They
 are useful as smoke tests, but they should not be required for every
-local test or every pull request.
+local test or every pull request. In CI, keep them in the manual
+`network-smoke` workflow instead of the required OS matrix.
 
 ## Build Documentation with pkgdown
 
