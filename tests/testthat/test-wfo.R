@@ -349,3 +349,20 @@ test_that("backend = local errors clearly", {
     "local WFO backend is planned"
   )
 })
+
+test_that("wfo_accepted_name can query WFO when network tests are enabled", {
+  skip_if_not(
+    identical(Sys.getenv("JPPLANTNAMES_RUN_NETWORK_TESTS"), "true"),
+    "Set JPPLANTNAMES_RUN_NETWORK_TESTS=true to run live WFO tests."
+  )
+  skip_if_not(requireNamespace("httr2", quietly = TRUE), "httr2 is not installed.")
+
+  result <- wfo_accepted_name("Quercus serrata", cache = FALSE, delay = 0)
+
+  # WFO candidate counts are release-dependent; the smoke test checks that the
+  # live API returns the expected accepted-name fields without using cache.
+  expect_equal(result$matched_name_no_author[[1]], "Quercus serrata")
+  expect_equal(result$accepted_name_no_author[[1]], "Quercus serrata")
+  expect_true(result$match_status[[1]] %in% c("matched", "ambiguous"))
+  expect_false(result$cached[[1]])
+})

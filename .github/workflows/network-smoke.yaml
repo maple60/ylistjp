@@ -1,0 +1,33 @@
+name: network-smoke
+
+on:
+  workflow_dispatch:
+
+permissions: read-all
+
+concurrency:
+  group: network-smoke-${{ github.ref }}
+  cancel-in-progress: true
+
+# This workflow is manual because GBIF/WFO availability is outside package
+# control and should not make routine pull requests flaky.
+jobs:
+  network-smoke:
+    name: optional live API smoke tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+      JPPLANTNAMES_RUN_NETWORK_TESTS: "true"
+    steps:
+      - uses: actions/checkout@v5
+      - uses: r-lib/actions/setup-r@v2
+        with:
+          use-public-rspm: true
+      - uses: r-lib/actions/setup-r-dependencies@v2
+        with:
+          extra-packages: any::httr2, any::jsonlite, any::testthat
+          needs: check
+      - name: Run opt-in network tests
+        run: testthat::test_local(".", reporter = "summary")
+        shell: Rscript {0}
